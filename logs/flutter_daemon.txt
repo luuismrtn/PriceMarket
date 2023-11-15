@@ -1,0 +1,29 @@
+!! ⚠️ PLEASE REVIEW THIS LOG FOR SENSITIVE INFORMATION BEFORE SHARING ⚠️ !!
+Dart Code extension: 3.76.1
+Flutter extension: 3.76.0 (not activated)
+
+App: Visual Studio Code
+App Host: desktop
+Version: win 1.84.2
+
+
+Logging Categories:
+    FlutterDaemon
+
+Wed Nov 15 2023 [22:10:39 GMT+0100 (hora estándar de Europa central)] Log file started
+[22:10:39] [FlutterDaemon] [Info] Spawning C:\Users\luism\flutter\bin\flutter.bat with args ["daemon"]
+[22:10:39] [FlutterDaemon] [Info] ..  in C:\Users\luism\flutter
+[22:10:39] [FlutterDaemon] [Info] ..  with {"toolEnv":{"FLUTTER_HOST":"VSCode","PUB_ENVIRONMENT":"vscode.dart-code","FLUTTER_ROOT":"C:\\Users\\luism\\flutter"}}
+[22:10:39] [FlutterDaemon] [Info]     PID: 21868
+[22:10:40] [FlutterDaemon] [Info] <== [{"event":"daemon.connected","params":{"version":"0.6.1","pid":19076}}]
+[22:10:40] [FlutterDaemon] [Info] ==> [{"id":"1","method":"device.enable"}]
+[22:10:40] [FlutterDaemon] [Info] ==> [{"id":"2","method":"emulator.getEmulators"}]
+[22:10:40] [FlutterDaemon] [Info] <== [{"event":"daemon.logMessage","params":{"level":"status","message":"Starting device daemon..."}}]
+[22:10:40] [FlutterDaemon] [Info] <== [{"id":"1"}]
+[22:10:41] [FlutterDaemon] [Info] <== [{"id":"2","result":[{"id":"Resizable_Experimental_API_33","name":"Resizable (Experimental) API 33","category":"mobile","platformType":"android"}]}]
+[22:10:44] [FlutterDaemon] [Info] <== [{"event":"device.added","params":{"id":"windows","name":"Windows","platform":"windows-x64","emulator":false,"category":"desktop","platformType":"windows","ephemeral":false,"emulatorId":null,"sdk":"Microsoft Windows [Versi¢n 10.0.22635.2700]","capabilities":{"hotReload":true,"hotRestart":true,"screenshot":false,"fastStart":false,"flutterExit":true,"hardwareRendering":true,"startPaused":true}}}]
+[22:10:44] [FlutterDaemon] [Info] ==> [{"id":"3","method":"daemon.getSupportedPlatforms","params":{"projectRoot":"C:\\Users\\luism\\Desktop\\Proyectos\\PriceMarket"}}]
+[22:10:44] [FlutterDaemon] [Info] <== [{"event":"device.added","params":{"id":"chrome","name":"Chrome","platform":"web-javascript","emulator":false,"category":"web","platformType":"web","ephemeral":false,"emulatorId":null,"sdk":"unknown","capabilities":{"hotReload":true,"hotRestart":true,"screenshot":false,"fastStart":false,"flutterExit":false,"hardwareRendering":true,"startPaused":true}}}]
+[22:10:44] [FlutterDaemon] [Info] <== [{"id":"3","result":{"platforms":["windows","android","web"]}}]
+[22:18:34] [FlutterDaemon] [Info] ==> [{"id":"4","method":"daemon.shutdown"}]
+[22:18:34] [FlutterDaemon] [Info] Process C:\Users\luism\flutter\bin\flutter.bat terminated! null, SIGTERM
