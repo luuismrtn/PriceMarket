@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:price_market/screens/principal.dart';
+import 'objects/colors.dart';
 
-void main() {
+Future<void> main() async {
   runApp(const MyApp());
 }
 
@@ -11,12 +12,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'PriceMarket',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        primaryColor: AppColors.miColorPrimario,
         useMaterial3: true,
       ),
-      home: HomePage(),
+      home: const Principal(),
     );
   }
 }
