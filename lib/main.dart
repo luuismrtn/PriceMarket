@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:price_market/screens/principal.dart';
-import 'objects/colors.dart';
+import 'objects/AppStyle.dart';
 
 Future<void> main() async {
   runApp(const MyApp());
@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'PriceMarket',
       theme: ThemeData(
-        primaryColor: AppColors.miColorPrimario,
+        primaryColor: AppStyle.miColorPrimario,
         useMaterial3: true,
       ),
       home: const Principal(),

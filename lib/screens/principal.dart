@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../objects/colors.dart';
+import '../objects/AppStyle.dart';
 import '../objects/Producto.dart';
 import 'formularioProducto.dart';
 
@@ -100,41 +100,41 @@ class _MyScreenState extends State<Principal> {
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
-        title: Text('Editar Producto'),
-        titlePadding: EdgeInsets.fromLTRB(20, 20, 20, 5),
+        title: const Text('Editar Producto'),
+        titlePadding: const EdgeInsets.fromLTRB(20, 20, 20, 5),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             TextField(
               controller: _nombreController,
-              decoration: InputDecoration(labelText: 'Nombre del Producto'),
+              decoration: const InputDecoration(labelText: 'Nombre del Producto'),
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             TextField(
               controller: _precio1Controller,
               keyboardType: TextInputType.number,
-              decoration: InputDecoration(labelText: 'Precio 1'),
+              decoration: const InputDecoration(labelText: 'Precio 1'),
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             TextField(
               controller: _precio2Controller,
               keyboardType: TextInputType.number,
-              decoration: InputDecoration(labelText: 'Precio 2'),
+              decoration: const InputDecoration(labelText: 'Precio 2'),
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             TextField(
               controller: _categoriaController,
-              decoration: InputDecoration(labelText: 'Categoría'),
+              decoration: const InputDecoration(labelText: 'Categoría'),
             ),
           ],
         ),
-        contentPadding: EdgeInsets.fromLTRB(20, 5, 20, 20),
+        contentPadding: const EdgeInsets.fromLTRB(20, 5, 20, 20),
         actions: [
           TextButton(
             onPressed: () {
               Navigator.pop(context);
             },
-            child: Text('Cancelar'),
+            child: const Text('Cancelar'),
           ),
           TextButton(
             onPressed: () {
@@ -148,7 +148,7 @@ class _MyScreenState extends State<Principal> {
               });
               Navigator.pop(context);
             },
-            child: Text('Guardar'),
+            child: const Text('Guardar'),
           ),
         ],
       );
@@ -167,21 +167,20 @@ class _MyScreenState extends State<Principal> {
           bottom: Radius.circular(30),
         )),
         elevation: 2,
-        iconTheme: const IconThemeData(color: AppColors.miColorPrimario),
+        iconTheme: const IconThemeData(color: AppStyle.miColorPrimario),
         backgroundColor: Colors.white,
-        title: Row(
+        title: const Row(
           children: [
-            const Spacer(),
-            const Text(
+            Spacer(),
+            Text(
               'PriceMarket',
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
-                color: AppColors.miColorPrimario,
+                color: AppStyle.miColorPrimario,
               ),
             ),
-            const Spacer(),
-            // ... Otros botones o iconos que puedas tener
+            Spacer(),
           ],
         ),
       ),
@@ -189,7 +188,7 @@ class _MyScreenState extends State<Principal> {
         onPressed: () {
           _irFormulario(context);
         },
-        backgroundColor: AppColors.miColorPrimario,
+        backgroundColor: AppStyle.miColorPrimario,
         foregroundColor: Colors.white,
         child: const Icon(Icons.add),
       ),
@@ -202,7 +201,7 @@ class _MyScreenState extends State<Principal> {
                 Expanded(
                   child: TextField(
                     onChanged: _filtrarProductos,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       labelText: 'Buscar producto',
                       prefixIcon: Icon(Icons.search),
                     ),
@@ -218,17 +217,17 @@ class _MyScreenState extends State<Principal> {
                   },
                   itemBuilder: (BuildContext context) {
                     return [
-                      PopupMenuItem<String>(
+                      const PopupMenuItem<String>(
                         value: '',
-                        child: const Text('Todos'),
+                        child: Text('Todos'),
                       ),
-                      PopupMenuItem<String>(
+                      const PopupMenuItem<String>(
                         value: 'Bebidas',
-                        child: const Text('Bebidas'),
+                        child: Text('Bebidas'),
                       ),
-                      PopupMenuItem<String>(
+                      const PopupMenuItem<String>(
                         value: 'Alimentación',
-                        child: const Text('Alimentación'),
+                        child: Text('Alimentación'),
                       ),
                       // Agrega más opciones de filtro según tus necesidades
                     ];
@@ -237,8 +236,8 @@ class _MyScreenState extends State<Principal> {
               ],
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
+          const Padding(
+            padding: EdgeInsets.all(8.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -270,37 +269,42 @@ class _MyScreenState extends State<Principal> {
             child: ListView.builder(
               itemCount: productosFiltrados.length,
               itemBuilder: (context, index) {
-                return ListTile(
-                  title: InkWell(
-                    onTap: () {
-                      _editarProducto(index);
-                    },
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Expanded(
-                          child: Text(
-                            productosFiltrados[index].nombre,
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                            textAlign: TextAlign.center,
-                          ),
+                return Padding(
+                  padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
+                  child: Card(
+                      child: InkWell(
+                          onTap: () {
+                            _editarProducto(index);
+                          },
+                          child: ListTile(
+                            title: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    productosFiltrados[index].nombre,
+                                    style: const TextStyle(fontWeight: FontWeight.bold),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Text(
+                                    '${productosFiltrados[index].precios[0]}€',
+                                    style: const TextStyle(color: Colors.green),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Text(
+                                    '${productosFiltrados[index].precios[1]}€',
+                                    style: const TextStyle(color: Colors.blue),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
+                              ],
+                            ),
                         ),
-                        Expanded(
-                          child: Text(
-                            '${productosFiltrados[index].precios[0]}€',
-                            style: TextStyle(color: Colors.green),
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
-                        Expanded(
-                          child: Text(
-                            '${productosFiltrados[index].precios[1]}€',
-                            style: TextStyle(color: Colors.blue),
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
-                      ],
-                    ),
+                     ),
                   ),
                 );
               },

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../objects/Categorias.dart';
 import '../objects/Producto.dart';
+import '../objects/AppStyle.dart';
 
 class FormularioProducto extends StatefulWidget {
   final Function(Producto) onProductoAgregado;
@@ -16,14 +17,24 @@ class _FormularioProductoState extends State<FormularioProducto> {
   final TextEditingController _nombreController = TextEditingController();
   final TextEditingController _precio1Controller = TextEditingController();
   final TextEditingController _precio2Controller = TextEditingController();
-  String _selectedCategoria = Categorias.listaCategorias[0]; // Establece la primera categoría como predeterminada
+  String _selectedCategoria = Categorias.listaCategorias[0];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Añadir Producto'),
-      ),
+        scrolledUnderElevation: 5,
+        elevation: 2,
+        iconTheme: const IconThemeData(color: AppStyle.miColorPrimario),
+        backgroundColor: Colors.white,
+        title: const Text(
+              'Añadir Producto',
+              style: TextStyle(
+                  color: AppStyle.miColorPrimario,
+                  fontFamily: 'ProductSans',
+              ),
+            ),
+        ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -31,7 +42,12 @@ class _FormularioProductoState extends State<FormularioProducto> {
           children: [
             TextField(
               controller: _nombreController,
-              decoration: InputDecoration(labelText: 'Nombre del Producto'),
+              style: const TextStyle(
+                fontFamily: 'ProductSans',
+              ),
+              decoration: const InputDecoration(labelText: 'Nombre del Producto',
+                  labelStyle: TextStyle(fontFamily: 'ProductSans'),
+              ),
             ),
             SizedBox(height: 16),
             TextField(
@@ -63,7 +79,11 @@ class _FormularioProductoState extends State<FormularioProducto> {
               hint: const Text('Seleccione una categoría'),
             ),
             SizedBox(height: 16),
-            ElevatedButton(
+            FilledButton(
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all<Color>(
+                    Theme.of(context).primaryColor),
+              ),
               onPressed: () {
                 _agregarProducto();
               },
