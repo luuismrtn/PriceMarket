@@ -1,4 +1,6 @@
+
 import 'package:flutter/material.dart';
+import 'package:price_market/objects/Clases.dart';
 import '../objects/AppStyle.dart';
 import '../objects/Producto.dart';
 import 'formularioProducto.dart';
@@ -11,12 +13,18 @@ class Principal extends StatefulWidget {
 }
 
 class _MyScreenState extends State<Principal> {
+
+  List<String> ordenOpciones = ['Menor Precio', 'Mayor Precio'];
+
+  String filtroOrden = 'Ninguno';
+
   List<Producto> productos = [
     Producto(
       id: 1,
       nombre: 'Coca Cola',
       precios: [1.5, 2.0],
       categoria: 'Bebidas',
+      imagen: "https://sgfm.elcorteingles.es/SGFM/dctm/MEDIA03/202109/28/00118622300228____23__600x600",
     ),
     Producto(
       id: 2,
@@ -72,6 +80,20 @@ class _MyScreenState extends State<Principal> {
               producto.nombre.toLowerCase().contains(filtro.toLowerCase()) &&
               (filtroCategoria.isEmpty || producto.categoria == filtroCategoria))
           .toList();
+
+      if (filtroOrden == 'Menor Precio') {
+        productosFiltrados.sort((a, b) =>
+            (a.precios.reduce((value, element) => value + element) /
+                    a.precios.length)
+                .compareTo((b.precios.reduce((value, element) => value + element) /
+                        b.precios.length)));
+      } else if (filtroOrden == 'Mayor Precio') {
+        productosFiltrados.sort((a, b) =>
+            (b.precios.reduce((value, element) => value + element) /
+                    b.precios.length)
+                .compareTo((a.precios.reduce((value, element) => value + element) /
+                        a.precios.length)));
+      }
     });
   }
 
@@ -85,6 +107,109 @@ class _MyScreenState extends State<Principal> {
       ),
     );
   }
+
+  void _mostrarInformacionProducto(Producto producto) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: const Text('Información del Producto'),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            if (producto.imagen != "")
+               Image.network(
+                producto.imagen,
+                height: 100,
+                width: 100,
+              ),
+            Table(
+          columnWidths: {
+            0: const FlexColumnWidth(1),
+            1: const FlexColumnWidth(1),
+          },
+          defaultVerticalAlignment: TableCellVerticalAlignment.middle,
+          children: [
+            TableRow(
+              children: [
+                const TableCell(
+                  child: Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Text('Nombre:'),
+                  ),
+                ),
+                TableCell(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(producto.nombre),
+                  ),
+                ),
+              ],
+            ),
+            TableRow(
+              children: [
+                const TableCell(
+                  child: Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Text('Mercadona:'),
+                  ),
+                ),
+                TableCell(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text('${producto.precios[0]}€'),
+                  ),
+                ),
+              ],
+            ),
+            TableRow(
+              children: [
+                const TableCell(
+                  child: Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Text('Lidl:'),
+                  ),
+                ),
+                TableCell(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text('${producto.precios[1]}€'),
+                  ),
+                ),
+              ],
+            ),
+            TableRow(
+              children: [
+                const TableCell(
+                  child: Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Text('Categoría:'),
+                  ),
+                ),
+                TableCell(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(producto.categoria),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            child: const Text('Cerrar'),
+          ),
+        ],
+      );
+    },
+  );
+}
 
   void _editarProducto(int index) async {
   final TextEditingController _nombreController =
@@ -156,6 +281,91 @@ class _MyScreenState extends State<Principal> {
   );
 }
 
+  void _mostrarFiltrosDialog() {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return StatefulBuilder(
+        builder: (BuildContext context, StateSetter setState) {
+          return AlertDialog(
+            title: const Text('Filtros'),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const Text(
+                  'Categorías: ',
+                  style: TextStyle(
+                    fontFamily: 'ProductSans',
+                    fontSize: 20,
+                  ),
+                ),
+                SizedBox(height: 10),
+                Wrap(
+                  children: Categorias.listaCategorias.map((categoria) {
+                    return Padding(
+                      padding: const EdgeInsets.all(3.0),
+                      child: FilterChip(
+                        label: Text(categoria),
+                        selected: filtroCategoria == categoria,
+                        onSelected: (selected) {
+                          setState(() {
+                            filtroCategoria = selected ? categoria : '';
+                            _filtrarProductos('');
+                          });
+                        },
+                      ),
+                    );
+                  }).toList(),
+                ),
+                const Padding(
+                  padding: EdgeInsets.all(8),
+                  child: Divider(
+                    color: Colors.black,
+                    height: 10,
+                  ),
+                ),
+                const Text(
+                  'Ordenar por: ',
+                  style: TextStyle(
+                    fontFamily: 'ProductSans',
+                    fontSize: 20,
+                  ),
+                ),
+                SizedBox(height: 10),
+                Wrap(
+                  children: ordenOpciones.map((orden) {
+                    return Padding(
+                      padding: const EdgeInsets.all(3.0),
+                      child: FilterChip(
+                          label: Text(orden),
+                          selected: filtroOrden == orden,
+                          onSelected: (selected) {
+                            setState(() {
+                              filtroOrden = selected ? orden : '';
+                              _filtrarProductos('');
+                            });
+                          },
+                        ),
+                    );
+                  }).toList(),
+                ),
+              ],
+            ),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: const Text('Cerrar'),
+              ),
+            ],
+          );
+        },
+      );
+    },
+  );
+}
+
 
   @override
   Widget build(BuildContext context) {
@@ -192,7 +402,7 @@ class _MyScreenState extends State<Principal> {
         foregroundColor: Colors.white,
         child: const Icon(Icons.add),
       ),
-      body: Column(
+       body: Column(
         children: [
           Padding(
             padding: const EdgeInsets.all(8.0),
@@ -202,116 +412,99 @@ class _MyScreenState extends State<Principal> {
                   child: TextField(
                     onChanged: _filtrarProductos,
                     decoration: const InputDecoration(
+                      border: OutlineInputBorder(),
                       labelText: 'Buscar producto',
                       prefixIcon: Icon(Icons.search),
                     ),
                   ),
                 ),
-                PopupMenuButton<String>(
+                IconButton(
+                  onPressed: _mostrarFiltrosDialog,
                   icon: const Icon(Icons.filter_list),
-                  onSelected: (value) {
-                    setState(() {
-                      filtroCategoria = value;
-                      _filtrarProductos('');
-                    });
-                  },
-                  itemBuilder: (BuildContext context) {
-                    return [
-                      const PopupMenuItem<String>(
-                        value: '',
-                        child: Text('Todos'),
-                      ),
-                      const PopupMenuItem<String>(
-                        value: 'Bebidas',
-                        child: Text('Bebidas'),
-                      ),
-                      const PopupMenuItem<String>(
-                        value: 'Alimentación',
-                        child: Text('Alimentación'),
-                      ),
-                      // Agrega más opciones de filtro según tus necesidades
-                    ];
-                  },
                 ),
               ],
             ),
           ),
           const Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Expanded(
-                  child: Text(
-                    'Nombre',
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                    textAlign: TextAlign.center,
-                  ),
+          padding: EdgeInsets.fromLTRB(28, 8, 35, 8),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Expanded(
+                child: Text(
+                  'Nombre',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                  textAlign: TextAlign.center,
                 ),
-                Expanded(
-                  child: Text(
-                    'Mercadona',
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                    textAlign: TextAlign.center,
-                  ),
+              ),
+              Expanded(
+                child: Text(
+                  'Mercadona',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                  textAlign: TextAlign.center,
                 ),
-                Expanded(
-                  child: Text(
-                    'Lidl',
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                    textAlign: TextAlign.center,
-                  ),
+              ),
+              Expanded(
+                child: Text(
+                  'Lidl',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                  textAlign: TextAlign.center,
                 ),
-              ],
+              ),
+            ],
+          ),
+        ),
+        Expanded(
+  child: ListView.builder(
+    itemCount: productosFiltrados.length,
+    itemBuilder: (context, index) {
+      return Padding(
+        padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
+        child: Card(
+          surfaceTintColor: Color.fromARGB(255, 217, 212, 212),
+          child: InkWell(
+            onTap: () {
+              _mostrarInformacionProducto(productosFiltrados[index]);
+            },
+            onLongPress: () {
+              _editarProducto(index);
+            },
+            child: ListTile(
+              title: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Expanded(
+                    child: Text(
+                      productosFiltrados[index].nombre,
+                      style: const TextStyle(fontWeight: FontWeight.bold),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                  Expanded(
+                    child: Text(
+                      '${productosFiltrados[index].precios[0]}€',
+                      style: const TextStyle(color: Colors.green),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                  Expanded(
+                    child: Text(
+                      '${productosFiltrados[index].precios[1]}€',
+                      style: const TextStyle(color: Colors.blue),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
-          Expanded(
-            child: ListView.builder(
-              itemCount: productosFiltrados.length,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
-                  child: Card(
-                      child: InkWell(
-                          onTap: () {
-                            _editarProducto(index);
-                          },
-                          child: ListTile(
-                            title: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Expanded(
-                                  child: Text(
-                                    productosFiltrados[index].nombre,
-                                    style: const TextStyle(fontWeight: FontWeight.bold),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ),
-                                Expanded(
-                                  child: Text(
-                                    '${productosFiltrados[index].precios[0]}€',
-                                    style: const TextStyle(color: Colors.green),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ),
-                                Expanded(
-                                  child: Text(
-                                    '${productosFiltrados[index].precios[1]}€',
-                                    style: const TextStyle(color: Colors.blue),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ),
-                              ],
-                            ),
-                        ),
-                     ),
-                  ),
-                );
-              },
-            ),
-          ),
-        ],
-      ),
-    );
-  }
+        ),
+      );
+    },
+  ),
+),
+      ],
+    ),
+  );
+}
 }

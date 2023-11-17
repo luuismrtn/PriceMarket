@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../objects/Categorias.dart';
+import '../objects/Clases.dart';
 import '../objects/Producto.dart';
 import '../objects/AppStyle.dart';
 
@@ -49,19 +49,23 @@ class _FormularioProductoState extends State<FormularioProducto> {
                   labelStyle: TextStyle(fontFamily: 'ProductSans'),
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             TextField(
               controller: _precio1Controller,
               keyboardType: TextInputType.number,
-              decoration: InputDecoration(labelText: 'Precio 1'),
+              decoration: const InputDecoration(labelText: 'Precio 1',
+                labelStyle: TextStyle(fontFamily: 'ProductSans'),
+              ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             TextField(
               controller: _precio2Controller,
               keyboardType: TextInputType.number,
-              decoration: InputDecoration(labelText: 'Precio 2'),
+              decoration: const InputDecoration(labelText: 'Precio 2',
+                labelStyle: TextStyle(fontFamily: 'ProductSans'),
+              ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             DropdownButton<String>(
               value: _selectedCategoria,
               onChanged: (String? newValue) {
@@ -76,9 +80,11 @@ class _FormularioProductoState extends State<FormularioProducto> {
                   child: Text(value),
                 );
               }).toList(),
-              hint: const Text('Seleccione una categoría'),
+              hint: const Text('Seleccione una categoría',
+                style: TextStyle(fontFamily: 'ProductSans'),
             ),
-            SizedBox(height: 16),
+            ),
+            const SizedBox(height: 16),
             FilledButton(
               style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all<Color>(
@@ -87,8 +93,14 @@ class _FormularioProductoState extends State<FormularioProducto> {
               onPressed: () {
                 _agregarProducto();
               },
-              child: const Text('Añadir Producto'),
+              child: const Text('Añadir Producto',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontFamily: 'ProductSans',
+                ),
+
             ),
+            )
           ],
         ),
       ),
