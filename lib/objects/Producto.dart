@@ -17,4 +17,15 @@ class Producto {
       'imagen': imagen,
     };
   }
+
+  static Producto fromMap(Map<String, dynamic> map) {
+    return Producto(
+      id: map['id'] as int,
+      nombre: map['nombre'] as String,
+      precios: (map['precios'] as List<double>).map((precio) => precio.toDouble()).toList(),
+      categoria: map['categoria'] as String,
+      imagen: map['imagen'] as String,
+    );
+  }
+
 }

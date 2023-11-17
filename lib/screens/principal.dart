@@ -406,6 +406,15 @@ class _MyScreenState extends State<Principal> {
         children: [
           Padding(
             padding: const EdgeInsets.all(8.0),
+            child: ElevatedButton(
+              onPressed: () {
+
+              },
+              child: const Text('Guardar datos'),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
             child: Row(
               children: [
                 Expanded(
@@ -461,7 +470,7 @@ class _MyScreenState extends State<Principal> {
       return Padding(
         padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
         child: Card(
-          surfaceTintColor: Color.fromARGB(255, 217, 212, 212),
+          surfaceTintColor: const Color.fromARGB(255, 217, 212, 212),
           child: InkWell(
             onTap: () {
               _mostrarInformacionProducto(productosFiltrados[index]);
