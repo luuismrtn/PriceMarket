@@ -3,9 +3,11 @@ class Producto {
   String nombre;
   List<double> precios;
   String categoria;
+  List<int> yuka;
   String imagen = '';
 
-  Producto({required this.id, required this.nombre, required this.precios, required this.categoria, this.imagen = ''});
+  Producto({required this.id, required this.nombre, required this.precios,
+    required this.categoria, this.imagen = '', required this.yuka});
 
   Map<String, dynamic> toMap() {
     return {
@@ -14,6 +16,8 @@ class Producto {
       'mercadona': precios[0],
       'lidl': precios[1],
       'categoria': categoria,
+      'yukaMercadona': yuka[0],
+      'yukaLidl': yuka[1],
       'imagen': imagen,
     };
   }
@@ -24,6 +28,7 @@ class Producto {
       nombre: map['nombre'] as String,
       precios: (map['precios'] as List<double>).map((precio) => precio.toDouble()).toList(),
       categoria: map['categoria'] as String,
+      yuka: (map['yuka'] as List<int>).map((yuka) => yuka.toInt()).toList(),
       imagen: map['imagen'] as String,
     );
   }
