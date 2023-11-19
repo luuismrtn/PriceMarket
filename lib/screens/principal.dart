@@ -17,9 +17,7 @@ class _MyScreenState extends State<Principal> {
     'Menor Yuka',
     'Mayor Yuka'
   ];
-
   String filtroOrden = 'Ninguno';
-
   List<Producto> productos = [
     Producto(
       id: 1,
@@ -29,6 +27,7 @@ class _MyScreenState extends State<Principal> {
       yuka: [6, 2],
       imagen:
           "https://sgfm.elcorteingles.es/SGFM/dctm/MEDIA03/202109/28/00118622300228____23__600x600",
+      fecha: DateTime.now(),
     ),
     Producto(
       id: 2,
@@ -36,6 +35,7 @@ class _MyScreenState extends State<Principal> {
       precios: [1.6, 1.0],
       categoria: 'Bebidas',
       yuka: [0, 0],
+      fecha: DateTime.now(),
     ),
     Producto(
       id: 3,
@@ -43,6 +43,7 @@ class _MyScreenState extends State<Principal> {
       precios: [1.4, 0.2],
       categoria: 'Bebidas',
       yuka: [30, 98],
+      fecha: DateTime.now(),
     ),
     Producto(
       id: 4,
@@ -50,6 +51,7 @@ class _MyScreenState extends State<Principal> {
       precios: [1.5, 2.0],
       categoria: 'Bebidas',
       yuka: [20, 28],
+      fecha: DateTime.now(),
     ),
     Producto(
       id: 5,
@@ -57,6 +59,7 @@ class _MyScreenState extends State<Principal> {
       precios: [1.6, 2.3],
       categoria: 'Bebidas',
       yuka: [100, 88],
+      fecha: DateTime.now(),
     ),
     Producto(
       id: 6,
@@ -64,22 +67,17 @@ class _MyScreenState extends State<Principal> {
       precios: [132, 28],
       categoria: 'Alimentación',
       yuka: [80, 28],
+      fecha: DateTime.now(),
     ),
   ];
-
   List<Producto> productosFiltrados = [];
   String filtroCategoria = '';
+  final ScrollController _scrollController = ScrollController();
 
   @override
   void initState() {
     super.initState();
     productosFiltrados = List.from(productos);
-  }
-
-  void _agregarProducto(Producto nuevoProducto) {
-    setState(() {
-      productos.add(nuevoProducto);
-    });
   }
 
   void _filtrarProductos(String filtro) {
@@ -122,7 +120,7 @@ class _MyScreenState extends State<Principal> {
 
   Form formularioProducto(TextEditingController _nombreController, TextEditingController _mercadonaController,
       TextEditingController _lidlController, TextEditingController _yukaMercadonaController,
-      TextEditingController _yukaLidlController, TextEditingController categoriaController, GlobalKey<FormState> _formKey) {
+      TextEditingController _yukaLidlController, TextEditingController _categoriaController, GlobalKey<FormState> _formKey) {
     return Form(
       key: _formKey,
       child: Column(
@@ -131,6 +129,7 @@ class _MyScreenState extends State<Principal> {
           TextFormField(
             controller: _nombreController,
             decoration: const InputDecoration(
+              border: OutlineInputBorder(),
               labelText: 'Nombre del Producto',
               labelStyle: TextStyle(fontFamily: 'ProductSans'),
             ),
@@ -146,6 +145,7 @@ class _MyScreenState extends State<Principal> {
             controller: _mercadonaController,
             keyboardType: TextInputType.number,
             decoration: const InputDecoration(
+              border: OutlineInputBorder(),
               labelText: 'Precio Mercadona',
               labelStyle: TextStyle(fontFamily: 'ProductSans'),
             ),
@@ -169,6 +169,7 @@ class _MyScreenState extends State<Principal> {
               controller: _yukaMercadonaController,
               keyboardType: TextInputType.number,
               decoration: const InputDecoration(
+                border: OutlineInputBorder(),
                 labelText: 'Yuka Mercadona',
                 labelStyle: TextStyle(fontFamily: 'ProductSans'),
               ),
@@ -191,13 +192,14 @@ class _MyScreenState extends State<Principal> {
               controller: _lidlController,
               keyboardType: TextInputType.number,
               decoration: const InputDecoration(
+                border: OutlineInputBorder(),
                 labelText: 'Precio Lidl',
                 labelStyle: TextStyle(fontFamily: 'ProductSans'),
               ),
               validator: (value) {
                 if (value != null && value.isNotEmpty) {
                   try {
-                    final intVal = int.parse(value);
+                    final intVal = double.parse(value);
                     if (intVal <= 0) {
                       return 'El producto no puede ser gratis.';
                     }
@@ -213,6 +215,7 @@ class _MyScreenState extends State<Principal> {
               controller: _yukaLidlController,
               keyboardType: TextInputType.number,
               decoration: const InputDecoration(
+                border: OutlineInputBorder(),
                 labelText: 'Yuka Lidl',
                 labelStyle: TextStyle(fontFamily: 'ProductSans'),
               ),
@@ -232,12 +235,6 @@ class _MyScreenState extends State<Principal> {
               }),
           const SizedBox(height: 8),
           DropdownButtonFormField(
-            icon: const Icon(Icons.expand_more),
-            onChanged: (String? newValue) {
-              setState(() {
-                categoriaController.text = newValue!;
-              });
-            },
             items: Categorias.listaCategorias
                 .map<DropdownMenuItem<String>>((String value) {
               return DropdownMenuItem<String>(
@@ -245,10 +242,22 @@ class _MyScreenState extends State<Principal> {
                 child: Text(value, style: const TextStyle(fontFamily: 'ProductSans')),
               );
             }).toList(),
+            value: _categoriaController.text.isNotEmpty ? _categoriaController.text : null,
             hint: const Text(
               'Seleccione una categoría',
               style: TextStyle(fontFamily: 'ProductSans'),
             ),
+            onChanged: (String? newValue) {
+              setState(() {
+                _categoriaController.text = newValue!;
+              });
+            },
+            decoration: const InputDecoration(
+              border: OutlineInputBorder(),
+              labelText: 'Categoría',
+              labelStyle: TextStyle(fontFamily: 'ProductSans'),
+            ),
+            icon: const Icon(Icons.expand_more),
             validator: (value) {
               if (value == null || value.isEmpty) {
                 return 'Por favor, elija una categoría.';
@@ -317,8 +326,9 @@ class _MyScreenState extends State<Principal> {
                             categoria: categoria,
                             id: 0,
                             yuka: [yukaMercadona, yukaLidl],
+                            fecha: DateTime.now(),
                           );
-                          _agregarProducto(nuevoProducto);
+                          productos.add(nuevoProducto);
                           Navigator.pop(context);
                         }
                       }
@@ -417,7 +427,7 @@ class _MyScreenState extends State<Principal> {
                             producto.precios[0] == -1
                                 ? 'No disponible'
                                 : '${producto.precios[0]}€',
-                            style: TextStyle(fontFamily: 'ProductSans'),
+                            style: const TextStyle(fontFamily: 'ProductSans'),
                           ),
                         ),
                       ),
@@ -428,7 +438,7 @@ class _MyScreenState extends State<Principal> {
                             producto.precios[1] == -1
                                 ? 'No disponible'
                                 : '${producto.precios[1]}€',
-                            style: TextStyle(fontFamily: 'ProductSans'),
+                            style: const TextStyle(fontFamily: 'ProductSans'),
                           ),
                         ),
                       ),
@@ -452,7 +462,7 @@ class _MyScreenState extends State<Principal> {
                             producto.yuka[0] == -1
                                 ? 'No disponible'
                                 : '${producto.yuka[0]}',
-                            style: TextStyle(fontFamily: 'ProductSans'),
+                            style: const TextStyle(fontFamily: 'ProductSans'),
                           ),
                         ),
                       ),
@@ -463,7 +473,7 @@ class _MyScreenState extends State<Principal> {
                             producto.yuka[1] == -1
                                 ? 'No disponible'
                                 : '${producto.yuka[1]}',
-                            style: TextStyle(fontFamily: 'ProductSans'),
+                            style: const TextStyle(fontFamily: 'ProductSans'),
                           ),
                         ),
                       ),
@@ -478,6 +488,12 @@ class _MyScreenState extends State<Principal> {
                     fontWeight: FontWeight.bold,
                     fontSize: 16,
                     fontFamily: 'ProductSans'),
+              ),
+              const SizedBox(height: 16),
+              Text(
+                'Última modificación: ${producto.fecha.day}/${producto.fecha.month}/${producto.fecha.year}',
+                style: const TextStyle(
+                    fontSize: 10),
               ),
             ],
           ),
@@ -557,6 +573,7 @@ class _MyScreenState extends State<Principal> {
                         int.tryParse(yukaLidlController.text) ?? -1;
                     productosFiltrados[index].categoria = categoriaController.text;
                     Navigator.pop(context);
+                    productosFiltrados[index].fecha = DateTime.now();
                   }
                 });
               },
@@ -655,40 +672,51 @@ class _MyScreenState extends State<Principal> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        scrolledUnderElevation: 5,
-        shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(
+  return Scaffold(
+    appBar: AppBar(
+
+      scrolledUnderElevation: 5,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(
           bottom: Radius.circular(30),
-        )),
-        elevation: 2,
-        iconTheme: const IconThemeData(color: AppStyle.miColorPrimario),
-        backgroundColor: Colors.white,
-        title: const Row(
-          children: [
-            Spacer(),
-            Text(
-              'PriceMarket',
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-                color: AppStyle.miColorPrimario,
-              ),
-            ),
-            Spacer(),
-          ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          _agregarProductoNuevo();
-        },
-        backgroundColor: AppStyle.miColorPrimario,
-        foregroundColor: Colors.white,
-        child: const Icon(Icons.add),
-      ),
-      body: Column(
+      elevation: 2,
+      iconTheme: const IconThemeData(color: AppStyle.miColorPrimario),
+      backgroundColor: Colors.white,
+      title: GestureDetector(
+          onTap: () {
+            // Cuando se toca el AppBar, se desplaza al principio.
+            _scrollController.animateTo(0,
+                duration: const Duration(milliseconds: 500), curve: Curves.easeInOut);
+          },
+          child: const Row(
+            children: [
+              Spacer(),
+              Text(
+                'Price Market',
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  color: AppStyle.miColorPrimario,
+                ),
+              ),
+              Spacer(),
+            ],
+          )
+        ),
+    ),
+    floatingActionButton: FloatingActionButton(
+      onPressed: () {
+        _agregarProductoNuevo();
+      },
+      backgroundColor: AppStyle.miColorPrimario,
+      foregroundColor: Colors.white,
+      child: const Icon(Icons.add),
+    ),
+    body: SingleChildScrollView(
+      controller: _scrollController,
+      child: Column(
         children: [
           Padding(
             padding: const EdgeInsets.all(8.0),
@@ -747,63 +775,64 @@ class _MyScreenState extends State<Principal> {
               ],
             ),
           ),
-          Expanded(
-            child: ListView.builder(
-              itemCount: productosFiltrados.length,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
-                  child: Card(
-                    surfaceTintColor: const Color.fromARGB(255, 217, 212, 212),
-                    child: InkWell(
-                      onTap: () {
-                        _mostrarInformacionProducto(productosFiltrados[index]);
-                      },
-                      onLongPress: () {
-                        _editarProducto(index);
-                      },
-                      child: ListTile(
-                        title: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Expanded(
-                              child: Text(
-                                productosFiltrados[index].nombre,
-                                style: const TextStyle(
-                                    fontWeight: FontWeight.bold),
-                                textAlign: TextAlign.center,
-                              ),
+          ListView.builder(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: productosFiltrados.length,
+            itemBuilder: (context, index) {
+              return Padding(
+                padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
+                child: Card(
+                  surfaceTintColor: const Color.fromARGB(255, 217, 212, 212),
+                  child: InkWell(
+                    onTap: () {
+                      _mostrarInformacionProducto(productosFiltrados[index]);
+                    },
+                    onLongPress: () {
+                      _editarProducto(index);
+                    },
+                    child: ListTile(
+                      title: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Expanded(
+                            child: Text(
+                              productosFiltrados[index].nombre,
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.bold),
+                              textAlign: TextAlign.center,
                             ),
-                            Expanded(
-                              child: Text(
-                                productosFiltrados[index].precios[0] == -1
-                                    ? 'No disponible'
-                                    : '${productosFiltrados[index].precios[0]}€',
-                                style: const TextStyle(color: Colors.green),
-                                textAlign: TextAlign.center,
-                              ),
+                          ),
+                          Expanded(
+                            child: Text(
+                              productosFiltrados[index].precios[0] == -1
+                                  ? 'No disponible'
+                                  : '${productosFiltrados[index].precios[0]}€',
+                              style: const TextStyle(color: Colors.green),
+                              textAlign: TextAlign.center,
                             ),
-                            Expanded(
-                              child: Text(
-                                productosFiltrados[index].precios[1] == -1
-                                    ? 'No disponible'
-                                    : '${productosFiltrados[index].precios[1]}€',
-                                style: const TextStyle(
-                                    color: Color.fromARGB(255, 255, 0, 0)),
-                                textAlign: TextAlign.center,
-                              ),
+                          ),
+                          Expanded(
+                            child: Text(
+                              productosFiltrados[index].precios[1] == -1
+                                  ? 'No disponible'
+                                  : '${productosFiltrados[index].precios[1]}€',
+                              style: const TextStyle(
+                                  color: Color.fromARGB(255, 255, 0, 0)),
+                              textAlign: TextAlign.center,
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     ),
                   ),
-                );
-              },
-            ),
+                ),
+              );
+            },
           ),
         ],
       ),
-    );
-  }
+    ),
+  );
+}
 }
