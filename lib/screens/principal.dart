@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:price_market/objects/Clases.dart';
+import 'package:price_market/objects/DatosManager.dart';
+import 'package:price_market/objects/ListaProdutos.dart';
 import '../objects/AppStyle.dart';
 import '../objects/Producto.dart';
 
@@ -18,58 +20,9 @@ class _MyScreenState extends State<Principal> {
     'Mayor Yuka'
   ];
   String filtroOrden = 'Ninguno';
-  List<Producto> productos = [
-    Producto(
-      id: 1,
-      nombre: 'Coca Cola',
-      precios: [1.5, 2.0],
-      categoria: 'Bebidas',
-      yuka: [6, 2],
-      imagen:
-          "https://sgfm.elcorteingles.es/SGFM/dctm/MEDIA03/202109/28/00118622300228____23__600x600",
-      fecha: DateTime.now(),
-    ),
-    Producto(
-      id: 2,
-      nombre: 'Pepsi',
-      precios: [1.6, 1.0],
-      categoria: 'Bebidas',
-      yuka: [0, 0],
-      fecha: DateTime.now(),
-    ),
-    Producto(
-      id: 3,
-      nombre: 'Fanta',
-      precios: [1.4, 0.2],
-      categoria: 'Bebidas',
-      yuka: [30, 98],
-      fecha: DateTime.now(),
-    ),
-    Producto(
-      id: 4,
-      nombre: 'Cerveza',
-      precios: [1.5, 2.0],
-      categoria: 'Bebidas',
-      yuka: [20, 28],
-      fecha: DateTime.now(),
-    ),
-    Producto(
-      id: 5,
-      nombre: 'Agua',
-      precios: [1.6, 2.3],
-      categoria: 'Bebidas',
-      yuka: [100, 88],
-      fecha: DateTime.now(),
-    ),
-    Producto(
-      id: 6,
-      nombre: 'Leche',
-      precios: [132, 28],
-      categoria: 'Alimentación',
-      yuka: [80, 28],
-      fecha: DateTime.now(),
-    ),
-  ];
+
+  ListaProducto listaProductos = ListaProducto(productos: [
+  ]);
   List<Producto> productosFiltrados = [];
   String filtroCategoria = '';
   final ScrollController _scrollController = ScrollController();
@@ -77,50 +30,53 @@ class _MyScreenState extends State<Principal> {
   @override
   void initState() {
     super.initState();
-    productosFiltrados = List.from(productos);
+    productosFiltrados = listaProductos.productos;
+    _datosManager('Importar');
   }
 
   void _filtrarProductos(String filtro) {
-  setState(() {
-    productosFiltrados = productos
-        .where((producto) =>
-            producto.nombre.toLowerCase().contains(filtro.toLowerCase()) &&
-            (filtroCategoria.isEmpty || producto.categoria == filtroCategoria))
-        .toList();
+    setState(() {
+      productosFiltrados = listaProductos.productos
+          .where((producto) =>
+              producto.nombre.toLowerCase().contains(filtro.toLowerCase()) &&
+              (filtroCategoria.isEmpty ||
+                  producto.categoria == filtroCategoria))
+          .toList();
 
-    if (filtroOrden == 'Menor Precio') {
-      productosFiltrados.sort((a, b) => (a.precios
-                  .reduce((value, element) => value + element) /
-              a.precios.length)
-          .compareTo((b.precios.reduce((value, element) => value + element) /
-              b.precios.length)));
-    } else if (filtroOrden == 'Mayor Precio') {
-      productosFiltrados.sort((a, b) => (b.precios
-                  .reduce((value, element) => value + element) /
-              b.precios.length)
-          .compareTo((a.precios.reduce((value, element) => value + element) /
-              a.precios.length)));
-    } else if (filtroOrden == 'Menor Yuka') {
-      productosFiltrados.sort((a, b) =>
-          (a.yuka.reduce((value, element) => value + element) /
-              a.yuka.length)
-              .compareTo(
-              b.yuka.reduce((value, element) => value + element) /
-                  b.yuka.length));
-    } else if (filtroOrden == 'Mayor Yuka') {
-      productosFiltrados.sort((a, b) =>
-          (b.yuka.reduce((value, element) => value + element) /
-              b.yuka.length)
-              .compareTo(
-              a.yuka.reduce((value, element) => value + element) /
-                  a.yuka.length));
-    }
-  });
-}
+      if (filtroOrden == 'Menor Precio') {
+        productosFiltrados.sort((a, b) => (a.precios
+                    .reduce((value, element) => value + element) /
+                a.precios.length)
+            .compareTo((b.precios.reduce((value, element) => value + element) /
+                b.precios.length)));
+      } else if (filtroOrden == 'Mayor Precio') {
+        productosFiltrados.sort((a, b) => (b.precios
+                    .reduce((value, element) => value + element) /
+                b.precios.length)
+            .compareTo((a.precios.reduce((value, element) => value + element) /
+                a.precios.length)));
+      } else if (filtroOrden == 'Menor Yuka') {
+        productosFiltrados.sort((a, b) =>
+            (a.yuka.reduce((value, element) => value + element) / a.yuka.length)
+                .compareTo(b.yuka.reduce((value, element) => value + element) /
+                    b.yuka.length));
+      } else if (filtroOrden == 'Mayor Yuka') {
+        productosFiltrados.sort((a, b) =>
+            (b.yuka.reduce((value, element) => value + element) / b.yuka.length)
+                .compareTo(a.yuka.reduce((value, element) => value + element) /
+                    a.yuka.length));
+      }
+    });
+  }
 
-  Form formularioProducto(TextEditingController _nombreController, TextEditingController _mercadonaController,
-      TextEditingController _lidlController, TextEditingController _yukaMercadonaController,
-      TextEditingController _yukaLidlController, TextEditingController _categoriaController, GlobalKey<FormState> _formKey) {
+  Form formularioProducto(
+      TextEditingController _nombreController,
+      TextEditingController _mercadonaController,
+      TextEditingController _lidlController,
+      TextEditingController _yukaMercadonaController,
+      TextEditingController _yukaLidlController,
+      TextEditingController _categoriaController,
+      GlobalKey<FormState> _formKey) {
     return Form(
       key: _formKey,
       child: Column(
@@ -239,10 +195,13 @@ class _MyScreenState extends State<Principal> {
                 .map<DropdownMenuItem<String>>((String value) {
               return DropdownMenuItem<String>(
                 value: value,
-                child: Text(value, style: const TextStyle(fontFamily: 'ProductSans')),
+                child: Text(value,
+                    style: const TextStyle(fontFamily: 'ProductSans')),
               );
             }).toList(),
-            value: _categoriaController.text.isNotEmpty ? _categoriaController.text : null,
+            value: _categoriaController.text.isNotEmpty
+                ? _categoriaController.text
+                : null,
             hint: const Text(
               'Seleccione una categoría',
               style: TextStyle(fontFamily: 'ProductSans'),
@@ -287,14 +246,16 @@ class _MyScreenState extends State<Principal> {
           return AlertDialog(
             title: const Text('Añadir Producto'),
             titlePadding: const EdgeInsets.fromLTRB(20, 20, 20, 5),
-            content: formularioProducto(
-                nombreController,
-                mercadonaController,
-                lidlController,
-                yukaMercadonaController,
-                yukaLidlController,
-                categoriaController,
-                formKey),
+            content: SingleChildScrollView(
+              child: formularioProducto(
+                  nombreController,
+                  mercadonaController,
+                  lidlController,
+                  yukaMercadonaController,
+                  yukaLidlController,
+                  categoriaController,
+                  formKey),
+            ),
             contentPadding: const EdgeInsets.fromLTRB(20, 5, 20, 20),
             actions: [
               TextButton(
@@ -317,7 +278,8 @@ class _MyScreenState extends State<Principal> {
                             int.tryParse(yukaMercadonaController.text) ?? -1;
                         final int yukaLidl =
                             int.tryParse(yukaLidlController.text) ?? -1;
-                        final String categoria = categoriaController.text.trim();
+                        final String categoria =
+                            categoriaController.text.trim();
 
                         if (nombre.isNotEmpty) {
                           final Producto nuevoProducto = Producto(
@@ -328,7 +290,9 @@ class _MyScreenState extends State<Principal> {
                             yuka: [yukaMercadona, yukaLidl],
                             fecha: DateTime.now(),
                           );
-                          productos.add(nuevoProducto);
+                          listaProductos.productos.add(nuevoProducto);
+                          _datosManager('Exportar');
+                          _filtrarProductos('');
                           Navigator.pop(context);
                         }
                       }
@@ -340,6 +304,37 @@ class _MyScreenState extends State<Principal> {
             ],
           );
         });
+  }
+
+  void _eliminarProducto(Producto producto){
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Eliminar Producto'),
+          content: const Text('¿Está seguro de que desea eliminar este producto?'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: const Text('Cancelar'),
+            ),
+            TextButton(
+              onPressed: () {
+                setState(() {
+                  listaProductos.productos.remove(producto);
+                  _datosManager('Exportar');
+                  _filtrarProductos('');
+                  Navigator.pop(context);
+                });
+              },
+              child: const Text('Eliminar'),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   void _mostrarInformacionProducto(Producto producto) {
@@ -492,8 +487,7 @@ class _MyScreenState extends State<Principal> {
               const SizedBox(height: 16),
               Text(
                 'Última modificación: ${producto.fecha.day}/${producto.fecha.month}/${producto.fecha.year}',
-                style: const TextStyle(
-                    fontSize: 10),
+                style: const TextStyle(fontSize: 10),
               ),
             ],
           ),
@@ -522,17 +516,16 @@ class _MyScreenState extends State<Principal> {
         text: productosFiltrados[index].precios[1] == -1
             ? ''
             : '${productosFiltrados[index].precios[1]}');
-    final TextEditingController yukaMercadonaController =
-        TextEditingController(
-            text: productosFiltrados[index].yuka[0] == -1
-                ? ''
-                : '${productosFiltrados[index].yuka[0]}');
+    final TextEditingController yukaMercadonaController = TextEditingController(
+        text: productosFiltrados[index].yuka[0] == -1
+            ? ''
+            : '${productosFiltrados[index].yuka[0]}');
     final TextEditingController yukaLidlController = TextEditingController(
         text: productosFiltrados[index].yuka[1] == -1
             ? ''
             : '${productosFiltrados[index].yuka[1]}');
-    final TextEditingController categoriaController = TextEditingController(
-        text: productosFiltrados[index].categoria);
+    final TextEditingController categoriaController =
+        TextEditingController(text: productosFiltrados[index].categoria);
 
     final formKey = GlobalKey<FormState>();
 
@@ -542,14 +535,16 @@ class _MyScreenState extends State<Principal> {
         return AlertDialog(
           title: const Text('Editar Producto'),
           titlePadding: const EdgeInsets.fromLTRB(20, 20, 20, 5),
-          content: formularioProducto(
-              nombreController,
-              mercadonaController,
-              lidlController,
-              yukaMercadonaController,
-              yukaLidlController,
-              categoriaController,
-              formKey),
+          content: SingleChildScrollView(
+              child: formularioProducto(
+                  nombreController,
+                  mercadonaController,
+                  lidlController,
+                  yukaMercadonaController,
+                  yukaLidlController,
+                  categoriaController,
+                  formKey),
+            ),
           contentPadding: const EdgeInsets.fromLTRB(20, 5, 20, 20),
           actions: [
             TextButton(
@@ -571,9 +566,12 @@ class _MyScreenState extends State<Principal> {
                         int.tryParse(yukaMercadonaController.text) ?? -1;
                     productosFiltrados[index].yuka[1] =
                         int.tryParse(yukaLidlController.text) ?? -1;
-                    productosFiltrados[index].categoria = categoriaController.text;
-                    Navigator.pop(context);
+                    productosFiltrados[index].categoria =
+                        categoriaController.text;
                     productosFiltrados[index].fecha = DateTime.now();
+                    _datosManager('Exportar');
+                    _filtrarProductos('');
+                    Navigator.pop(context);
                   }
                 });
               },
@@ -670,30 +668,39 @@ class _MyScreenState extends State<Principal> {
     );
   }
 
+  void _datosManager(String accion) {
+    if (accion == 'Exportar') {
+      ImportadorExportadorDatos.exportDataToFile(listaProductos.productos);
+    } else if (accion == 'Importar') {
+      ImportadorExportadorDatos.importDataFromFile(listaProductos.productos);
+      _filtrarProductos('');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-  return Scaffold(
-    appBar: AppBar(
-
-      scrolledUnderElevation: 5,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(
-          bottom: Radius.circular(30),
+    return Scaffold(
+      appBar: AppBar(
+        scrolledUnderElevation: 5,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            bottom: Radius.circular(30),
+          ),
         ),
-      ),
-      elevation: 2,
-      iconTheme: const IconThemeData(color: AppStyle.miColorPrimario),
-      backgroundColor: Colors.white,
-      title: GestureDetector(
-          onTap: () {
-            // Cuando se toca el AppBar, se desplaza al principio.
-            _scrollController.animateTo(0,
-                duration: const Duration(milliseconds: 500), curve: Curves.easeInOut);
-          },
-          child: const Row(
-            children: [
-              Spacer(),
-              Text(
+        elevation: 2,
+        iconTheme: const IconThemeData(color: AppStyle.miColorPrimario),
+        backgroundColor: Colors.white,
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            GestureDetector(
+              onTap: () {
+                // Cuando se toca el AppBar, se desplaza al principio.
+                _scrollController.animateTo(0,
+                    duration: const Duration(milliseconds: 500),
+                    curve: Curves.easeInOut);
+              },
+              child: const Text(
                 'Price Market',
                 style: TextStyle(
                   fontSize: 24,
@@ -701,138 +708,202 @@ class _MyScreenState extends State<Principal> {
                   color: AppStyle.miColorPrimario,
                 ),
               ),
-              Spacer(),
-            ],
-          )
-        ),
-    ),
-    floatingActionButton: FloatingActionButton(
-      onPressed: () {
-        _agregarProductoNuevo();
-      },
-      backgroundColor: AppStyle.miColorPrimario,
-      foregroundColor: Colors.white,
-      child: const Icon(Icons.add),
-    ),
-    body: SingleChildScrollView(
-      controller: _scrollController,
-      child: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: ElevatedButton(
-              onPressed: () {},
-              child: const Text('Guardar datos'),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              children: [
-                Expanded(
-                  child: TextField(
-                    onChanged: _filtrarProductos,
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'Buscar producto',
-                      prefixIcon: Icon(Icons.search),
-                    ),
-                  ),
-                ),
-                IconButton(
-                  onPressed: _mostrarFiltrosDialog,
-                  icon: const Icon(Icons.filter_list),
-                ),
-              ],
-            ),
-          ),
-          const Padding(
-            padding: EdgeInsets.fromLTRB(28, 8, 35, 8),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Expanded(
-                  child: Text(
-                    'Nombre',
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-                Expanded(
-                  child: Text(
-                    'Mercadona',
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-                Expanded(
-                  child: Text(
-                    'Lidl',
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          ListView.builder(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            itemCount: productosFiltrados.length,
-            itemBuilder: (context, index) {
-              return Padding(
-                padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
-                child: Card(
-                  surfaceTintColor: const Color.fromARGB(255, 217, 212, 212),
-                  child: InkWell(
+            const Spacer(),
+            PopupMenuButton(
+              itemBuilder: (context) {
+                return [
+                  PopupMenuItem(
+                    child: const Text('Importar datos'),
                     onTap: () {
-                      _mostrarInformacionProducto(productosFiltrados[index]);
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: const Text('Importar datos'),
+                            content: const Text('¿Está seguro de que desea importar los datos?'),
+                            actions: [
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                child: const Text('Cancelar'),
+                              ),
+                              TextButton(
+                                onPressed: () {
+                                  setState(() {
+                                    _datosManager('Importar');
+                                    Navigator.pop(context);
+                                  });
+                                },
+                                child: const Text('Importar datos'),
+                              ),
+                            ],
+                          );
+                        },
+                      );
                     },
-                    onLongPress: () {
-                      _editarProducto(index);
+                  ),
+                  PopupMenuItem(
+                    child: const Text('Exportar datos'),
+                    onTap: () {
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: const Text('Exportar datos'),
+                            content: const Text('¿Está seguro de que desea exportar los datos?'),
+                            actions: [
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                child: const Text('Cancelar'),
+                              ),
+                              TextButton(
+                                onPressed: () {
+                                  setState(() {
+                                    _datosManager('Exportar');
+                                    Navigator.pop(context);
+                                  });
+                                },
+                                child: const Text('Exportar datos'),
+                              ),
+                            ],
+                          );
+                        },
+                      );
                     },
-                    child: ListTile(
-                      title: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Expanded(
-                            child: Text(
-                              productosFiltrados[index].nombre,
-                              style: const TextStyle(
-                                  fontWeight: FontWeight.bold),
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                          Expanded(
-                            child: Text(
-                              productosFiltrados[index].precios[0] == -1
-                                  ? 'No disponible'
-                                  : '${productosFiltrados[index].precios[0]}€',
-                              style: const TextStyle(color: Colors.green),
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                          Expanded(
-                            child: Text(
-                              productosFiltrados[index].precios[1] == -1
-                                  ? 'No disponible'
-                                  : '${productosFiltrados[index].precios[1]}€',
-                              style: const TextStyle(
-                                  color: Color.fromARGB(255, 255, 0, 0)),
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                        ],
+                  ),
+                ];
+              },
+            ),
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          _agregarProductoNuevo();
+        },
+        backgroundColor: AppStyle.miColorPrimario,
+        foregroundColor: Colors.white,
+        child: const Icon(Icons.add),
+      ),
+      body: SingleChildScrollView(
+        controller: _scrollController,
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: TextField(
+                      onChanged: _filtrarProductos,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'Buscar producto',
+                        prefixIcon: Icon(Icons.search),
                       ),
                     ),
                   ),
-                ),
-              );
-            },
-          ),
-        ],
+                  IconButton(
+                    onPressed: _mostrarFiltrosDialog,
+                    icon: const Icon(Icons.filter_list),
+                  ),
+                ],
+              ),
+            ),
+            const Padding(
+              padding: EdgeInsets.fromLTRB(28, 8, 35, 8),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Expanded(
+                    child: Text(
+                      'Nombre',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                  Expanded(
+                    child: Text(
+                      'Mercadona',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                  Expanded(
+                    child: Text(
+                      'Lidl',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            ListView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: productosFiltrados.length,
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
+                  child: Card(
+                    surfaceTintColor: const Color.fromARGB(255, 217, 212, 212),
+                    child: InkWell(
+                      onTap: () {
+                        _mostrarInformacionProducto(productosFiltrados[index]);
+                      },
+                      onLongPress: () {
+                        _editarProducto(index);
+                      },
+                      onDoubleTap: () {
+                        _eliminarProducto(productosFiltrados[index]);
+                      },
+                      child: ListTile(
+                        title: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Expanded(
+                              child: Text(
+                                productosFiltrados[index].nombre,
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold),
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
+                            Expanded(
+                              child: Text(
+                                productosFiltrados[index].precios[0] == -1
+                                    ? 'No disponible'
+                                    : '${productosFiltrados[index].precios[0]}€',
+                                style: const TextStyle(color: Colors.green),
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
+                            Expanded(
+                              child: Text(
+                                productosFiltrados[index].precios[1] == -1
+                                    ? 'No disponible'
+                                    : '${productosFiltrados[index].precios[1]}€',
+                                style: const TextStyle(
+                                    color: Color.fromARGB(255, 255, 0, 0)),
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                );
+              },
+            ),
+          ],
+        ),
       ),
-    ),
-  );
-}
+    );
+  }
 }
