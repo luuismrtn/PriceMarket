@@ -1,7 +1,7 @@
 
 class Categorias {
-  static const List<String> listaCategorias = ['Refrescos', 'Bolleria', 'Postres',
-    'Frutas', 'Pastas', 'Congelados', 'Higiene', 'Bebidas','Otros'];
+  static const List<String> listaCategorias = ['Comidas', 'Chuches', 'Bolleria', 'Postres',
+    'Frutas', 'Congelados', 'Higiene', 'Bebidas', 'Otros'];
 }
 
 class Supermercados {
