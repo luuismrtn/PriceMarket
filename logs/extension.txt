@@ -151,3 +151,70 @@ Flutter (3.16.0): C:\Users\luism\flutter (No device)
 [23:56:10] [General] [Info] Returning cached results for project search
 [23:56:10] [General] [Info] Checking 1 projects for supported platforms
 [23:56:10] [General] [Info] Supported platforms for the workspace are windows, android, web
+[23:57:35] [General] [Info] Returning cached results for project search
+[23:57:35] [General] [Info] Checking 1 projects for supported platforms
+[23:57:35] [General] [Info] Supported platforms for the workspace are windows, android, web
+[23:58:08] [General] [Info] Saving emulator-5554 as preferred device
+[23:58:08] [General] [Info] Returning cached results for project search
+[23:58:08] [General] [Info] Checking 1 projects for supported platforms
+[23:58:08] [General] [Info] Supported platforms for the workspace are windows, android, web
+[23:58:17] [General] [Info] Starting debug session...
+[23:58:17] [General] [Info]     workspace: C:\Users\luism\Desktop\Proyectos\PriceMarket
+[23:58:17] [General] [Info]     program  : C:\Users\luism\Desktop\Proyectos\PriceMarket\lib\main.dart
+[23:58:17] [General] [Info] Setting cwd based on likely entry point: C:\Users\luism\Desktop\Proyectos\PriceMarket
+[23:58:17] [General] [Info] Using workspace as cwd: C:\Users\luism\Desktop\Proyectos\PriceMarket
+[23:58:17] [General] [Info] Detected launch project as Flutter
+[23:58:17] [General] [Info] Using Flutter debug adapter for this session
+[23:58:17] [General] [Info] Getting DevTools server address to pass to Flutter...
+[23:58:17] [General] [Info] Checking for errors before launching
+[23:58:17] [General] [Info] Debug session starting...
+    {
+        "name": "Dart  (Resizable (Experimental) API 33)",
+        "noDebug": true,
+        "request": "launch",
+        "type": "dart",
+        "program": "C:\\Users\\luism\\Desktop\\Proyectos\\PriceMarket\\lib\\main.dart",
+        "dartCodeDebugSessionID": "session-4f92b",
+        "cwd": "C:\\Users\\luism\\Desktop\\Proyectos\\PriceMarket",
+        "deviceId": "emulator-5554",
+        "deviceName": "Resizable (Experimental) API 33 (android-x64)",
+        "toolEnv": {
+            "FLUTTER_HOST": "VSCode",
+            "PUB_ENVIRONMENT": "vscode.dart-code",
+            "FLUTTER_ROOT": "C:\\Users\\luism\\flutter"
+        },
+        "sendLogsToClient": false,
+        "sendCustomProgressEvents": true,
+        "allowAnsiColorOutput": true,
+        "additionalProjectPaths": [
+            "C:\\Users\\luism\\Desktop\\Proyectos\\PriceMarket"
+        ],
+        "args": [],
+        "vmAdditionalArgs": [],
+        "toolArgs": [
+            "-d",
+            "emulator-5554",
+            "--devtools-server-address",
+            "http://127.0.0.1:9100/"
+        ],
+        "vmServicePort": 0,
+        "dartSdkPath": "C:\\Users\\luism\\flutter\\bin\\cache\\dart-sdk",
+        "vmServiceLogFile": "C:\\Users\\luism\\Desktop\\Proyectos\\PriceMarket\\logs\\observatory.txt",
+        "maxLogLineLength": 2000,
+        "dartTestLogFile": "C:\\Users\\luism\\Desktop\\Proyectos\\PriceMarket\\logs\\dart_test.txt",
+        "debugSdkLibraries": false,
+        "debugExternalPackageLibraries": false,
+        "showDartDeveloperLogs": true,
+        "evaluateGettersInDebugViews": true,
+        "evaluateToStringInDebugViews": true,
+        "flutterSdkPath": "C:\\Users\\luism\\flutter",
+        "useInspectorNotificationsForWidgetErrors": false,
+        "flutterRunLogFile": "C:\\Users\\luism\\Desktop\\Proyectos\\PriceMarket\\logs\\flutter_run.txt",
+        "flutterTestLogFile": "C:\\Users\\luism\\Desktop\\Proyectos\\PriceMarket\\logs\\flutter_test.txt",
+        "showMemoryUsa…
+[23:58:17] [General] [Info] Using flutter debugger for Flutter
+[23:58:17] [General] [Info] SDK DAP setting is true, set by sdkDaps experiment
+[23:58:17] [General] [Info] Running SDK DAP Dart VM in undefined: C:\Users\luism\flutter\bin\flutter.bat debug_adapter and options {"env":{"FLUTTER_HOST":"VSCode","PUB_ENVIRONMENT":"vscode.dart-code","FLUTTER_ROOT":"C:\\Users\\luism\\flutter"}}
+[23:58:18] [General] [Info] Did not find session fb5e2ee4-66be-48d3-8202-32305ec128fc to handle dart.progressStart. There were 0 sessions:
+[23:58:18] [General] [Info] Event will be queued and processed when the session start event fires
+[23:58:18] [General] [Info] Processing delayed event dart.progressStart for session fb5e2ee4-66be-48d3-8202-32305ec128fc
