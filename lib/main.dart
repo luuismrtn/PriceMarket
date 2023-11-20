@@ -3,11 +3,11 @@ import 'package:price_market/screens/principal.dart';
 import 'objects/AppStyle.dart';
 
 Future<void> main() async {
-  runApp(const MyApp());
+  runApp(const PriceMarket());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class PriceMarket extends StatelessWidget {
+  const PriceMarket({super.key});
 
   @override
   Widget build(BuildContext context) {

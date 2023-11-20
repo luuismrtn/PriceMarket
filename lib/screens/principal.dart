@@ -21,8 +21,9 @@ class _MyScreenState extends State<Principal> {
   ];
   String filtroOrden = 'Ninguno';
 
-  ListaProducto listaProductos = ListaProducto(productos: [
-  ]);
+  final String version = '1.0.2';
+
+  ListaProducto listaProductos = ListaProducto(productos: []);
   List<Producto> productosFiltrados = [];
   String filtroCategoria = '';
   final ScrollController _scrollController = ScrollController();
@@ -133,7 +134,7 @@ class _MyScreenState extends State<Principal> {
                 if (value != null && value.isNotEmpty) {
                   try {
                     final intVal = double.parse(value);
-                    if (intVal < 0 || intVal > 100) {
+                    if (intVal < -2 || intVal > 100) {
                       return 'Ingrese un número entre 0 y 100.';
                     }
                   } catch (e) {
@@ -179,7 +180,7 @@ class _MyScreenState extends State<Principal> {
                 if (value != null && value.isNotEmpty) {
                   try {
                     final intVal = int.parse(value);
-                    if (intVal < 0 || intVal > 100) {
+                    if (intVal < -2 || intVal > 100) {
                       return 'Ingrese un número entre 0 y 100.';
                     }
                   } catch (e) {
@@ -292,7 +293,7 @@ class _MyScreenState extends State<Principal> {
                           );
                           listaProductos.productos.add(nuevoProducto);
                           _datosManager('Exportar');
-                          _filtrarProductos('');
+                          _actualizarPagina();
                           Navigator.pop(context);
                         }
                       }
@@ -306,13 +307,14 @@ class _MyScreenState extends State<Principal> {
         });
   }
 
-  void _eliminarProducto(Producto producto){
+  void _eliminarProducto(Producto producto) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
           title: const Text('Eliminar Producto'),
-          content: const Text('¿Está seguro de que desea eliminar este producto?'),
+          content:
+              const Text('¿Está seguro de que desea eliminar este producto?'),
           actions: [
             TextButton(
               onPressed: () {
@@ -325,7 +327,7 @@ class _MyScreenState extends State<Principal> {
                 setState(() {
                   listaProductos.productos.remove(producto);
                   _datosManager('Exportar');
-                  _filtrarProductos('');
+                  _actualizarPagina();
                   Navigator.pop(context);
                 });
               },
@@ -343,153 +345,159 @@ class _MyScreenState extends State<Principal> {
       builder: (BuildContext context) {
         return AlertDialog(
           title: const Text('Información del Producto'),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                producto.nombre,
-                style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
-                    fontFamily: 'ProductSans'),
-              ),
-              const SizedBox(height: 16),
-              if (producto.imagen != "")
-                Column(
+          content: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  producto.nombre,
+                  style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                      fontFamily: 'ProductSans'),
+                ),
+                const SizedBox(height: 16),
+                if (producto.imagen != "")
+                  Column(
+                    children: [
+                      Image.network(
+                        producto.imagen,
+                        height: 100,
+                        width: 100,
+                      ),
+                      const SizedBox(height: 16),
+                    ],
+                  ),
+                Table(
+                  columnWidths: const {
+                    0: FlexColumnWidth(2),
+                    1: FlexColumnWidth(2),
+                    2: FlexColumnWidth(2),
+                  },
+                  border: TableBorder.all(
+                    color: Colors.black,
+                    width: 1,
+                  ),
+                  defaultVerticalAlignment: TableCellVerticalAlignment.middle,
                   children: [
-                    Image.network(
-                      producto.imagen,
-                      height: 100,
-                      width: 100,
+                    const TableRow(
+                      children: [
+                        TableCell(
+                          child: Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Text(
+                              'Super',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: 'ProductSans'),
+                            ),
+                          ),
+                        ),
+                        TableCell(
+                          child: Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Text('Mercadona'),
+                          ),
+                        ),
+                        TableCell(
+                          child: Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Text('Lidl'),
+                          ),
+                        ),
+                      ],
                     ),
-                    const SizedBox(height: 16),
+                    TableRow(
+                      children: [
+                        const TableCell(
+                          child: Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Text('Precio',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: 'ProductSans')),
+                          ),
+                        ),
+                        TableCell(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              producto.precios[0] == -1
+                                  ? 'No disponible'
+                                  : '${producto.precios[0]}€',
+                              style: const TextStyle(fontFamily: 'ProductSans'),
+                            ),
+                          ),
+                        ),
+                        TableCell(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              producto.precios[1] == -1
+                                  ? 'No disponible'
+                                  : '${producto.precios[1]}€',
+                              style: const TextStyle(fontFamily: 'ProductSans'),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    TableRow(
+                      children: [
+                        const TableCell(
+                          child: Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Text('Yuka',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: 'ProductSans')),
+                          ),
+                        ),
+                        TableCell(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              producto.yuka[0] == -1
+                                  ? 'No disponible'
+                                  : producto.yuka[0] == -2
+                                      ? 'No tiene'
+                                      : '${producto.yuka[0]}',
+                              style: const TextStyle(fontFamily: 'ProductSans'),
+                            ),
+                          ),
+                        ),
+                        TableCell(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              producto.yuka[1] == -1
+                                  ? 'No disponible'
+                                  : producto.yuka[1] == -2
+                                      ? 'No tiene'
+                                      : '${producto.yuka[1]}',
+                              style: const TextStyle(fontFamily: 'ProductSans'),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ],
                 ),
-              Table(
-                columnWidths: const {
-                  0: FlexColumnWidth(2),
-                  1: FlexColumnWidth(2),
-                  2: FlexColumnWidth(2),
-                },
-                border: TableBorder.all(
-                  color: Colors.black,
-                  width: 1,
+                const SizedBox(height: 16),
+                Text(
+                  'Categoría: ${producto.categoria}',
+                  style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                      fontFamily: 'ProductSans'),
                 ),
-                defaultVerticalAlignment: TableCellVerticalAlignment.middle,
-                children: [
-                  const TableRow(
-                    children: [
-                      TableCell(
-                        child: Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: Text(
-                            'Super',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontFamily: 'ProductSans'),
-                          ),
-                        ),
-                      ),
-                      TableCell(
-                        child: Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: Text('Mercadona'),
-                        ),
-                      ),
-                      TableCell(
-                        child: Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: Text('Lidl'),
-                        ),
-                      ),
-                    ],
-                  ),
-                  TableRow(
-                    children: [
-                      const TableCell(
-                        child: Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: Text('Precio',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'ProductSans')),
-                        ),
-                      ),
-                      TableCell(
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            producto.precios[0] == -1
-                                ? 'No disponible'
-                                : '${producto.precios[0]}€',
-                            style: const TextStyle(fontFamily: 'ProductSans'),
-                          ),
-                        ),
-                      ),
-                      TableCell(
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            producto.precios[1] == -1
-                                ? 'No disponible'
-                                : '${producto.precios[1]}€',
-                            style: const TextStyle(fontFamily: 'ProductSans'),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  TableRow(
-                    children: [
-                      const TableCell(
-                        child: Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: Text('Yuka',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'ProductSans')),
-                        ),
-                      ),
-                      TableCell(
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            producto.yuka[0] == -1
-                                ? 'No disponible'
-                                : '${producto.yuka[0]}',
-                            style: const TextStyle(fontFamily: 'ProductSans'),
-                          ),
-                        ),
-                      ),
-                      TableCell(
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            producto.yuka[1] == -1
-                                ? 'No disponible'
-                                : '${producto.yuka[1]}',
-                            style: const TextStyle(fontFamily: 'ProductSans'),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-              const SizedBox(height: 16),
-              Text(
-                'Categoría: ${producto.categoria}',
-                style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16,
-                    fontFamily: 'ProductSans'),
-              ),
-              const SizedBox(height: 16),
-              Text(
-                'Última modificación: ${producto.fecha.day}/${producto.fecha.month}/${producto.fecha.year}',
-                style: const TextStyle(fontSize: 10),
-              ),
-            ],
+                const SizedBox(height: 16),
+                Text(
+                  'Última modificación: ${producto.fecha.day}/${producto.fecha.month}/${producto.fecha.year}',
+                  style: const TextStyle(fontSize: 10),
+                ),
+              ],
+            ),
           ),
           actions: [
             TextButton(
@@ -536,15 +544,15 @@ class _MyScreenState extends State<Principal> {
           title: const Text('Editar Producto'),
           titlePadding: const EdgeInsets.fromLTRB(20, 20, 20, 5),
           content: SingleChildScrollView(
-              child: formularioProducto(
-                  nombreController,
-                  mercadonaController,
-                  lidlController,
-                  yukaMercadonaController,
-                  yukaLidlController,
-                  categoriaController,
-                  formKey),
-            ),
+            child: formularioProducto(
+                nombreController,
+                mercadonaController,
+                lidlController,
+                yukaMercadonaController,
+                yukaLidlController,
+                categoriaController,
+                formKey),
+          ),
           contentPadding: const EdgeInsets.fromLTRB(20, 5, 20, 20),
           actions: [
             TextButton(
@@ -570,7 +578,7 @@ class _MyScreenState extends State<Principal> {
                         categoriaController.text;
                     productosFiltrados[index].fecha = DateTime.now();
                     _datosManager('Exportar');
-                    _filtrarProductos('');
+                    _actualizarPagina();
                     Navigator.pop(context);
                   }
                 });
@@ -591,67 +599,69 @@ class _MyScreenState extends State<Principal> {
           builder: (BuildContext context, StateSetter setState) {
             return AlertDialog(
               title: const Text('Filtros'),
-              content: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  const Text(
-                    'Categorías: ',
-                    style: TextStyle(
-                      fontFamily: 'ProductSans',
-                      fontSize: 20,
+              content: SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const Text(
+                      'Categorías: ',
+                      style: TextStyle(
+                        fontFamily: 'ProductSans',
+                        fontSize: 20,
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 10),
-                  Wrap(
-                    children: Categorias.listaCategorias.map((categoria) {
-                      return Padding(
-                        padding: const EdgeInsets.all(3.0),
-                        child: FilterChip(
-                          label: Text(categoria),
-                          selected: filtroCategoria == categoria,
-                          onSelected: (selected) {
-                            setState(() {
-                              filtroCategoria = selected ? categoria : '';
-                              _filtrarProductos('');
-                            });
-                          },
-                        ),
-                      );
-                    }).toList(),
-                  ),
-                  const Padding(
-                    padding: EdgeInsets.all(8),
-                    child: Divider(
-                      color: Colors.black,
-                      height: 10,
+                    const SizedBox(height: 10),
+                    Wrap(
+                      children: Categorias.listaCategorias.map((categoria) {
+                        return Padding(
+                          padding: const EdgeInsets.all(3.0),
+                          child: FilterChip(
+                            label: Text(categoria),
+                            selected: filtroCategoria == categoria,
+                            onSelected: (selected) {
+                              setState(() {
+                                filtroCategoria = selected ? categoria : '';
+                                _filtrarProductos('');
+                              });
+                            },
+                          ),
+                        );
+                      }).toList(),
                     ),
-                  ),
-                  const Text(
-                    'Ordenar por: ',
-                    style: TextStyle(
-                      fontFamily: 'ProductSans',
-                      fontSize: 20,
+                    const Padding(
+                      padding: EdgeInsets.all(8),
+                      child: Divider(
+                        color: Colors.black,
+                        height: 10,
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 10),
-                  Wrap(
-                    children: ordenOpciones.map((orden) {
-                      return Padding(
-                        padding: const EdgeInsets.all(3.0),
-                        child: FilterChip(
-                          label: Text(orden),
-                          selected: filtroOrden == orden,
-                          onSelected: (selected) {
-                            setState(() {
-                              filtroOrden = selected ? orden : '';
-                              _filtrarProductos('');
-                            });
-                          },
-                        ),
-                      );
-                    }).toList(),
-                  ),
-                ],
+                    const Text(
+                      'Ordenar por: ',
+                      style: TextStyle(
+                        fontFamily: 'ProductSans',
+                        fontSize: 20,
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    Wrap(
+                      children: ordenOpciones.map((orden) {
+                        return Padding(
+                          padding: const EdgeInsets.all(3.0),
+                          child: FilterChip(
+                            label: Text(orden),
+                            selected: filtroOrden == orden,
+                            onSelected: (selected) {
+                              setState(() {
+                                filtroOrden = selected ? orden : '';
+                                _filtrarProductos('');
+                              });
+                            },
+                          ),
+                        );
+                      }).toList(),
+                    ),
+                  ],
+                ),
               ),
               actions: [
                 TextButton(
@@ -673,8 +683,109 @@ class _MyScreenState extends State<Principal> {
       ImportadorExportadorDatos.exportDataToFile(listaProductos.productos);
     } else if (accion == 'Importar') {
       ImportadorExportadorDatos.importDataFromFile(listaProductos.productos);
-      _filtrarProductos('');
     }
+  }
+
+  Future<void> _actualizarPagina() async {
+    _filtrarProductos('');
+    _filtrarProductos;
+  }
+
+  Drawer DrawerWidget() {
+    return Drawer(
+      child: ListView(
+        padding: EdgeInsets.zero,
+        children: [
+          const DrawerHeader(
+            decoration: BoxDecoration(
+              color: AppStyle.miColorPrimario,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                CircleAvatar(
+                  radius: 40,
+                  backgroundImage: AssetImage('assets/logo.png'),
+                ),
+                SizedBox(height: 10),
+                Text(
+                  'Luis Martín',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                  ),
+                ),
+                Text(
+                  'luismartingarcia4@gmail.com',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 14,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          ListTile(
+            leading: const Icon(Icons.home),
+            title: const Text('Inicio'),
+            onTap: () {
+              Navigator.pop(context);
+              // Código para la acción al hacer clic en "Inicio"
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.settings),
+            title: const Text('Configuración'),
+            onTap: () {
+              Navigator.pop(context);
+              // Código para la acción al hacer clic en "Configuración"
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.info),
+            title: const Text('Acerca de'),
+            onTap: () {
+              Navigator.pop(context);
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    title: const Text('Acerca de',
+                        style: TextStyle(fontFamily: 'ProductSans')),
+                    content: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        const Text(
+                            'Aplicación desarrollada por',
+                            style: TextStyle(fontFamily: 'ProductSans')),
+                        const Text(
+                            'Luis Martín García',
+                            style: TextStyle(fontFamily: 'ProductSans',
+                                fontWeight: FontWeight.bold)),
+                        const SizedBox(height: 10),
+                        const Text('Price Market',
+                            style: TextStyle(fontFamily: 'ProductSans')),
+                        Text('Versión: $version',
+                            style: const TextStyle(fontFamily: 'ProductSans')),
+                      ],
+                    ),
+                    actions: [
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        child: const Text('Cerrar'),
+                      ),
+                    ],
+                  );
+                },
+              );
+            },
+          ),
+        ],
+      ),
+    );
   }
 
   @override
@@ -690,12 +801,14 @@ class _MyScreenState extends State<Principal> {
         elevation: 2,
         iconTheme: const IconThemeData(color: AppStyle.miColorPrimario),
         backgroundColor: Colors.white,
+        centerTitle: true,
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            const Spacer(),
             GestureDetector(
               onTap: () {
-                // Cuando se toca el AppBar, se desplaza al principio.
+                _actualizarPagina();
                 _scrollController.animateTo(0,
                     duration: const Duration(milliseconds: 500),
                     curve: Curves.easeInOut);
@@ -721,7 +834,8 @@ class _MyScreenState extends State<Principal> {
                         builder: (BuildContext context) {
                           return AlertDialog(
                             title: const Text('Importar datos'),
-                            content: const Text('¿Está seguro de que desea importar los datos?'),
+                            content: const Text(
+                                '¿Está seguro de que desea importar los datos?'),
                             actions: [
                               TextButton(
                                 onPressed: () {
@@ -752,7 +866,8 @@ class _MyScreenState extends State<Principal> {
                         builder: (BuildContext context) {
                           return AlertDialog(
                             title: const Text('Exportar datos'),
-                            content: const Text('¿Está seguro de que desea exportar los datos?'),
+                            content: const Text(
+                                '¿Está seguro de que desea exportar los datos?'),
                             actions: [
                               TextButton(
                                 onPressed: () {
@@ -781,6 +896,7 @@ class _MyScreenState extends State<Principal> {
           ],
         ),
       ),
+      drawer: DrawerWidget(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           _agregarProductoNuevo();

@@ -10,111 +10,111 @@ Version: win 1.84.2
 Logging Categories:
     General
 
-Sun Nov 19 2023 [23:55:59 GMT+0100 (hora estándar de Europa central)] Log file started
-[23:55:59] [General] [Info] Searching for SDKs...
-[23:55:59] [General] [Info] Environment PATH:
-[23:55:59] [General] [Info]     C:\Program Files\Java\jdk-19\bin
-[23:55:59] [General] [Info]     C:\Program Files\Git\cmd
-[23:55:59] [General] [Info]     flutter\bin
-[23:55:59] [General] [Info]     C:\Windows\System32
-[23:55:59] [General] [Info]     C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
-[23:55:59] [General] [Info]     C:\WINDOWS\System32\WindowsPowerShell\v1.0\
-[23:55:59] [General] [Info]     C:\Program Files\Java\jdk-19\bin
-[23:55:59] [General] [Info]     C:\Program Files\Git\cmd
-[23:55:59] [General] [Info]     flutter\bin
-[23:55:59] [General] [Info]     C:\Windows\System32
-[23:55:59] [General] [Info]     C:\Windows\System32\WindowsPowerShell\v1.0\PowerShell.exe
-[23:55:59] [General] [Info]     flutter\bin
-[23:55:59] [General] [Info]     C:\Windows\System32\WindowsPowerShell\v1.0\PowerShell
-[23:55:59] [General] [Info] Took 97ms to search for projects (5 levels)
-[23:55:59] [General] [Info] Took 3ms to filter out excluded projects (0 exclusion rules)
-[23:55:59] [General] [Info] Found Flutter project at C:\Users\luism\Desktop\Proyectos\PriceMarket:
+Mon Nov 20 2023 [15:21:26 GMT+0100 (hora estándar de Europa central)] Log file started
+[15:21:26] [General] [Info] Searching for SDKs...
+[15:21:26] [General] [Info] Environment PATH:
+[15:21:26] [General] [Info]     C:\Program Files\Java\jdk-19\bin
+[15:21:26] [General] [Info]     C:\Program Files\Git\cmd
+[15:21:26] [General] [Info]     flutter\bin
+[15:21:26] [General] [Info]     C:\Windows\System32
+[15:21:26] [General] [Info]     C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
+[15:21:26] [General] [Info]     C:\WINDOWS\System32\WindowsPowerShell\v1.0\
+[15:21:26] [General] [Info]     C:\Program Files\Java\jdk-19\bin
+[15:21:26] [General] [Info]     C:\Program Files\Git\cmd
+[15:21:26] [General] [Info]     flutter\bin
+[15:21:26] [General] [Info]     C:\Windows\System32
+[15:21:26] [General] [Info]     C:\Windows\System32\WindowsPowerShell\v1.0\PowerShell.exe
+[15:21:26] [General] [Info]     flutter\bin
+[15:21:26] [General] [Info]     C:\Windows\System32\WindowsPowerShell\v1.0\PowerShell
+[15:21:27] [General] [Info] Took 116ms to search for projects (5 levels)
+[15:21:27] [General] [Info] Took 3ms to filter out excluded projects (0 exclusion rules)
+[15:21:27] [General] [Info] Found Flutter project at C:\Users\luism\Desktop\Proyectos\PriceMarket:
 			Mobile? true
 			Web? false
 			Create Trigger? false
 			Flutter Repo? false
-[23:55:59] [General] [Info] Searching for flutter.bat
-[23:55:59] [General] [Info]     Looking for flutter.bat in:
-[23:55:59] [General] [Info]         C:\Users\luism\Desktop\Proyectos\PriceMarket
-[23:55:59] [General] [Info]         C:\Users\luism\Desktop\Proyectos\PriceMarket -> C:\Users\luism\Desktop\Proyectos\PriceMarket\bin
-[23:55:59] [General] [Info]         C:\Users\luism\flutter\bin\
-[23:55:59] [General] [Info]         C:\Users\luism\Desktop\Proyectos\PriceMarket\.flutter
-[23:55:59] [General] [Info]         C:\Users\luism\Desktop\Proyectos\PriceMarket\.flutter -> C:\Users\luism\Desktop\Proyectos\PriceMarket\.flutter\bin
-[23:55:59] [General] [Info]         C:\Users\luism\Desktop\Proyectos\PriceMarket\vendor\flutter
-[23:55:59] [General] [Info]         C:\Users\luism\Desktop\Proyectos\PriceMarket\vendor\flutter -> C:\Users\luism\Desktop\Proyectos\PriceMarket\vendor\flutter\bin
-[23:55:59] [General] [Info]         C:\Users\luism\flutter-sdk
-[23:55:59] [General] [Info]         C:\Users\luism\flutter-sdk -> C:\Users\luism\flutter-sdk\bin
-[23:55:59] [General] [Info]         /google/flutter
-[23:55:59] [General] [Info]         /google/flutter -> \google\flutter\bin
-[23:55:59] [General] [Info]         C:\Program Files\Java\jdk-19\bin
-[23:55:59] [General] [Info]         C:\Program Files\Git\cmd
-[23:55:59] [General] [Info]         C:\Program Files\Git\cmd -> C:\Program Files\Git\cmd\bin
-[23:55:59] [General] [Info]         C:\Users\luism\Desktop\Proyectos\PriceMarket\flutter\bin
-[23:55:59] [General] [Info]         C:\Windows\System32
-[23:55:59] [General] [Info]         C:\Windows\System32 -> C:\Windows\System32\bin
-[23:55:59] [General] [Info]         C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
-[23:55:59] [General] [Info]         C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -> C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe\bin
-[23:55:59] [General] [Info]         C:\WINDOWS\System32\WindowsPowerShell\v1.0\
-[23:55:59] [General] [Info]         C:\WINDOWS\System32\WindowsPowerShell\v1.0\ -> C:\WINDOWS\System32\WindowsPowerShell\v1.0\bin
-[23:55:59] [General] [Info]         C:\Program Files\Java\jdk-19\bin
-[23:55:59] [General] [Info]         C:\Program Files\Git\cmd
-[23:55:59] [General] [Info]         C:\Program Files\Git\cmd -> C:\Program Files\Git\cmd\bin
-[23:55:59] [General] [Info]         C:\Users\luism\Desktop\Proyectos\PriceMarket\flutter\bin
-[23:55:59] [General] [Info]         C:\Windows\System32
-[23:55:59] [General] [Info]         C:\Windows\System32 -> C:\Windows\System32\bin
-[23:55:59] [General] [Info]         C:\Windows\System32\WindowsPowerShell\v1.0\PowerShell.exe
-[23:55:59] [General] [Info]         C:\Windows\System32\WindowsPowerShell\v1.0\PowerShell.exe -> C:\Windows\System32\WindowsPowerShell\v1.0\PowerShell.exe\bin
-[23:55:59] [General] [Info]         C:\Users\luism\Desktop\Proyectos\PriceMarket\flutter\bin
-[23:55:59] [General] [Info]         C:\Windows\System32\WindowsPowerShell\v1.0\PowerShell
-[23:55:59] [General] [Info]         C:\Windows\System32\WindowsPowerShell\v1.0\PowerShell -> C:\Windows\System32\WindowsPowerShell\v1.0\PowerShell\bin
-[23:55:59] [General] [Info]     Found at:
-[23:55:59] [General] [Info]         C:\Users\luism\flutter\bin\
-[23:55:59] [General] [Info]     Candidate paths to be post-filtered:
-[23:55:59] [General] [Info]         C:\Users\luism\flutter\bin\ -> C:\Users\luism\flutter
-[23:55:59] [General] [Info]     Found at C:\Users\luism\flutter\bin\ -> C:\Users\luism\flutter
-[23:55:59] [General] [Info]     Returning SDK path C:\Users\luism\flutter for flutter.bat
-[23:55:59] [General] [Info] Searching for dart.exe
-[23:55:59] [General] [Info]     Looking for dart.exe in:
-[23:55:59] [General] [Info]         C:\Users\luism\flutter\bin\cache\dart-sdk
-[23:55:59] [General] [Info]         C:\Users\luism\flutter\bin\cache\dart-sdk -> C:\Users\luism\flutter\bin\cache\dart-sdk\bin
-[23:55:59] [General] [Info]         C:\Program Files\Java\jdk-19\bin
-[23:55:59] [General] [Info]         C:\Program Files\Git\cmd
-[23:55:59] [General] [Info]         C:\Program Files\Git\cmd -> C:\Program Files\Git\cmd\bin
-[23:55:59] [General] [Info]         C:\Users\luism\Desktop\Proyectos\PriceMarket\flutter\bin
-[23:55:59] [General] [Info]         C:\Windows\System32
-[23:55:59] [General] [Info]         C:\Windows\System32 -> C:\Windows\System32\bin
-[23:55:59] [General] [Info]         C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
-[23:55:59] [General] [Info]         C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -> C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe\bin
-[23:55:59] [General] [Info]         C:\WINDOWS\System32\WindowsPowerShell\v1.0\
-[23:55:59] [General] [Info]         C:\WINDOWS\System32\WindowsPowerShell\v1.0\ -> C:\WINDOWS\System32\WindowsPowerShell\v1.0\bin
-[23:55:59] [General] [Info]         C:\Program Files\Java\jdk-19\bin
-[23:55:59] [General] [Info]         C:\Program Files\Git\cmd
-[23:55:59] [General] [Info]         C:\Program Files\Git\cmd -> C:\Program Files\Git\cmd\bin
-[23:55:59] [General] [Info]         C:\Users\luism\Desktop\Proyectos\PriceMarket\flutter\bin
-[23:55:59] [General] [Info]         C:\Windows\System32
-[23:55:59] [General] [Info]         C:\Windows\System32 -> C:\Windows\System32\bin
-[23:55:59] [General] [Info]         C:\Windows\System32\WindowsPowerShell\v1.0\PowerShell.exe
-[23:55:59] [General] [Info]         C:\Windows\System32\WindowsPowerShell\v1.0\PowerShell.exe -> C:\Windows\System32\WindowsPowerShell\v1.0\PowerShell.exe\bin
-[23:55:59] [General] [Info]         C:\Users\luism\Desktop\Proyectos\PriceMarket\flutter\bin
-[23:55:59] [General] [Info]         C:\Windows\System32\WindowsPowerShell\v1.0\PowerShell
-[23:55:59] [General] [Info]         C:\Windows\System32\WindowsPowerShell\v1.0\PowerShell -> C:\Windows\System32\WindowsPowerShell\v1.0\PowerShell\bin
-[23:55:59] [General] [Info]         C:\Users\luism\flutter\bin\cache\dart-sdk
-[23:55:59] [General] [Info]         C:\Users\luism\flutter\bin\cache\dart-sdk -> C:\Users\luism\flutter\bin\cache\dart-sdk\bin
-[23:55:59] [General] [Info]     Found at:
-[23:55:59] [General] [Info]         C:\Users\luism\flutter\bin\cache\dart-sdk -> C:\Users\luism\flutter\bin\cache\dart-sdk\bin
-[23:55:59] [General] [Info]         C:\Users\luism\flutter\bin\cache\dart-sdk -> C:\Users\luism\flutter\bin\cache\dart-sdk\bin
-[23:55:59] [General] [Info]     Candidate paths to be post-filtered:
-[23:55:59] [General] [Info]         C:\Users\luism\flutter\bin\cache\dart-sdk
-[23:55:59] [General] [Info]         C:\Users\luism\flutter\bin\cache\dart-sdk
-[23:55:59] [General] [Info]     Found at C:\Users\luism\flutter\bin\cache\dart-sdk
-[23:55:59] [General] [Info]     Returning SDK path C:\Users\luism\flutter\bin\cache\dart-sdk for dart.exe
-[23:55:59] [General] [Info] Experiment random number is 7 for experiment 'sdkDaps'. Experiment is enabled for <= 100
-[23:55:59] [General] [Info] Experiment 'sdkDaps' is activating (not first time)
-[23:55:59] [General] [Info] Experiment random number is 7 for experiment 'sdkDaps'. Experiment is enabled for <= 50
-[23:55:59] [General] [Info] Experiment 'sdkDaps' is activating (not first time)
-[23:55:59] [General] [Info] Experiment random number is 7 for experiment 'sdkDaps'. Experiment is enabled for <= 10
-[23:55:59] [General] [Info] Experiment 'sdkDaps' is activating (not first time)
-[23:55:59] [General] [Info] !! ⚠️ PLEASE REVIEW THIS LOG FOR SENSITIVE INFORMATION BEFORE SHARING ⚠️ !!
+[15:21:27] [General] [Info] Searching for flutter.bat
+[15:21:27] [General] [Info]     Looking for flutter.bat in:
+[15:21:27] [General] [Info]         C:\Users\luism\Desktop\Proyectos\PriceMarket
+[15:21:27] [General] [Info]         C:\Users\luism\Desktop\Proyectos\PriceMarket -> C:\Users\luism\Desktop\Proyectos\PriceMarket\bin
+[15:21:27] [General] [Info]         C:\Users\luism\flutter\bin\
+[15:21:27] [General] [Info]         C:\Users\luism\Desktop\Proyectos\PriceMarket\.flutter
+[15:21:27] [General] [Info]         C:\Users\luism\Desktop\Proyectos\PriceMarket\.flutter -> C:\Users\luism\Desktop\Proyectos\PriceMarket\.flutter\bin
+[15:21:27] [General] [Info]         C:\Users\luism\Desktop\Proyectos\PriceMarket\vendor\flutter
+[15:21:27] [General] [Info]         C:\Users\luism\Desktop\Proyectos\PriceMarket\vendor\flutter -> C:\Users\luism\Desktop\Proyectos\PriceMarket\vendor\flutter\bin
+[15:21:27] [General] [Info]         C:\Users\luism\flutter-sdk
+[15:21:27] [General] [Info]         C:\Users\luism\flutter-sdk -> C:\Users\luism\flutter-sdk\bin
+[15:21:27] [General] [Info]         /google/flutter
+[15:21:27] [General] [Info]         /google/flutter -> \google\flutter\bin
+[15:21:27] [General] [Info]         C:\Program Files\Java\jdk-19\bin
+[15:21:27] [General] [Info]         C:\Program Files\Git\cmd
+[15:21:27] [General] [Info]         C:\Program Files\Git\cmd -> C:\Program Files\Git\cmd\bin
+[15:21:27] [General] [Info]         C:\Users\luism\Desktop\Proyectos\PriceMarket\flutter\bin
+[15:21:27] [General] [Info]         C:\Windows\System32
+[15:21:27] [General] [Info]         C:\Windows\System32 -> C:\Windows\System32\bin
+[15:21:27] [General] [Info]         C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
+[15:21:27] [General] [Info]         C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -> C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe\bin
+[15:21:27] [General] [Info]         C:\WINDOWS\System32\WindowsPowerShell\v1.0\
+[15:21:27] [General] [Info]         C:\WINDOWS\System32\WindowsPowerShell\v1.0\ -> C:\WINDOWS\System32\WindowsPowerShell\v1.0\bin
+[15:21:27] [General] [Info]         C:\Program Files\Java\jdk-19\bin
+[15:21:27] [General] [Info]         C:\Program Files\Git\cmd
+[15:21:27] [General] [Info]         C:\Program Files\Git\cmd -> C:\Program Files\Git\cmd\bin
+[15:21:27] [General] [Info]         C:\Users\luism\Desktop\Proyectos\PriceMarket\flutter\bin
+[15:21:27] [General] [Info]         C:\Windows\System32
+[15:21:27] [General] [Info]         C:\Windows\System32 -> C:\Windows\System32\bin
+[15:21:27] [General] [Info]         C:\Windows\System32\WindowsPowerShell\v1.0\PowerShell.exe
+[15:21:27] [General] [Info]         C:\Windows\System32\WindowsPowerShell\v1.0\PowerShell.exe -> C:\Windows\System32\WindowsPowerShell\v1.0\PowerShell.exe\bin
+[15:21:27] [General] [Info]         C:\Users\luism\Desktop\Proyectos\PriceMarket\flutter\bin
+[15:21:27] [General] [Info]         C:\Windows\System32\WindowsPowerShell\v1.0\PowerShell
+[15:21:27] [General] [Info]         C:\Windows\System32\WindowsPowerShell\v1.0\PowerShell -> C:\Windows\System32\WindowsPowerShell\v1.0\PowerShell\bin
+[15:21:27] [General] [Info]     Found at:
+[15:21:27] [General] [Info]         C:\Users\luism\flutter\bin\
+[15:21:27] [General] [Info]     Candidate paths to be post-filtered:
+[15:21:27] [General] [Info]         C:\Users\luism\flutter\bin\ -> C:\Users\luism\flutter
+[15:21:27] [General] [Info]     Found at C:\Users\luism\flutter\bin\ -> C:\Users\luism\flutter
+[15:21:27] [General] [Info]     Returning SDK path C:\Users\luism\flutter for flutter.bat
+[15:21:27] [General] [Info] Searching for dart.exe
+[15:21:27] [General] [Info]     Looking for dart.exe in:
+[15:21:27] [General] [Info]         C:\Users\luism\flutter\bin\cache\dart-sdk
+[15:21:27] [General] [Info]         C:\Users\luism\flutter\bin\cache\dart-sdk -> C:\Users\luism\flutter\bin\cache\dart-sdk\bin
+[15:21:27] [General] [Info]         C:\Program Files\Java\jdk-19\bin
+[15:21:27] [General] [Info]         C:\Program Files\Git\cmd
+[15:21:27] [General] [Info]         C:\Program Files\Git\cmd -> C:\Program Files\Git\cmd\bin
+[15:21:27] [General] [Info]         C:\Users\luism\Desktop\Proyectos\PriceMarket\flutter\bin
+[15:21:27] [General] [Info]         C:\Windows\System32
+[15:21:27] [General] [Info]         C:\Windows\System32 -> C:\Windows\System32\bin
+[15:21:27] [General] [Info]         C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
+[15:21:27] [General] [Info]         C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -> C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe\bin
+[15:21:27] [General] [Info]         C:\WINDOWS\System32\WindowsPowerShell\v1.0\
+[15:21:27] [General] [Info]         C:\WINDOWS\System32\WindowsPowerShell\v1.0\ -> C:\WINDOWS\System32\WindowsPowerShell\v1.0\bin
+[15:21:27] [General] [Info]         C:\Program Files\Java\jdk-19\bin
+[15:21:27] [General] [Info]         C:\Program Files\Git\cmd
+[15:21:27] [General] [Info]         C:\Program Files\Git\cmd -> C:\Program Files\Git\cmd\bin
+[15:21:27] [General] [Info]         C:\Users\luism\Desktop\Proyectos\PriceMarket\flutter\bin
+[15:21:27] [General] [Info]         C:\Windows\System32
+[15:21:27] [General] [Info]         C:\Windows\System32 -> C:\Windows\System32\bin
+[15:21:27] [General] [Info]         C:\Windows\System32\WindowsPowerShell\v1.0\PowerShell.exe
+[15:21:27] [General] [Info]         C:\Windows\System32\WindowsPowerShell\v1.0\PowerShell.exe -> C:\Windows\System32\WindowsPowerShell\v1.0\PowerShell.exe\bin
+[15:21:27] [General] [Info]         C:\Users\luism\Desktop\Proyectos\PriceMarket\flutter\bin
+[15:21:27] [General] [Info]         C:\Windows\System32\WindowsPowerShell\v1.0\PowerShell
+[15:21:27] [General] [Info]         C:\Windows\System32\WindowsPowerShell\v1.0\PowerShell -> C:\Windows\System32\WindowsPowerShell\v1.0\PowerShell\bin
+[15:21:27] [General] [Info]         C:\Users\luism\flutter\bin\cache\dart-sdk
+[15:21:27] [General] [Info]         C:\Users\luism\flutter\bin\cache\dart-sdk -> C:\Users\luism\flutter\bin\cache\dart-sdk\bin
+[15:21:27] [General] [Info]     Found at:
+[15:21:27] [General] [Info]         C:\Users\luism\flutter\bin\cache\dart-sdk -> C:\Users\luism\flutter\bin\cache\dart-sdk\bin
+[15:21:27] [General] [Info]         C:\Users\luism\flutter\bin\cache\dart-sdk -> C:\Users\luism\flutter\bin\cache\dart-sdk\bin
+[15:21:27] [General] [Info]     Candidate paths to be post-filtered:
+[15:21:27] [General] [Info]         C:\Users\luism\flutter\bin\cache\dart-sdk
+[15:21:27] [General] [Info]         C:\Users\luism\flutter\bin\cache\dart-sdk
+[15:21:27] [General] [Info]     Found at C:\Users\luism\flutter\bin\cache\dart-sdk
+[15:21:27] [General] [Info]     Returning SDK path C:\Users\luism\flutter\bin\cache\dart-sdk for dart.exe
+[15:21:27] [General] [Info] Experiment random number is 7 for experiment 'sdkDaps'. Experiment is enabled for <= 100
+[15:21:27] [General] [Info] Experiment 'sdkDaps' is activating (not first time)
+[15:21:27] [General] [Info] Experiment random number is 7 for experiment 'sdkDaps'. Experiment is enabled for <= 50
+[15:21:27] [General] [Info] Experiment 'sdkDaps' is activating (not first time)
+[15:21:27] [General] [Info] Experiment random number is 7 for experiment 'sdkDaps'. Experiment is enabled for <= 10
+[15:21:27] [General] [Info] Experiment 'sdkDaps' is activating (not first time)
+[15:21:27] [General] [Info] !! ⚠️ PLEASE REVIEW THIS LOG FOR SENSITIVE INFORMATION BEFORE SHARING ⚠️ !!
 Dart Code extension: 3.76.1
 Flutter extension: 3.76.0 (not activated)
 
@@ -126,12 +126,13 @@ Workspace type: Flutter (LSP)
 
 Dart (3.2.0): C:\Users\luism\flutter\bin\cache\dart-sdk
 Flutter (3.16.0): C:\Users\luism\flutter (No device)
-[23:55:59] [General] [Info] Returning cached results for project search
-[23:55:59] [General] [Info] Activating Flutter extension for Flutter project...
-[23:55:59] [General] [Info] Version last used for Pub is 3.2.0 (3.2.0), current is 3.2.0 (3.2.0)
-[23:55:59] [General] [Info] Found 0 folders requiring "pub get" or "pub upgrade":
-[23:55:59] [General] [Info] Loaded 20000 package names from vscode-userdata:/c%3A/Users/luism/AppData/Roaming/Code/User/globalStorage/dart-code.dart-code/package_cache.json
-[23:55:59] [General] [Info] !! ⚠️ PLEASE REVIEW THIS LOG FOR SENSITIVE INFORMATION BEFORE SHARING ⚠️ !!
+[15:21:27] [General] [Info] Returning cached results for project search
+[15:21:27] [General] [Info] Activating Flutter extension for Flutter project...
+[15:21:27] [General] [Info] Version last used for Pub is 3.2.0 (3.2.0), current is 3.2.0 (3.2.0)
+[15:21:27] [General] [Info] Found 1 folders requiring "pub get" or "pub upgrade":
+    C:\Users\luism\Desktop\Proyectos\PriceMarket (get: true, upgrade: false, reason: pubspec.yaml was modified (Mon Nov 20 2023 15:21:22 GMT+0100 (hora estándar de Europa central)) more recently than pubspec.lock (Sun Nov 19 2023 15:12:20 GMT+0100 (hora estándar de Europa central)))
+[15:21:27] [General] [Info] Loaded 20000 package names from vscode-userdata:/c%3A/Users/luism/AppData/Roaming/Code/User/globalStorage/dart-code.dart-code/package_cache.json
+[15:21:27] [General] [Info] !! ⚠️ PLEASE REVIEW THIS LOG FOR SENSITIVE INFORMATION BEFORE SHARING ⚠️ !!
 Dart Code extension: 3.76.1
 Flutter extension: 3.76.0 (activated)
 
@@ -143,38 +144,33 @@ Workspace type: Flutter (LSP)
 
 Dart (3.2.0): C:\Users\luism\flutter\bin\cache\dart-sdk
 Flutter (3.16.0): C:\Users\luism\flutter (No device)
-[23:56:00] [General] [Info] Returning cached results for project search
-[23:56:00] [General] [Info] Returning cached promise for getSupportedPlatforms()
-[23:56:00] [General] [Info] Returning cached promise for getSupportedPlatforms()
-[23:56:00] [General] [Info] Checking 1 projects for supported platforms
-[23:56:00] [General] [Info] Supported platforms for the workspace are windows, android, web
-[23:56:10] [General] [Info] Returning cached results for project search
-[23:56:10] [General] [Info] Checking 1 projects for supported platforms
-[23:56:10] [General] [Info] Supported platforms for the workspace are windows, android, web
-[23:57:35] [General] [Info] Returning cached results for project search
-[23:57:35] [General] [Info] Checking 1 projects for supported platforms
-[23:57:35] [General] [Info] Supported platforms for the workspace are windows, android, web
-[23:58:08] [General] [Info] Saving emulator-5554 as preferred device
-[23:58:08] [General] [Info] Returning cached results for project search
-[23:58:08] [General] [Info] Checking 1 projects for supported platforms
-[23:58:08] [General] [Info] Supported platforms for the workspace are windows, android, web
-[23:58:17] [General] [Info] Starting debug session...
-[23:58:17] [General] [Info]     workspace: C:\Users\luism\Desktop\Proyectos\PriceMarket
-[23:58:17] [General] [Info]     program  : C:\Users\luism\Desktop\Proyectos\PriceMarket\lib\main.dart
-[23:58:17] [General] [Info] Setting cwd based on likely entry point: C:\Users\luism\Desktop\Proyectos\PriceMarket
-[23:58:17] [General] [Info] Using workspace as cwd: C:\Users\luism\Desktop\Proyectos\PriceMarket
-[23:58:17] [General] [Info] Detected launch project as Flutter
-[23:58:17] [General] [Info] Using Flutter debug adapter for this session
-[23:58:17] [General] [Info] Getting DevTools server address to pass to Flutter...
-[23:58:17] [General] [Info] Checking for errors before launching
-[23:58:17] [General] [Info] Debug session starting...
+[15:21:28] [General] [Info] Returning cached results for project search
+[15:21:28] [General] [Info] Returning cached promise for getSupportedPlatforms()
+[15:21:28] [General] [Info] Returning cached promise for getSupportedPlatforms()
+[15:21:28] [General] [Info] Checking 1 projects for supported platforms
+[15:21:29] [General] [Info] Supported platforms for the workspace are windows, android, web
+[15:21:35] [General] [Info] Returning cached promise for getSupportedPlatforms()
+[15:21:46] [General] [Info] Saving emulator-5554 as preferred device
+[15:21:46] [General] [Info] Returning cached results for project search
+[15:21:46] [General] [Info] Checking 1 projects for supported platforms
+[15:21:46] [General] [Info] Supported platforms for the workspace are windows, android, web
+[15:21:49] [General] [Info] Starting debug session...
+[15:21:49] [General] [Info]     workspace: C:\Users\luism\Desktop\Proyectos\PriceMarket
+[15:21:49] [General] [Info]     program  : C:\Users\luism\Desktop\Proyectos\PriceMarket\lib\main.dart
+[15:21:49] [General] [Info] Setting cwd based on likely entry point: C:\Users\luism\Desktop\Proyectos\PriceMarket
+[15:21:49] [General] [Info] Using workspace as cwd: C:\Users\luism\Desktop\Proyectos\PriceMarket
+[15:21:49] [General] [Info] Detected launch project as Flutter
+[15:21:49] [General] [Info] Using Flutter debug adapter for this session
+[15:21:49] [General] [Info] Getting DevTools server address to pass to Flutter...
+[15:21:49] [General] [Info] Checking for errors before launching
+[15:21:49] [General] [Info] Debug session starting...
     {
         "name": "Dart  (Resizable (Experimental) API 33)",
         "noDebug": true,
         "request": "launch",
         "type": "dart",
         "program": "C:\\Users\\luism\\Desktop\\Proyectos\\PriceMarket\\lib\\main.dart",
-        "dartCodeDebugSessionID": "session-4f92b",
+        "dartCodeDebugSessionID": "session-225bc",
         "cwd": "C:\\Users\\luism\\Desktop\\Proyectos\\PriceMarket",
         "deviceId": "emulator-5554",
         "deviceName": "Resizable (Experimental) API 33 (android-x64)",
@@ -212,9 +208,663 @@ Flutter (3.16.0): C:\Users\luism\flutter (No device)
         "flutterRunLogFile": "C:\\Users\\luism\\Desktop\\Proyectos\\PriceMarket\\logs\\flutter_run.txt",
         "flutterTestLogFile": "C:\\Users\\luism\\Desktop\\Proyectos\\PriceMarket\\logs\\flutter_test.txt",
         "showMemoryUsa…
-[23:58:17] [General] [Info] Using flutter debugger for Flutter
-[23:58:17] [General] [Info] SDK DAP setting is true, set by sdkDaps experiment
-[23:58:17] [General] [Info] Running SDK DAP Dart VM in undefined: C:\Users\luism\flutter\bin\flutter.bat debug_adapter and options {"env":{"FLUTTER_HOST":"VSCode","PUB_ENVIRONMENT":"vscode.dart-code","FLUTTER_ROOT":"C:\\Users\\luism\\flutter"}}
-[23:58:18] [General] [Info] Did not find session fb5e2ee4-66be-48d3-8202-32305ec128fc to handle dart.progressStart. There were 0 sessions:
-[23:58:18] [General] [Info] Event will be queued and processed when the session start event fires
-[23:58:18] [General] [Info] Processing delayed event dart.progressStart for session fb5e2ee4-66be-48d3-8202-32305ec128fc
+[15:21:49] [General] [Info] Using flutter debugger for Flutter
+[15:21:49] [General] [Info] SDK DAP setting is true, set by sdkDaps experiment
+[15:21:49] [General] [Info] Running SDK DAP Dart VM in undefined: C:\Users\luism\flutter\bin\flutter.bat debug_adapter and options {"env":{"FLUTTER_HOST":"VSCode","PUB_ENVIRONMENT":"vscode.dart-code","FLUTTER_ROOT":"C:\\Users\\luism\\flutter"}}
+[15:21:50] [General] [Info] Did not find session 4fd4d4a1-c367-4fcf-8d12-28b29af15252 to handle dart.progressStart. There were 0 sessions:
+[15:21:50] [General] [Info] Event will be queued and processed when the session start event fires
+[15:21:50] [General] [Info] Processing delayed event dart.progressStart for session 4fd4d4a1-c367-4fcf-8d12-28b29af15252
+[15:23:17] [General] [Info] Pubspec C:\Users\luism\Desktop\Proyectos\PriceMarket\pubspec.yaml was modified
+[15:23:27] [General] [Info] Returning cached results for project search
+[15:23:27] [General] [Info] Version last used for Pub is 3.2.0 (3.2.0), current is 3.2.0 (3.2.0)
+[15:23:27] [General] [Info] Found 1 folders requiring "pub get" or "pub upgrade":
+    C:\Users\luism\Desktop\Proyectos\PriceMarket (get: true, upgrade: false, reason: pubspec.yaml was modified (Mon Nov 20 2023 15:23:17 GMT+0100 (hora estándar de Europa central)) more recently than pubspec.lock (Mon Nov 20 2023 15:21:52 GMT+0100 (hora estándar de Europa central)))
+[15:23:32] [General] [Info] Starting debug session...
+[15:23:32] [General] [Info]     workspace: C:\Users\luism\Desktop\Proyectos\PriceMarket
+[15:23:32] [General] [Info]     program  : C:\Users\luism\Desktop\Proyectos\PriceMarket\lib\main.dart
+[15:23:32] [General] [Info] Setting cwd based on likely entry point: C:\Users\luism\Desktop\Proyectos\PriceMarket
+[15:23:32] [General] [Info] Using workspace as cwd: C:\Users\luism\Desktop\Proyectos\PriceMarket
+[15:23:32] [General] [Info] Detected launch project as Flutter
+[15:23:32] [General] [Info] Using Flutter debug adapter for this session
+[15:23:32] [General] [Info] Getting DevTools server address to pass to Flutter...
+[15:23:32] [General] [Info] Checking for errors before launching
+[15:23:32] [General] [Info] Debug session starting...
+    {
+        "name": "Dart  (Resizable (Experimental) API 33)",
+        "noDebug": true,
+        "request": "launch",
+        "type": "dart",
+        "program": "C:\\Users\\luism\\Desktop\\Proyectos\\PriceMarket\\lib\\main.dart",
+        "dartCodeDebugSessionID": "session-d0240",
+        "cwd": "C:\\Users\\luism\\Desktop\\Proyectos\\PriceMarket",
+        "deviceId": "emulator-5554",
+        "deviceName": "Resizable (Experimental) API 33 (android-x64)",
+        "toolEnv": {
+            "FLUTTER_HOST": "VSCode",
+            "PUB_ENVIRONMENT": "vscode.dart-code",
+            "FLUTTER_ROOT": "C:\\Users\\luism\\flutter"
+        },
+        "sendLogsToClient": false,
+        "sendCustomProgressEvents": true,
+        "allowAnsiColorOutput": true,
+        "additionalProjectPaths": [
+            "C:\\Users\\luism\\Desktop\\Proyectos\\PriceMarket"
+        ],
+        "args": [],
+        "vmAdditionalArgs": [],
+        "toolArgs": [
+            "-d",
+            "emulator-5554",
+            "--devtools-server-address",
+            "http://127.0.0.1:9100/"
+        ],
+        "vmServicePort": 0,
+        "dartSdkPath": "C:\\Users\\luism\\flutter\\bin\\cache\\dart-sdk",
+        "vmServiceLogFile": "C:\\Users\\luism\\Desktop\\Proyectos\\PriceMarket\\logs\\observatory.txt",
+        "maxLogLineLength": 2000,
+        "dartTestLogFile": "C:\\Users\\luism\\Desktop\\Proyectos\\PriceMarket\\logs\\dart_test.txt",
+        "debugSdkLibraries": false,
+        "debugExternalPackageLibraries": false,
+        "showDartDeveloperLogs": true,
+        "evaluateGettersInDebugViews": true,
+        "evaluateToStringInDebugViews": true,
+        "flutterSdkPath": "C:\\Users\\luism\\flutter",
+        "useInspectorNotificationsForWidgetErrors": false,
+        "flutterRunLogFile": "C:\\Users\\luism\\Desktop\\Proyectos\\PriceMarket\\logs\\flutter_run.txt",
+        "flutterTestLogFile": "C:\\Users\\luism\\Desktop\\Proyectos\\PriceMarket\\logs\\flutter_test.txt",
+        "showMemoryUsa…
+[15:23:32] [General] [Info] Using flutter debugger for Flutter
+[15:23:32] [General] [Info] SDK DAP setting is true, set by sdkDaps experiment
+[15:23:32] [General] [Info] Running SDK DAP Dart VM in undefined: C:\Users\luism\flutter\bin\flutter.bat debug_adapter and options {"env":{"FLUTTER_HOST":"VSCode","PUB_ENVIRONMENT":"vscode.dart-code","FLUTTER_ROOT":"C:\\Users\\luism\\flutter"}}
+[15:23:33] [General] [Info] Did not find session 95b93db9-6e31-4fb2-8249-5bf74a01666c to handle dart.progressStart. There were 0 sessions:
+[15:23:33] [General] [Info] Event will be queued and processed when the session start event fires
+[15:23:33] [General] [Info] Processing delayed event dart.progressStart for session 95b93db9-6e31-4fb2-8249-5bf74a01666c
+[15:27:02] [General] [Info] Starting debug session...
+[15:27:02] [General] [Info]     workspace: C:\Users\luism\Desktop\Proyectos\PriceMarket
+[15:27:02] [General] [Info]     program  : C:\Users\luism\Desktop\Proyectos\PriceMarket\lib\main.dart
+[15:27:02] [General] [Info] Setting cwd based on likely entry point: C:\Users\luism\Desktop\Proyectos\PriceMarket
+[15:27:02] [General] [Info] Using workspace as cwd: C:\Users\luism\Desktop\Proyectos\PriceMarket
+[15:27:02] [General] [Info] Detected launch project as Flutter
+[15:27:02] [General] [Info] Using Flutter debug adapter for this session
+[15:27:02] [General] [Info] Getting DevTools server address to pass to Flutter...
+[15:27:02] [General] [Info] Checking for errors before launching
+[15:27:02] [General] [Info] Debug session starting...
+    {
+        "name": "Dart  (Resizable (Experimental) API 33)",
+        "noDebug": true,
+        "request": "launch",
+        "type": "dart",
+        "program": "C:\\Users\\luism\\Desktop\\Proyectos\\PriceMarket\\lib\\main.dart",
+        "dartCodeDebugSessionID": "session-9ed85",
+        "cwd": "C:\\Users\\luism\\Desktop\\Proyectos\\PriceMarket",
+        "deviceId": "emulator-5554",
+        "deviceName": "Resizable (Experimental) API 33 (android-x64)",
+        "toolEnv": {
+            "FLUTTER_HOST": "VSCode",
+            "PUB_ENVIRONMENT": "vscode.dart-code",
+            "FLUTTER_ROOT": "C:\\Users\\luism\\flutter"
+        },
+        "sendLogsToClient": false,
+        "sendCustomProgressEvents": true,
+        "allowAnsiColorOutput": true,
+        "additionalProjectPaths": [
+            "C:\\Users\\luism\\Desktop\\Proyectos\\PriceMarket"
+        ],
+        "args": [],
+        "vmAdditionalArgs": [],
+        "toolArgs": [
+            "-d",
+            "emulator-5554",
+            "--devtools-server-address",
+            "http://127.0.0.1:9100/"
+        ],
+        "vmServicePort": 0,
+        "dartSdkPath": "C:\\Users\\luism\\flutter\\bin\\cache\\dart-sdk",
+        "vmServiceLogFile": "C:\\Users\\luism\\Desktop\\Proyectos\\PriceMarket\\logs\\observatory.txt",
+        "maxLogLineLength": 2000,
+        "dartTestLogFile": "C:\\Users\\luism\\Desktop\\Proyectos\\PriceMarket\\logs\\dart_test.txt",
+        "debugSdkLibraries": false,
+        "debugExternalPackageLibraries": false,
+        "showDartDeveloperLogs": true,
+        "evaluateGettersInDebugViews": true,
+        "evaluateToStringInDebugViews": true,
+        "flutterSdkPath": "C:\\Users\\luism\\flutter",
+        "useInspectorNotificationsForWidgetErrors": false,
+        "flutterRunLogFile": "C:\\Users\\luism\\Desktop\\Proyectos\\PriceMarket\\logs\\flutter_run.txt",
+        "flutterTestLogFile": "C:\\Users\\luism\\Desktop\\Proyectos\\PriceMarket\\logs\\flutter_test.txt",
+        "showMemoryUsa…
+[15:27:02] [General] [Info] Using flutter debugger for Flutter
+[15:27:02] [General] [Info] SDK DAP setting is true, set by sdkDaps experiment
+[15:27:02] [General] [Info] Running SDK DAP Dart VM in undefined: C:\Users\luism\flutter\bin\flutter.bat debug_adapter and options {"env":{"FLUTTER_HOST":"VSCode","PUB_ENVIRONMENT":"vscode.dart-code","FLUTTER_ROOT":"C:\\Users\\luism\\flutter"}}
+[15:27:02] [General] [Info] Did not find session 90222496-e1f9-4cf6-8652-0fe2cabb8a1d to handle dart.progressStart. There were 0 sessions:
+[15:27:02] [General] [Info] Event will be queued and processed when the session start event fires
+[15:27:02] [General] [Info] Processing delayed event dart.progressStart for session 90222496-e1f9-4cf6-8652-0fe2cabb8a1d
+[15:30:29] [General] [Info] Took 62ms to search for projects (5 levels)
+[15:30:29] [General] [Info] Took 1ms to filter out excluded projects (0 exclusion rules)
+[15:30:29] [General] [Info] Checking 1 projects for supported platforms
+[15:30:29] [General] [Info] Supported platforms for the workspace are windows, android, web
+[15:30:33] [General] [Info] Returning cached promise for getSupportedPlatforms()
+[15:31:51] [General] [Info] Pubspec C:\Users\luism\Desktop\Proyectos\PriceMarket\pubspec.yaml was modified
+[15:32:01] [General] [Info] Returning cached results for project search
+[15:32:01] [General] [Info] Version last used for Pub is 3.2.0 (3.2.0), current is 3.2.0 (3.2.0)
+[15:32:01] [General] [Info] Found 1 folders requiring "pub get" or "pub upgrade":
+    C:\Users\luism\Desktop\Proyectos\PriceMarket (get: true, upgrade: false, reason: pubspec.yaml was modified (Mon Nov 20 2023 15:31:51 GMT+0100 (hora estándar de Europa central)) more recently than pubspec.lock (Mon Nov 20 2023 15:23:28 GMT+0100 (hora estándar de Europa central)))
+[15:32:37] [General] [Info] Pubspec C:\Users\luism\Desktop\Proyectos\PriceMarket\pubspec.yaml was modified
+[15:32:47] [General] [Info] Returning cached results for project search
+[15:32:47] [General] [Info] Version last used for Pub is 3.2.0 (3.2.0), current is 3.2.0 (3.2.0)
+[15:32:47] [General] [Info] Found 1 folders requiring "pub get" or "pub upgrade":
+    C:\Users\luism\Desktop\Proyectos\PriceMarket (get: true, upgrade: false, reason: pubspec.yaml was modified (Mon Nov 20 2023 15:32:37 GMT+0100 (hora estándar de Europa central)) more recently than pubspec.lock (Mon Nov 20 2023 15:32:05 GMT+0100 (hora estándar de Europa central)))
+[15:32:49] [General] [Info] Pubspec C:\Users\luism\Desktop\Proyectos\PriceMarket\pubspec.yaml was modified
+[15:32:59] [General] [Info] Returning cached results for project search
+[15:32:59] [General] [Info] Version last used for Pub is 3.2.0 (3.2.0), current is 3.2.0 (3.2.0)
+[15:32:59] [General] [Info] Found 1 folders requiring "pub get" or "pub upgrade":
+    C:\Users\luism\Desktop\Proyectos\PriceMarket (get: true, upgrade: false, reason: pubspec.yaml was modified (Mon Nov 20 2023 15:32:49 GMT+0100 (hora estándar de Europa central)) more recently than pubspec.lock (Mon Nov 20 2023 15:32:48 GMT+0100 (hora estándar de Europa central)))
+[15:33:14] [General] [Info] Starting debug session...
+[15:33:14] [General] [Info]     workspace: C:\Users\luism\Desktop\Proyectos\PriceMarket
+[15:33:14] [General] [Info]     program  : C:\Users\luism\Desktop\Proyectos\PriceMarket\lib\main.dart
+[15:33:14] [General] [Info] Setting cwd based on likely entry point: C:\Users\luism\Desktop\Proyectos\PriceMarket
+[15:33:14] [General] [Info] Using workspace as cwd: C:\Users\luism\Desktop\Proyectos\PriceMarket
+[15:33:14] [General] [Info] Detected launch project as Flutter
+[15:33:14] [General] [Info] Using Flutter debug adapter for this session
+[15:33:14] [General] [Info] Getting DevTools server address to pass to Flutter...
+[15:33:14] [General] [Info] Checking for errors before launching
+[15:33:14] [General] [Info] Debug session starting...
+    {
+        "name": "Dart  (Resizable (Experimental) API 33)",
+        "noDebug": true,
+        "request": "launch",
+        "type": "dart",
+        "program": "C:\\Users\\luism\\Desktop\\Proyectos\\PriceMarket\\lib\\main.dart",
+        "dartCodeDebugSessionID": "session-95fe3",
+        "cwd": "C:\\Users\\luism\\Desktop\\Proyectos\\PriceMarket",
+        "deviceId": "emulator-5554",
+        "deviceName": "Resizable (Experimental) API 33 (android-x64)",
+        "toolEnv": {
+            "FLUTTER_HOST": "VSCode",
+            "PUB_ENVIRONMENT": "vscode.dart-code",
+            "FLUTTER_ROOT": "C:\\Users\\luism\\flutter"
+        },
+        "sendLogsToClient": false,
+        "sendCustomProgressEvents": true,
+        "allowAnsiColorOutput": true,
+        "additionalProjectPaths": [
+            "C:\\Users\\luism\\Desktop\\Proyectos\\PriceMarket"
+        ],
+        "args": [],
+        "vmAdditionalArgs": [],
+        "toolArgs": [
+            "-d",
+            "emulator-5554",
+            "--devtools-server-address",
+            "http://127.0.0.1:9100/"
+        ],
+        "vmServicePort": 0,
+        "dartSdkPath": "C:\\Users\\luism\\flutter\\bin\\cache\\dart-sdk",
+        "vmServiceLogFile": "C:\\Users\\luism\\Desktop\\Proyectos\\PriceMarket\\logs\\observatory.txt",
+        "maxLogLineLength": 2000,
+        "dartTestLogFile": "C:\\Users\\luism\\Desktop\\Proyectos\\PriceMarket\\logs\\dart_test.txt",
+        "debugSdkLibraries": false,
+        "debugExternalPackageLibraries": false,
+        "showDartDeveloperLogs": true,
+        "evaluateGettersInDebugViews": true,
+        "evaluateToStringInDebugViews": true,
+        "flutterSdkPath": "C:\\Users\\luism\\flutter",
+        "useInspectorNotificationsForWidgetErrors": false,
+        "flutterRunLogFile": "C:\\Users\\luism\\Desktop\\Proyectos\\PriceMarket\\logs\\flutter_run.txt",
+        "flutterTestLogFile": "C:\\Users\\luism\\Desktop\\Proyectos\\PriceMarket\\logs\\flutter_test.txt",
+        "showMemoryUsa…
+[15:33:14] [General] [Info] Using flutter debugger for Flutter
+[15:33:14] [General] [Info] SDK DAP setting is true, set by sdkDaps experiment
+[15:33:14] [General] [Info] Running SDK DAP Dart VM in undefined: C:\Users\luism\flutter\bin\flutter.bat debug_adapter and options {"env":{"FLUTTER_HOST":"VSCode","PUB_ENVIRONMENT":"vscode.dart-code","FLUTTER_ROOT":"C:\\Users\\luism\\flutter"}}
+[15:33:14] [General] [Info] Did not find session 91968057-9a10-4270-87ba-efea17d3a0e7 to handle dart.progressStart. There were 0 sessions:
+[15:33:14] [General] [Info] Event will be queued and processed when the session start event fires
+[15:33:14] [General] [Info] Processing delayed event dart.progressStart for session 91968057-9a10-4270-87ba-efea17d3a0e7
+[15:34:01] [General] [Info] Pubspec C:\Users\luism\Desktop\Proyectos\PriceMarket\pubspec.yaml was modified
+[15:34:03] [General] [Info] Pubspec C:\Users\luism\Desktop\Proyectos\PriceMarket\pubspec.yaml was modified
+[15:34:13] [General] [Info] Returning cached results for project search
+[15:34:13] [General] [Info] Version last used for Pub is 3.2.0 (3.2.0), current is 3.2.0 (3.2.0)
+[15:34:13] [General] [Info] Found 1 folders requiring "pub get" or "pub upgrade":
+    C:\Users\luism\Desktop\Proyectos\PriceMarket (get: true, upgrade: false, reason: pubspec.yaml was modified (Mon Nov 20 2023 15:34:03 GMT+0100 (hora estándar de Europa central)) more recently than pubspec.lock (Mon Nov 20 2023 15:33:00 GMT+0100 (hora estándar de Europa central)))
+[15:34:30] [General] [Info] Starting debug session...
+[15:34:30] [General] [Info]     workspace: C:\Users\luism\Desktop\Proyectos\PriceMarket
+[15:34:30] [General] [Info]     program  : C:\Users\luism\Desktop\Proyectos\PriceMarket\lib\main.dart
+[15:34:30] [General] [Info] Setting cwd based on likely entry point: C:\Users\luism\Desktop\Proyectos\PriceMarket
+[15:34:30] [General] [Info] Using workspace as cwd: C:\Users\luism\Desktop\Proyectos\PriceMarket
+[15:34:30] [General] [Info] Detected launch project as Flutter
+[15:34:30] [General] [Info] Using Flutter debug adapter for this session
+[15:34:30] [General] [Info] Getting DevTools server address to pass to Flutter...
+[15:34:30] [General] [Info] Checking for errors before launching
+[15:34:30] [General] [Info] Debug session starting...
+    {
+        "name": "Dart  (Resizable (Experimental) API 33)",
+        "noDebug": true,
+        "request": "launch",
+        "type": "dart",
+        "program": "C:\\Users\\luism\\Desktop\\Proyectos\\PriceMarket\\lib\\main.dart",
+        "dartCodeDebugSessionID": "session-703c5",
+        "cwd": "C:\\Users\\luism\\Desktop\\Proyectos\\PriceMarket",
+        "deviceId": "emulator-5554",
+        "deviceName": "Resizable (Experimental) API 33 (android-x64)",
+        "toolEnv": {
+            "FLUTTER_HOST": "VSCode",
+            "PUB_ENVIRONMENT": "vscode.dart-code",
+            "FLUTTER_ROOT": "C:\\Users\\luism\\flutter"
+        },
+        "sendLogsToClient": false,
+        "sendCustomProgressEvents": true,
+        "allowAnsiColorOutput": true,
+        "additionalProjectPaths": [
+            "C:\\Users\\luism\\Desktop\\Proyectos\\PriceMarket"
+        ],
+        "args": [],
+        "vmAdditionalArgs": [],
+        "toolArgs": [
+            "-d",
+            "emulator-5554",
+            "--devtools-server-address",
+            "http://127.0.0.1:9100/"
+        ],
+        "vmServicePort": 0,
+        "dartSdkPath": "C:\\Users\\luism\\flutter\\bin\\cache\\dart-sdk",
+        "vmServiceLogFile": "C:\\Users\\luism\\Desktop\\Proyectos\\PriceMarket\\logs\\observatory.txt",
+        "maxLogLineLength": 2000,
+        "dartTestLogFile": "C:\\Users\\luism\\Desktop\\Proyectos\\PriceMarket\\logs\\dart_test.txt",
+        "debugSdkLibraries": false,
+        "debugExternalPackageLibraries": false,
+        "showDartDeveloperLogs": true,
+        "evaluateGettersInDebugViews": true,
+        "evaluateToStringInDebugViews": true,
+        "flutterSdkPath": "C:\\Users\\luism\\flutter",
+        "useInspectorNotificationsForWidgetErrors": false,
+        "flutterRunLogFile": "C:\\Users\\luism\\Desktop\\Proyectos\\PriceMarket\\logs\\flutter_run.txt",
+        "flutterTestLogFile": "C:\\Users\\luism\\Desktop\\Proyectos\\PriceMarket\\logs\\flutter_test.txt",
+        "showMemoryUsa…
+[15:34:30] [General] [Info] Using flutter debugger for Flutter
+[15:34:30] [General] [Info] SDK DAP setting is true, set by sdkDaps experiment
+[15:34:30] [General] [Info] Running SDK DAP Dart VM in undefined: C:\Users\luism\flutter\bin\flutter.bat debug_adapter and options {"env":{"FLUTTER_HOST":"VSCode","PUB_ENVIRONMENT":"vscode.dart-code","FLUTTER_ROOT":"C:\\Users\\luism\\flutter"}}
+[15:34:31] [General] [Info] Did not find session 7c4ca1a5-d333-4913-802c-842b61e3c1fb to handle dart.progressStart. There were 0 sessions:
+[15:34:31] [General] [Info] Event will be queued and processed when the session start event fires
+[15:34:31] [General] [Info] Processing delayed event dart.progressStart for session 7c4ca1a5-d333-4913-802c-842b61e3c1fb
+[15:35:18] [General] [Info] Pubspec C:\Users\luism\Desktop\Proyectos\PriceMarket\pubspec.yaml was modified
+[15:35:28] [General] [Info] Pubspec C:\Users\luism\Desktop\Proyectos\PriceMarket\pubspec.yaml was modified
+[15:35:30] [General] [Info] Pubspec C:\Users\luism\Desktop\Proyectos\PriceMarket\pubspec.yaml was modified
+[15:35:31] [General] [Info] Pubspec C:\Users\luism\Desktop\Proyectos\PriceMarket\pubspec.yaml was modified
+[15:35:41] [General] [Info] Took 52ms to search for projects (5 levels)
+[15:35:41] [General] [Info] Took 0ms to filter out excluded projects (0 exclusion rules)
+[15:35:41] [General] [Info] Version last used for Pub is 3.2.0 (3.2.0), current is 3.2.0 (3.2.0)
+[15:35:41] [General] [Info] Found 1 folders requiring "pub get" or "pub upgrade":
+    C:\Users\luism\Desktop\Proyectos\PriceMarket (get: true, upgrade: false, reason: pubspec.yaml was modified (Mon Nov 20 2023 15:35:31 GMT+0100 (hora estándar de Europa central)) more recently than pubspec.lock (Mon Nov 20 2023 15:35:00 GMT+0100 (hora estándar de Europa central)))
+[15:35:52] [General] [Info] Pubspec C:\Users\luism\Desktop\Proyectos\PriceMarket\pubspec.yaml was modified
+[15:36:02] [General] [Info] Returning cached results for project search
+[15:36:02] [General] [Info] Version last used for Pub is 3.2.0 (3.2.0), current is 3.2.0 (3.2.0)
+[15:36:02] [General] [Info] Found 1 folders requiring "pub get" or "pub upgrade":
+    C:\Users\luism\Desktop\Proyectos\PriceMarket (get: true, upgrade: false, reason: pubspec.yaml was modified (Mon Nov 20 2023 15:35:52 GMT+0100 (hora estándar de Europa central)) more recently than pubspec.lock (Mon Nov 20 2023 15:35:00 GMT+0100 (hora estándar de Europa central)))
+[15:36:09] [General] [Info] Starting debug session...
+[15:36:09] [General] [Info]     workspace: C:\Users\luism\Desktop\Proyectos\PriceMarket
+[15:36:09] [General] [Info]     program  : C:\Users\luism\Desktop\Proyectos\PriceMarket\lib\main.dart
+[15:36:09] [General] [Info] Setting cwd based on likely entry point: C:\Users\luism\Desktop\Proyectos\PriceMarket
+[15:36:09] [General] [Info] Using workspace as cwd: C:\Users\luism\Desktop\Proyectos\PriceMarket
+[15:36:09] [General] [Info] Detected launch project as Flutter
+[15:36:09] [General] [Info] Using Flutter debug adapter for this session
+[15:36:09] [General] [Info] Getting DevTools server address to pass to Flutter...
+[15:36:09] [General] [Info] Checking for errors before launching
+[15:36:09] [General] [Info] Debug session starting...
+    {
+        "name": "Dart  (Resizable (Experimental) API 33)",
+        "noDebug": true,
+        "request": "launch",
+        "type": "dart",
+        "program": "C:\\Users\\luism\\Desktop\\Proyectos\\PriceMarket\\lib\\main.dart",
+        "dartCodeDebugSessionID": "session-c30df",
+        "cwd": "C:\\Users\\luism\\Desktop\\Proyectos\\PriceMarket",
+        "deviceId": "emulator-5554",
+        "deviceName": "Resizable (Experimental) API 33 (android-x64)",
+        "toolEnv": {
+            "FLUTTER_HOST": "VSCode",
+            "PUB_ENVIRONMENT": "vscode.dart-code",
+            "FLUTTER_ROOT": "C:\\Users\\luism\\flutter"
+        },
+        "sendLogsToClient": false,
+        "sendCustomProgressEvents": true,
+        "allowAnsiColorOutput": true,
+        "additionalProjectPaths": [
+            "C:\\Users\\luism\\Desktop\\Proyectos\\PriceMarket"
+        ],
+        "args": [],
+        "vmAdditionalArgs": [],
+        "toolArgs": [
+            "-d",
+            "emulator-5554",
+            "--devtools-server-address",
+            "http://127.0.0.1:9100/"
+        ],
+        "vmServicePort": 0,
+        "dartSdkPath": "C:\\Users\\luism\\flutter\\bin\\cache\\dart-sdk",
+        "vmServiceLogFile": "C:\\Users\\luism\\Desktop\\Proyectos\\PriceMarket\\logs\\observatory.txt",
+        "maxLogLineLength": 2000,
+        "dartTestLogFile": "C:\\Users\\luism\\Desktop\\Proyectos\\PriceMarket\\logs\\dart_test.txt",
+        "debugSdkLibraries": false,
+        "debugExternalPackageLibraries": false,
+        "showDartDeveloperLogs": true,
+        "evaluateGettersInDebugViews": true,
+        "evaluateToStringInDebugViews": true,
+        "flutterSdkPath": "C:\\Users\\luism\\flutter",
+        "useInspectorNotificationsForWidgetErrors": false,
+        "flutterRunLogFile": "C:\\Users\\luism\\Desktop\\Proyectos\\PriceMarket\\logs\\flutter_run.txt",
+        "flutterTestLogFile": "C:\\Users\\luism\\Desktop\\Proyectos\\PriceMarket\\logs\\flutter_test.txt",
+        "showMemoryUsa…
+[15:36:09] [General] [Info] Using flutter debugger for Flutter
+[15:36:09] [General] [Info] SDK DAP setting is true, set by sdkDaps experiment
+[15:36:09] [General] [Info] Running SDK DAP Dart VM in undefined: C:\Users\luism\flutter\bin\flutter.bat debug_adapter and options {"env":{"FLUTTER_HOST":"VSCode","PUB_ENVIRONMENT":"vscode.dart-code","FLUTTER_ROOT":"C:\\Users\\luism\\flutter"}}
+[15:36:09] [General] [Info] Did not find session a9a0e140-8cb5-4279-93f0-e37dd4ecd05a to handle dart.progressStart. There were 0 sessions:
+[15:36:09] [General] [Info] Event will be queued and processed when the session start event fires
+[15:36:09] [General] [Info] Processing delayed event dart.progressStart for session a9a0e140-8cb5-4279-93f0-e37dd4ecd05a
+[15:38:09] [General] [Info] Pubspec C:\Users\luism\Desktop\Proyectos\PriceMarket\pubspec.yaml was modified
+[15:38:11] [General] [Info] Pubspec C:\Users\luism\Desktop\Proyectos\PriceMarket\pubspec.yaml was modified
+[15:38:14] [General] [Info] Pubspec C:\Users\luism\Desktop\Proyectos\PriceMarket\pubspec.yaml was modified
+[15:38:15] [General] [Info] Pubspec C:\Users\luism\Desktop\Proyectos\PriceMarket\pubspec.yaml was modified
+[15:38:25] [General] [Info] Returning cached results for project search
+[15:38:25] [General] [Info] Version last used for Pub is 3.2.0 (3.2.0), current is 3.2.0 (3.2.0)
+[15:38:25] [General] [Info] Found 1 folders requiring "pub get" or "pub upgrade":
+    C:\Users\luism\Desktop\Proyectos\PriceMarket (get: true, upgrade: false, reason: pubspec.yaml was modified (Mon Nov 20 2023 15:38:15 GMT+0100 (hora estándar de Europa central)) more recently than pubspec.lock (Mon Nov 20 2023 15:36:03 GMT+0100 (hora estándar de Europa central)))
+[15:38:33] [General] [Info] Pubspec C:\Users\luism\Desktop\Proyectos\PriceMarket\pubspec.yaml was modified
+[15:38:34] [General] [Info] Pubspec C:\Users\luism\Desktop\Proyectos\PriceMarket\pubspec.yaml was modified
+[15:38:38] [General] [Info] Pubspec C:\Users\luism\Desktop\Proyectos\PriceMarket\pubspec.yaml was modified
+[15:38:48] [General] [Info] Returning cached results for project search
+[15:38:48] [General] [Info] Version last used for Pub is 3.2.0 (3.2.0), current is 3.2.0 (3.2.0)
+[15:38:48] [General] [Info] Found 1 folders requiring "pub get" or "pub upgrade":
+    C:\Users\luism\Desktop\Proyectos\PriceMarket (get: true, upgrade: false, reason: pubspec.yaml was modified (Mon Nov 20 2023 15:38:48 GMT+0100 (hora estándar de Europa central)) more recently than pubspec.lock (Mon Nov 20 2023 15:36:03 GMT+0100 (hora estándar de Europa central)))
+[15:38:48] [General] [Info] Pubspec C:\Users\luism\Desktop\Proyectos\PriceMarket\pubspec.yaml was modified
+[15:38:49] [General] [Info] Already running pub get, skipping!
+[15:39:19] [General] [Info] Starting debug session...
+[15:39:19] [General] [Info]     workspace: C:\Users\luism\Desktop\Proyectos\PriceMarket
+[15:39:19] [General] [Info]     program  : C:\Users\luism\Desktop\Proyectos\PriceMarket\lib\main.dart
+[15:39:19] [General] [Info] Setting cwd based on likely entry point: C:\Users\luism\Desktop\Proyectos\PriceMarket
+[15:39:19] [General] [Info] Using workspace as cwd: C:\Users\luism\Desktop\Proyectos\PriceMarket
+[15:39:19] [General] [Info] Detected launch project as Flutter
+[15:39:19] [General] [Info] Using Flutter debug adapter for this session
+[15:39:19] [General] [Info] Getting DevTools server address to pass to Flutter...
+[15:39:19] [General] [Info] Checking for errors before launching
+[15:39:19] [General] [Info] Debug session starting...
+    {
+        "name": "Dart  (Resizable (Experimental) API 33)",
+        "noDebug": true,
+        "request": "launch",
+        "type": "dart",
+        "program": "C:\\Users\\luism\\Desktop\\Proyectos\\PriceMarket\\lib\\main.dart",
+        "dartCodeDebugSessionID": "session-841be",
+        "cwd": "C:\\Users\\luism\\Desktop\\Proyectos\\PriceMarket",
+        "deviceId": "emulator-5554",
+        "deviceName": "Resizable (Experimental) API 33 (android-x64)",
+        "toolEnv": {
+            "FLUTTER_HOST": "VSCode",
+            "PUB_ENVIRONMENT": "vscode.dart-code",
+            "FLUTTER_ROOT": "C:\\Users\\luism\\flutter"
+        },
+        "sendLogsToClient": false,
+        "sendCustomProgressEvents": true,
+        "allowAnsiColorOutput": true,
+        "additionalProjectPaths": [
+            "C:\\Users\\luism\\Desktop\\Proyectos\\PriceMarket"
+        ],
+        "args": [],
+        "vmAdditionalArgs": [],
+        "toolArgs": [
+            "-d",
+            "emulator-5554",
+            "--devtools-server-address",
+            "http://127.0.0.1:9100/"
+        ],
+        "vmServicePort": 0,
+        "dartSdkPath": "C:\\Users\\luism\\flutter\\bin\\cache\\dart-sdk",
+        "vmServiceLogFile": "C:\\Users\\luism\\Desktop\\Proyectos\\PriceMarket\\logs\\observatory.txt",
+        "maxLogLineLength": 2000,
+        "dartTestLogFile": "C:\\Users\\luism\\Desktop\\Proyectos\\PriceMarket\\logs\\dart_test.txt",
+        "debugSdkLibraries": false,
+        "debugExternalPackageLibraries": false,
+        "showDartDeveloperLogs": true,
+        "evaluateGettersInDebugViews": true,
+        "evaluateToStringInDebugViews": true,
+        "flutterSdkPath": "C:\\Users\\luism\\flutter",
+        "useInspectorNotificationsForWidgetErrors": false,
+        "flutterRunLogFile": "C:\\Users\\luism\\Desktop\\Proyectos\\PriceMarket\\logs\\flutter_run.txt",
+        "flutterTestLogFile": "C:\\Users\\luism\\Desktop\\Proyectos\\PriceMarket\\logs\\flutter_test.txt",
+        "showMemoryUsa…
+[15:39:19] [General] [Info] Using flutter debugger for Flutter
+[15:39:19] [General] [Info] SDK DAP setting is true, set by sdkDaps experiment
+[15:39:19] [General] [Info] Running SDK DAP Dart VM in undefined: C:\Users\luism\flutter\bin\flutter.bat debug_adapter and options {"env":{"FLUTTER_HOST":"VSCode","PUB_ENVIRONMENT":"vscode.dart-code","FLUTTER_ROOT":"C:\\Users\\luism\\flutter"}}
+[15:39:19] [General] [Info] Did not find session ac3003b6-7f7a-41de-afa1-5885fd3d6141 to handle dart.progressStart. There were 0 sessions:
+[15:39:19] [General] [Info] Event will be queued and processed when the session start event fires
+[15:39:19] [General] [Info] Processing delayed event dart.progressStart for session ac3003b6-7f7a-41de-afa1-5885fd3d6141
+[15:41:26] [General] [Info] Pubspec C:\Users\luism\Desktop\Proyectos\PriceMarket\pubspec.yaml was modified
+[15:41:29] [General] [Info] Pubspec C:\Users\luism\Desktop\Proyectos\PriceMarket\pubspec.yaml was modified
+[15:41:33] [General] [Info] Pubspec C:\Users\luism\Desktop\Proyectos\PriceMarket\pubspec.yaml was modified
+[15:41:37] [General] [Info] Pubspec C:\Users\luism\Desktop\Proyectos\PriceMarket\pubspec.yaml was modified
+[15:41:39] [General] [Info] Pubspec C:\Users\luism\Desktop\Proyectos\PriceMarket\pubspec.yaml was modified
+[15:41:42] [General] [Info] Pubspec C:\Users\luism\Desktop\Proyectos\PriceMarket\pubspec.yaml was modified
+[15:41:44] [General] [Info] Pubspec C:\Users\luism\Desktop\Proyectos\PriceMarket\pubspec.yaml was modified
+[15:41:50] [General] [Info] Pubspec C:\Users\luism\Desktop\Proyectos\PriceMarket\pubspec.yaml was modified
+[15:42:00] [General] [Info] Took 49ms to search for projects (5 levels)
+[15:42:00] [General] [Info] Took 1ms to filter out excluded projects (0 exclusion rules)
+[15:42:00] [General] [Info] Version last used for Pub is 3.2.0 (3.2.0), current is 3.2.0 (3.2.0)
+[15:42:00] [General] [Info] Found 1 folders requiring "pub get" or "pub upgrade":
+    C:\Users\luism\Desktop\Proyectos\PriceMarket (get: true, upgrade: false, reason: pubspec.yaml was modified (Mon Nov 20 2023 15:41:50 GMT+0100 (hora estándar de Europa central)) more recently than pubspec.lock (Mon Nov 20 2023 15:38:49 GMT+0100 (hora estándar de Europa central)))
+[15:42:29] [General] [Info] Starting debug session...
+[15:42:29] [General] [Info]     workspace: C:\Users\luism\Desktop\Proyectos\PriceMarket
+[15:42:29] [General] [Info]     program  : C:\Users\luism\Desktop\Proyectos\PriceMarket\lib\main.dart
+[15:42:29] [General] [Info] Setting cwd based on likely entry point: C:\Users\luism\Desktop\Proyectos\PriceMarket
+[15:42:29] [General] [Info] Using workspace as cwd: C:\Users\luism\Desktop\Proyectos\PriceMarket
+[15:42:29] [General] [Info] Detected launch project as Flutter
+[15:42:29] [General] [Info] Using Flutter debug adapter for this session
+[15:42:29] [General] [Info] Getting DevTools server address to pass to Flutter...
+[15:42:29] [General] [Info] Checking for errors before launching
+[15:42:29] [General] [Info] Debug session starting...
+    {
+        "name": "Dart  (Resizable (Experimental) API 33)",
+        "noDebug": true,
+        "request": "launch",
+        "type": "dart",
+        "program": "C:\\Users\\luism\\Desktop\\Proyectos\\PriceMarket\\lib\\main.dart",
+        "dartCodeDebugSessionID": "session-9d122",
+        "cwd": "C:\\Users\\luism\\Desktop\\Proyectos\\PriceMarket",
+        "deviceId": "emulator-5554",
+        "deviceName": "Resizable (Experimental) API 33 (android-x64)",
+        "toolEnv": {
+            "FLUTTER_HOST": "VSCode",
+            "PUB_ENVIRONMENT": "vscode.dart-code",
+            "FLUTTER_ROOT": "C:\\Users\\luism\\flutter"
+        },
+        "sendLogsToClient": false,
+        "sendCustomProgressEvents": true,
+        "allowAnsiColorOutput": true,
+        "additionalProjectPaths": [
+            "C:\\Users\\luism\\Desktop\\Proyectos\\PriceMarket"
+        ],
+        "args": [],
+        "vmAdditionalArgs": [],
+        "toolArgs": [
+            "-d",
+            "emulator-5554",
+            "--devtools-server-address",
+            "http://127.0.0.1:9100/"
+        ],
+        "vmServicePort": 0,
+        "dartSdkPath": "C:\\Users\\luism\\flutter\\bin\\cache\\dart-sdk",
+        "vmServiceLogFile": "C:\\Users\\luism\\Desktop\\Proyectos\\PriceMarket\\logs\\observatory.txt",
+        "maxLogLineLength": 2000,
+        "dartTestLogFile": "C:\\Users\\luism\\Desktop\\Proyectos\\PriceMarket\\logs\\dart_test.txt",
+        "debugSdkLibraries": false,
+        "debugExternalPackageLibraries": false,
+        "showDartDeveloperLogs": true,
+        "evaluateGettersInDebugViews": true,
+        "evaluateToStringInDebugViews": true,
+        "flutterSdkPath": "C:\\Users\\luism\\flutter",
+        "useInspectorNotificationsForWidgetErrors": false,
+        "flutterRunLogFile": "C:\\Users\\luism\\Desktop\\Proyectos\\PriceMarket\\logs\\flutter_run.txt",
+        "flutterTestLogFile": "C:\\Users\\luism\\Desktop\\Proyectos\\PriceMarket\\logs\\flutter_test.txt",
+        "showMemoryUsa…
+[15:42:29] [General] [Info] Using flutter debugger for Flutter
+[15:42:29] [General] [Info] SDK DAP setting is true, set by sdkDaps experiment
+[15:42:29] [General] [Info] Running SDK DAP Dart VM in undefined: C:\Users\luism\flutter\bin\flutter.bat debug_adapter and options {"env":{"FLUTTER_HOST":"VSCode","PUB_ENVIRONMENT":"vscode.dart-code","FLUTTER_ROOT":"C:\\Users\\luism\\flutter"}}
+[15:42:29] [General] [Info] Did not find session 380176e5-d7db-459f-badf-36f7f50f4c09 to handle dart.progressStart. There were 0 sessions:
+[15:42:29] [General] [Info] Event will be queued and processed when the session start event fires
+[15:42:29] [General] [Info] Processing delayed event dart.progressStart for session 380176e5-d7db-459f-badf-36f7f50f4c09
+[15:43:39] [General] [Info] Pubspec C:\Users\luism\Desktop\Proyectos\PriceMarket\pubspec.yaml was modified
+[15:43:40] [General] [Info] Pubspec C:\Users\luism\Desktop\Proyectos\PriceMarket\pubspec.yaml was modified
+[15:43:41] [General] [Info] Pubspec C:\Users\luism\Desktop\Proyectos\PriceMarket\pubspec.yaml was modified
+[15:43:43] [General] [Info] Pubspec C:\Users\luism\Desktop\Proyectos\PriceMarket\pubspec.yaml was modified
+[15:43:45] [General] [Info] Pubspec C:\Users\luism\Desktop\Proyectos\PriceMarket\pubspec.yaml was modified
+[15:43:46] [General] [Info] Pubspec C:\Users\luism\Desktop\Proyectos\PriceMarket\pubspec.yaml was modified
+[15:43:49] [General] [Info] Pubspec C:\Users\luism\Desktop\Proyectos\PriceMarket\pubspec.yaml was modified
+[15:43:51] [General] [Info] Pubspec C:\Users\luism\Desktop\Proyectos\PriceMarket\pubspec.yaml was modified
+[15:43:54] [General] [Info] Pubspec C:\Users\luism\Desktop\Proyectos\PriceMarket\pubspec.yaml was modified
+[15:44:04] [General] [Info] Starting debug session...
+[15:44:04] [General] [Info]     workspace: C:\Users\luism\Desktop\Proyectos\PriceMarket
+[15:44:04] [General] [Info]     program  : C:\Users\luism\Desktop\Proyectos\PriceMarket\lib\main.dart
+[15:44:04] [General] [Info] Setting cwd based on likely entry point: C:\Users\luism\Desktop\Proyectos\PriceMarket
+[15:44:04] [General] [Info] Using workspace as cwd: C:\Users\luism\Desktop\Proyectos\PriceMarket
+[15:44:04] [General] [Info] Detected launch project as Flutter
+[15:44:04] [General] [Info] Using Flutter debug adapter for this session
+[15:44:04] [General] [Info] Getting DevTools server address to pass to Flutter...
+[15:44:04] [General] [Info] Checking for errors before launching
+[15:44:04] [General] [Info] Debug session starting...
+    {
+        "name": "Dart  (Resizable (Experimental) API 33)",
+        "noDebug": true,
+        "request": "launch",
+        "type": "dart",
+        "program": "C:\\Users\\luism\\Desktop\\Proyectos\\PriceMarket\\lib\\main.dart",
+        "dartCodeDebugSessionID": "session-75b44",
+        "cwd": "C:\\Users\\luism\\Desktop\\Proyectos\\PriceMarket",
+        "deviceId": "emulator-5554",
+        "deviceName": "Resizable (Experimental) API 33 (android-x64)",
+        "toolEnv": {
+            "FLUTTER_HOST": "VSCode",
+            "PUB_ENVIRONMENT": "vscode.dart-code",
+            "FLUTTER_ROOT": "C:\\Users\\luism\\flutter"
+        },
+        "sendLogsToClient": false,
+        "sendCustomProgressEvents": true,
+        "allowAnsiColorOutput": true,
+        "additionalProjectPaths": [
+            "C:\\Users\\luism\\Desktop\\Proyectos\\PriceMarket"
+        ],
+        "args": [],
+        "vmAdditionalArgs": [],
+        "toolArgs": [
+            "-d",
+            "emulator-5554",
+            "--devtools-server-address",
+            "http://127.0.0.1:9100/"
+        ],
+        "vmServicePort": 0,
+        "dartSdkPath": "C:\\Users\\luism\\flutter\\bin\\cache\\dart-sdk",
+        "vmServiceLogFile": "C:\\Users\\luism\\Desktop\\Proyectos\\PriceMarket\\logs\\observatory.txt",
+        "maxLogLineLength": 2000,
+        "dartTestLogFile": "C:\\Users\\luism\\Desktop\\Proyectos\\PriceMarket\\logs\\dart_test.txt",
+        "debugSdkLibraries": false,
+        "debugExternalPackageLibraries": false,
+        "showDartDeveloperLogs": true,
+        "evaluateGettersInDebugViews": true,
+        "evaluateToStringInDebugViews": true,
+        "flutterSdkPath": "C:\\Users\\luism\\flutter",
+        "useInspectorNotificationsForWidgetErrors": false,
+        "flutterRunLogFile": "C:\\Users\\luism\\Desktop\\Proyectos\\PriceMarket\\logs\\flutter_run.txt",
+        "flutterTestLogFile": "C:\\Users\\luism\\Desktop\\Proyectos\\PriceMarket\\logs\\flutter_test.txt",
+        "showMemoryUsa…
+[15:44:04] [General] [Info] Using flutter debugger for Flutter
+[15:44:04] [General] [Info] SDK DAP setting is true, set by sdkDaps experiment
+[15:44:04] [General] [Info] Running SDK DAP Dart VM in undefined: C:\Users\luism\flutter\bin\flutter.bat debug_adapter and options {"env":{"FLUTTER_HOST":"VSCode","PUB_ENVIRONMENT":"vscode.dart-code","FLUTTER_ROOT":"C:\\Users\\luism\\flutter"}}
+[15:44:04] [General] [Info] Returning cached results for project search
+[15:44:04] [General] [Info] Version last used for Pub is 3.2.0 (3.2.0), current is 3.2.0 (3.2.0)
+[15:44:04] [General] [Info] Found 1 folders requiring "pub get" or "pub upgrade":
+    C:\Users\luism\Desktop\Proyectos\PriceMarket (get: true, upgrade: false, reason: pubspec.yaml was modified (Mon Nov 20 2023 15:43:54 GMT+0100 (hora estándar de Europa central)) more recently than pubspec.lock (Mon Nov 20 2023 15:42:01 GMT+0100 (hora estándar de Europa central)))
+[15:44:05] [General] [Info] Did not find session 268ceb29-074b-4966-9ffc-bb25c4bd2f3e to handle dart.progressStart. There were 0 sessions:
+[15:44:05] [General] [Info] Event will be queued and processed when the session start event fires
+[15:44:05] [General] [Info] Processing delayed event dart.progressStart for session 268ceb29-074b-4966-9ffc-bb25c4bd2f3e
+[15:44:30] [General] [Info] Pubspec C:\Users\luism\Desktop\Proyectos\PriceMarket\pubspec.yaml was modified
+[15:44:40] [General] [Info] Returning cached results for project search
+[15:44:40] [General] [Info] Version last used for Pub is 3.2.0 (3.2.0), current is 3.2.0 (3.2.0)
+[15:44:40] [General] [Info] Found 1 folders requiring "pub get" or "pub upgrade":
+    C:\Users\luism\Desktop\Proyectos\PriceMarket (get: true, upgrade: false, reason: pubspec.yaml was modified (Mon Nov 20 2023 15:44:29 GMT+0100 (hora estándar de Europa central)) more recently than pubspec.lock (Mon Nov 20 2023 15:44:06 GMT+0100 (hora estándar de Europa central)))
+[15:44:40] [General] [Info] Pubspec C:\Users\luism\Desktop\Proyectos\PriceMarket\pubspec.yaml was modified
+[15:44:50] [General] [Info] Returning cached results for project search
+[15:44:50] [General] [Info] Version last used for Pub is 3.2.0 (3.2.0), current is 3.2.0 (3.2.0)
+[15:44:50] [General] [Info] Found 0 folders requiring "pub get" or "pub upgrade":
+[15:46:14] [General] [Info] Pubspec C:\Users\luism\Desktop\Proyectos\PriceMarket\pubspec.yaml was modified
+[15:46:15] [General] [Info] Pubspec C:\Users\luism\Desktop\Proyectos\PriceMarket\pubspec.yaml was modified
+[15:46:19] [General] [Info] Pubspec C:\Users\luism\Desktop\Proyectos\PriceMarket\pubspec.yaml was modified
+[15:46:21] [General] [Info] Pubspec C:\Users\luism\Desktop\Proyectos\PriceMarket\pubspec.yaml was modified
+[15:46:27] [General] [Info] Pubspec C:\Users\luism\Desktop\Proyectos\PriceMarket\pubspec.yaml was modified
+[15:46:37] [General] [Info] Returning cached results for project search
+[15:46:37] [General] [Info] Version last used for Pub is 3.2.0 (3.2.0), current is 3.2.0 (3.2.0)
+[15:46:37] [General] [Info] Found 1 folders requiring "pub get" or "pub upgrade":
+    C:\Users\luism\Desktop\Proyectos\PriceMarket (get: true, upgrade: false, reason: pubspec.yaml was modified (Mon Nov 20 2023 15:46:27 GMT+0100 (hora estándar de Europa central)) more recently than pubspec.lock (Mon Nov 20 2023 15:44:51 GMT+0100 (hora estándar de Europa central)))
+[15:47:20] [General] [Info] Took 55ms to search for projects (5 levels)
+[15:47:20] [General] [Info] Took 1ms to filter out excluded projects (0 exclusion rules)
+[15:50:52] [General] [Info] Pubspec C:\Users\luism\Desktop\Proyectos\PriceMarket\pubspec.yaml was modified
+[15:50:59] [General] [Info] Returning cached results for project search
+[15:51:02] [General] [Info] Returning cached results for project search
+[15:51:02] [General] [Info] Version last used for Pub is 3.2.0 (3.2.0), current is 3.2.0 (3.2.0)
+[15:51:02] [General] [Info] Found 0 folders requiring "pub get" or "pub upgrade":
+[15:51:04] [General] [Info] Returning cached results for project search
+[15:51:24] [General] [Info] Starting debug session...
+[15:51:24] [General] [Info]     workspace: C:\Users\luism\Desktop\Proyectos\PriceMarket
+[15:51:24] [General] [Info]     program  : C:\Users\luism\Desktop\Proyectos\PriceMarket\lib\main.dart
+[15:51:24] [General] [Info] Setting cwd based on likely entry point: C:\Users\luism\Desktop\Proyectos\PriceMarket
+[15:51:24] [General] [Info] Using workspace as cwd: C:\Users\luism\Desktop\Proyectos\PriceMarket
+[15:51:24] [General] [Info] Detected launch project as Flutter
+[15:51:24] [General] [Info] Using Flutter debug adapter for this session
+[15:51:24] [General] [Info] Getting DevTools server address to pass to Flutter...
+[15:51:24] [General] [Info] Checking for errors before launching
+[15:51:24] [General] [Info] Debug session starting...
+    {
+        "name": "Dart  (Resizable (Experimental) API 33)",
+        "noDebug": true,
+        "request": "launch",
+        "type": "dart",
+        "program": "C:\\Users\\luism\\Desktop\\Proyectos\\PriceMarket\\lib\\main.dart",
+        "dartCodeDebugSessionID": "session-40441",
+        "cwd": "C:\\Users\\luism\\Desktop\\Proyectos\\PriceMarket",
+        "deviceId": "emulator-5554",
+        "deviceName": "Resizable (Experimental) API 33 (android-x64)",
+        "toolEnv": {
+            "FLUTTER_HOST": "VSCode",
+            "PUB_ENVIRONMENT": "vscode.dart-code",
+            "FLUTTER_ROOT": "C:\\Users\\luism\\flutter"
+        },
+        "sendLogsToClient": false,
+        "sendCustomProgressEvents": true,
+        "allowAnsiColorOutput": true,
+        "additionalProjectPaths": [
+            "C:\\Users\\luism\\Desktop\\Proyectos\\PriceMarket"
+        ],
+        "args": [],
+        "vmAdditionalArgs": [],
+        "toolArgs": [
+            "-d",
+            "emulator-5554",
+            "--devtools-server-address",
+            "http://127.0.0.1:9100/"
+        ],
+        "vmServicePort": 0,
+        "dartSdkPath": "C:\\Users\\luism\\flutter\\bin\\cache\\dart-sdk",
+        "vmServiceLogFile": "C:\\Users\\luism\\Desktop\\Proyectos\\PriceMarket\\logs\\observatory.txt",
+        "maxLogLineLength": 2000,
+        "dartTestLogFile": "C:\\Users\\luism\\Desktop\\Proyectos\\PriceMarket\\logs\\dart_test.txt",
+        "debugSdkLibraries": false,
+        "debugExternalPackageLibraries": false,
+        "showDartDeveloperLogs": true,
+        "evaluateGettersInDebugViews": true,
+        "evaluateToStringInDebugViews": true,
+        "flutterSdkPath": "C:\\Users\\luism\\flutter",
+        "useInspectorNotificationsForWidgetErrors": false,
+        "flutterRunLogFile": "C:\\Users\\luism\\Desktop\\Proyectos\\PriceMarket\\logs\\flutter_run.txt",
+        "flutterTestLogFile": "C:\\Users\\luism\\Desktop\\Proyectos\\PriceMarket\\logs\\flutter_test.txt",
+        "showMemoryUsa…
+[15:51:24] [General] [Info] Using flutter debugger for Flutter
+[15:51:24] [General] [Info] SDK DAP setting is true, set by sdkDaps experiment
+[15:51:24] [General] [Info] Running SDK DAP Dart VM in undefined: C:\Users\luism\flutter\bin\flutter.bat debug_adapter and options {"env":{"FLUTTER_HOST":"VSCode","PUB_ENVIRONMENT":"vscode.dart-code","FLUTTER_ROOT":"C:\\Users\\luism\\flutter"}}
+[15:51:25] [General] [Info] Did not find session cfa1f725-ae44-400a-b695-d4eeddb2d906 to handle dart.progressStart. There were 0 sessions:
+[15:51:25] [General] [Info] Event will be queued and processed when the session start event fires
+[15:51:25] [General] [Info] Processing delayed event dart.progressStart for session cfa1f725-ae44-400a-b695-d4eeddb2d906
