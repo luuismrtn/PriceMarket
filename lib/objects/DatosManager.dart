@@ -55,18 +55,29 @@ class ImportadorExportadorDatos {
           double.parse(partes[3])
         ];
         String categoria = partes[4];
-        List<int> yuka = [
-          int.parse(partes[5]),
-          int.parse(partes[6])
+        
+        List<String> cantidad = [
+          partes[5],
+          partes[6]
         ];
-        String imagen = partes[7];
-        DateTime fecha = DateTime.parse(partes[8]);
+        List<int> yuka = [
+          int.parse(partes[7]),
+          int.parse(partes[8])
+        ];
+        List<int> opinion = [
+          int.parse(partes[9]),
+          int.parse(partes[10])
+        ];
+        String imagen = partes[11];
+        DateTime fecha = DateTime.parse(partes[12]);
         listaDeProductos.add(Producto(
             id: id,
             nombre: nombre,
             precios: precios,
             categoria: categoria,
+            cantidad: cantidad,
             yuka: yuka,
+            opinion: opinion,
             imagen: imagen,
             fecha: fecha));
       }

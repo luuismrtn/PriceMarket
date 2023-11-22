@@ -32,7 +32,6 @@ class _MyScreenState extends State<Principal> {
   void initState() {
     super.initState();
     productosFiltrados = listaProductos.productos;
-    _datosManager('Importar');
   }
 
   void _filtrarProductos(String filtro) {
@@ -71,20 +70,25 @@ class _MyScreenState extends State<Principal> {
   }
 
   Form formularioProducto(
-      TextEditingController _nombreController,
-      TextEditingController _mercadonaController,
-      TextEditingController _lidlController,
-      TextEditingController _yukaMercadonaController,
-      TextEditingController _yukaLidlController,
-      TextEditingController _categoriaController,
-      GlobalKey<FormState> _formKey) {
+      TextEditingController nombreController,
+      TextEditingController mercadonaController,
+      TextEditingController lidlController,
+      TextEditingController yukaMercadonaController,
+      TextEditingController yukaLidlController,
+      TextEditingController opinionMercadonaController,
+      TextEditingController opinionLidlController,
+      TextEditingController categoriaController,
+      TextEditingController cantidadMercadonaController,
+      TextEditingController cantidadLidlController,
+      
+      GlobalKey<FormState> formKey) {
     return Form(
-      key: _formKey,
+      key: formKey,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           TextFormField(
-            controller: _nombreController,
+            controller: nombreController,
             decoration: const InputDecoration(
               border: OutlineInputBorder(),
               labelText: 'Nombre del Producto',
@@ -98,8 +102,8 @@ class _MyScreenState extends State<Principal> {
             },
           ),
           const SizedBox(height: 8),
-          TextFormField(
-            controller: _mercadonaController,
+              TextFormField(
+            controller: mercadonaController,
             keyboardType: TextInputType.number,
             decoration: const InputDecoration(
               border: OutlineInputBorder(),
@@ -121,9 +125,19 @@ class _MyScreenState extends State<Principal> {
               return null;
             },
           ),
-          const SizedBox(height: 8),
+          const SizedBox(width: 8),
           TextFormField(
-              controller: _yukaMercadonaController,
+              controller: cantidadMercadonaController,
+              keyboardType: TextInputType.number,
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: 'Cantidad Mercadona',
+                labelStyle: TextStyle(fontFamily: 'ProductSans'),
+              ),
+            ),
+          const SizedBox(height: 8),
+              TextFormField(
+              controller: yukaMercadonaController,
               keyboardType: TextInputType.number,
               decoration: const InputDecoration(
                 border: OutlineInputBorder(),
@@ -144,9 +158,32 @@ class _MyScreenState extends State<Principal> {
                 }
                 return null;
               }),
+              const SizedBox(width: 8),
+              TextFormField(
+              controller: opinionMercadonaController,
+              keyboardType: TextInputType.number,
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: 'Opinión Mercadona',
+                labelStyle: TextStyle(fontFamily: 'ProductSans'),
+              ),
+              validator: (value) {
+                if (value != null && value.isNotEmpty) {
+                  try {
+                    final intVal = double.parse(value);
+                    if (intVal < -1 || intVal > 100) {
+                      return 'Ingrese un número entre 0 y 100.';
+                    }
+                  } catch (e) {
+                    return 'Ingrese un número válido.';
+                  }
+                  return null;
+                }
+                return null;
+              }),
           const SizedBox(height: 8),
-          TextFormField(
-              controller: _lidlController,
+              TextFormField(
+              controller: lidlController,
               keyboardType: TextInputType.number,
               decoration: const InputDecoration(
                 border: OutlineInputBorder(),
@@ -167,9 +204,23 @@ class _MyScreenState extends State<Principal> {
                 }
                 return null;
               }),
+              const SizedBox(width: 8),
+              TextFormField(
+              controller: cantidadLidlController,
+              keyboardType: TextInputType.number,
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: 'Cantidad Lidl',
+                labelStyle: TextStyle(fontFamily: 'ProductSans'),
+              ),
+              validator: (value) {
+              return null;
+            }),
+
           const SizedBox(height: 8),
-          TextFormField(
-              controller: _yukaLidlController,
+
+              TextFormField(
+              controller: yukaLidlController,
               keyboardType: TextInputType.number,
               decoration: const InputDecoration(
                 border: OutlineInputBorder(),
@@ -190,6 +241,29 @@ class _MyScreenState extends State<Principal> {
                 }
                 return null;
               }),
+              const SizedBox(width: 8),
+              TextFormField(
+              controller: opinionLidlController,
+              keyboardType: TextInputType.number,
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: 'Yuka Lidl',
+                labelStyle: TextStyle(fontFamily: 'ProductSans'),
+              ),
+              validator: (value) {
+                if (value != null && value.isNotEmpty) {
+                  try {
+                    final intVal = int.parse(value);
+                    if (intVal < -1 || intVal > 100) {
+                      return 'Ingrese un número entre 0 y 100.';
+                    }
+                  } catch (e) {
+                    return 'Ingrese un número válido.';
+                  }
+                  return null;
+                }
+                return null;
+              }),
           const SizedBox(height: 8),
           DropdownButtonFormField(
             items: Categorias.listaCategorias
@@ -200,8 +274,8 @@ class _MyScreenState extends State<Principal> {
                     style: const TextStyle(fontFamily: 'ProductSans')),
               );
             }).toList(),
-            value: _categoriaController.text.isNotEmpty
-                ? _categoriaController.text
+            value: categoriaController.text.isNotEmpty
+                ? categoriaController.text
                 : null,
             hint: const Text(
               'Seleccione una categoría',
@@ -209,7 +283,7 @@ class _MyScreenState extends State<Principal> {
             ),
             onChanged: (String? newValue) {
               setState(() {
-                _categoriaController.text = newValue!;
+                categoriaController.text = newValue!;
               });
             },
             decoration: const InputDecoration(
@@ -237,7 +311,11 @@ class _MyScreenState extends State<Principal> {
     final TextEditingController yukaMercadonaController =
         TextEditingController();
     final TextEditingController yukaLidlController = TextEditingController();
+    final TextEditingController opinionMercadonaController = TextEditingController();
+    final TextEditingController opinionLidlController = TextEditingController();
     final TextEditingController categoriaController = TextEditingController();
+    final TextEditingController cantidadMercadonaController = TextEditingController();
+    final TextEditingController cantidadLidlController = TextEditingController();
 
     final formKey = GlobalKey<FormState>();
 
@@ -254,8 +332,13 @@ class _MyScreenState extends State<Principal> {
                   lidlController,
                   yukaMercadonaController,
                   yukaLidlController,
+                  opinionMercadonaController,
+                  opinionLidlController,
                   categoriaController,
-                  formKey),
+                  cantidadMercadonaController,
+                  cantidadLidlController,
+                  formKey
+              ),
             ),
             contentPadding: const EdgeInsets.fromLTRB(20, 5, 20, 20),
             actions: [
@@ -281,14 +364,20 @@ class _MyScreenState extends State<Principal> {
                             int.tryParse(yukaLidlController.text) ?? -1;
                         final String categoria =
                             categoriaController.text.trim();
+                        final String cantidadMercadona = cantidadMercadonaController.text.isNotEmpty ? cantidadMercadonaController.text : 'No disponible';
+                        final String cantidadLidl = cantidadLidlController.text.isNotEmpty ? cantidadLidlController.text : 'No disponible';
+                        final int opinionMercadona = int.tryParse(opinionMercadonaController.text) ?? -1;
+                        final int opinionLidl = int.tryParse(opinionLidlController.text) ?? -1;
 
                         if (nombre.isNotEmpty) {
                           final Producto nuevoProducto = Producto(
                             nombre: nombre,
                             precios: [mercadona, lidl],
                             categoria: categoria,
+                            cantidad: [cantidadMercadona, cantidadLidl],
                             id: 0,
                             yuka: [yukaMercadona, yukaLidl],
+                            opinion: [opinionMercadona, opinionLidl],
                             fecha: DateTime.now(),
                           );
                           listaProductos.productos.add(nuevoProducto);
@@ -447,6 +536,41 @@ class _MyScreenState extends State<Principal> {
                         const TableCell(
                           child: Padding(
                             padding: EdgeInsets.all(8.0),
+                            child: Text('Cantidad',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: 'ProductSans')),
+                          ),
+                        ),
+                        TableCell(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              producto.cantidad[0] == '-1'
+                                  ? 'No disponible'
+                                  : producto.cantidad[0],
+                              style: const TextStyle(fontFamily: 'ProductSans'),
+                            ),
+                          ),
+                        ),
+                        TableCell(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              producto.cantidad[1] == '-1'
+                                  ? 'No disponible'
+                                  : producto.cantidad[1],
+                              style: const TextStyle(fontFamily: 'ProductSans'),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    TableRow(
+                      children: [
+                        const TableCell(
+                          child: Padding(
+                            padding: EdgeInsets.all(8.0),
                             child: Text('Yuka',
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold,
@@ -475,6 +599,41 @@ class _MyScreenState extends State<Principal> {
                                   : producto.yuka[1] == -2
                                       ? 'No tiene'
                                       : '${producto.yuka[1]}',
+                              style: const TextStyle(fontFamily: 'ProductSans'),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    TableRow(
+                      children: [
+                        const TableCell(
+                          child: Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Text('Opinión',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: 'ProductSans')),
+                          ),
+                        ),
+                        TableCell(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              producto.opinion[0] == -1
+                                  ? 'No disponible'
+                                  : '${producto.opinion[0]}',
+                              style: const TextStyle(fontFamily: 'ProductSans'),
+                            ),
+                          ),
+                        ),
+                        TableCell(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              producto.opinion[1] == -1
+                                  ? 'No disponible'
+                                  : '${producto.opinion[1]}',
                               style: const TextStyle(fontFamily: 'ProductSans'),
                             ),
                           ),
@@ -534,7 +693,22 @@ class _MyScreenState extends State<Principal> {
             : '${productosFiltrados[index].yuka[1]}');
     final TextEditingController categoriaController =
         TextEditingController(text: productosFiltrados[index].categoria);
-
+    final TextEditingController cantidadMercadonaController = TextEditingController(
+        text: productosFiltrados[index].cantidad[0] == '-1'
+            ? ''
+            : productosFiltrados[index].cantidad[1]);
+    final TextEditingController cantidadLidlController = TextEditingController(
+        text: productosFiltrados[index].cantidad[1] == '-1'
+            ? ''
+            : productosFiltrados[index].cantidad[1]);
+    final TextEditingController opinionMercadonaController = TextEditingController(
+        text: productosFiltrados[index].opinion[0] == -1
+            ? ''
+            : '${productosFiltrados[index].opinion[0]}');
+    final TextEditingController opinionLidlController = TextEditingController(
+        text: productosFiltrados[index].opinion[1] == -1
+            ? ''
+            : '${productosFiltrados[index].opinion[1]}');
     final formKey = GlobalKey<FormState>();
 
     await showDialog(
@@ -550,7 +724,11 @@ class _MyScreenState extends State<Principal> {
                 lidlController,
                 yukaMercadonaController,
                 yukaLidlController,
+                opinionMercadonaController,
+                opinionLidlController,
                 categoriaController,
+                cantidadMercadonaController,
+                cantidadLidlController,
                 formKey),
           ),
           contentPadding: const EdgeInsets.fromLTRB(20, 5, 20, 20),
@@ -576,6 +754,12 @@ class _MyScreenState extends State<Principal> {
                         int.tryParse(yukaLidlController.text) ?? -1;
                     productosFiltrados[index].categoria =
                         categoriaController.text;
+                    productosFiltrados[index].cantidad[0] = cantidadMercadonaController.text.isNotEmpty ? cantidadMercadonaController.text : 'No disponible';
+                    productosFiltrados[index].cantidad[1] = cantidadLidlController.text.isNotEmpty ? cantidadLidlController.text : 'No disponible';
+                    productosFiltrados[index].opinion[0] =
+                        int.tryParse(opinionMercadonaController.text) ?? -1;
+                    productosFiltrados[index].opinion[1] =
+                        int.tryParse(opinionLidlController.text) ?? -1;
                     productosFiltrados[index].fecha = DateTime.now();
                     _datosManager('Exportar');
                     _actualizarPagina();
