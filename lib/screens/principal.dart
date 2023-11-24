@@ -19,9 +19,18 @@ class _MyScreenState extends State<Principal> {
     'Menor Yuka',
     'Mayor Yuka'
   ];
+
+  List<String> opiniones = [
+    'Increíble',
+    'Me gusta',
+    'Sin más',
+    'No me gusta',
+    'Horrible'
+  ];
+
   String filtroOrden = 'Ninguno';
 
-  final String version = '1.0.2';
+  final String version = '1.0.5';
 
   ListaProducto listaProductos = ListaProducto(productos: []);
   List<Producto> productosFiltrados = [];
@@ -80,7 +89,6 @@ class _MyScreenState extends State<Principal> {
       TextEditingController categoriaController,
       TextEditingController cantidadMercadonaController,
       TextEditingController cantidadLidlController,
-      
       GlobalKey<FormState> formKey) {
     return Form(
       key: formKey,
@@ -102,7 +110,7 @@ class _MyScreenState extends State<Principal> {
             },
           ),
           const SizedBox(height: 8),
-              TextFormField(
+          TextFormField(
             controller: mercadonaController,
             keyboardType: TextInputType.number,
             decoration: const InputDecoration(
@@ -127,16 +135,16 @@ class _MyScreenState extends State<Principal> {
           ),
           const SizedBox(width: 8),
           TextFormField(
-              controller: cantidadMercadonaController,
-              keyboardType: TextInputType.number,
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'Cantidad Mercadona',
-                labelStyle: TextStyle(fontFamily: 'ProductSans'),
-              ),
+            controller: cantidadMercadonaController,
+            keyboardType: TextInputType.number,
+            decoration: const InputDecoration(
+              border: OutlineInputBorder(),
+              labelText: 'Cantidad Mercadona',
+              labelStyle: TextStyle(fontFamily: 'ProductSans'),
             ),
+          ),
           const SizedBox(height: 8),
-              TextFormField(
+          TextFormField(
               controller: yukaMercadonaController,
               keyboardType: TextInputType.number,
               decoration: const InputDecoration(
@@ -158,8 +166,8 @@ class _MyScreenState extends State<Principal> {
                 }
                 return null;
               }),
-              const SizedBox(width: 8),
-              TextFormField(
+          const SizedBox(width: 8),
+          TextFormField(
               controller: opinionMercadonaController,
               keyboardType: TextInputType.number,
               decoration: const InputDecoration(
@@ -182,7 +190,7 @@ class _MyScreenState extends State<Principal> {
                 return null;
               }),
           const SizedBox(height: 8),
-              TextFormField(
+          TextFormField(
               controller: lidlController,
               keyboardType: TextInputType.number,
               decoration: const InputDecoration(
@@ -204,8 +212,8 @@ class _MyScreenState extends State<Principal> {
                 }
                 return null;
               }),
-              const SizedBox(width: 8),
-              TextFormField(
+          const SizedBox(width: 8),
+          TextFormField(
               controller: cantidadLidlController,
               keyboardType: TextInputType.number,
               decoration: const InputDecoration(
@@ -214,12 +222,10 @@ class _MyScreenState extends State<Principal> {
                 labelStyle: TextStyle(fontFamily: 'ProductSans'),
               ),
               validator: (value) {
-              return null;
-            }),
-
+                return null;
+              }),
           const SizedBox(height: 8),
-
-              TextFormField(
+          TextFormField(
               controller: yukaLidlController,
               keyboardType: TextInputType.number,
               decoration: const InputDecoration(
@@ -241,13 +247,13 @@ class _MyScreenState extends State<Principal> {
                 }
                 return null;
               }),
-              const SizedBox(width: 8),
-              TextFormField(
+          const SizedBox(width: 8),
+          TextFormField(
               controller: opinionLidlController,
               keyboardType: TextInputType.number,
               decoration: const InputDecoration(
                 border: OutlineInputBorder(),
-                labelText: 'Yuka Lidl',
+                labelText: 'Opinión Lidl',
                 labelStyle: TextStyle(fontFamily: 'ProductSans'),
               ),
               validator: (value) {
@@ -311,11 +317,14 @@ class _MyScreenState extends State<Principal> {
     final TextEditingController yukaMercadonaController =
         TextEditingController();
     final TextEditingController yukaLidlController = TextEditingController();
-    final TextEditingController opinionMercadonaController = TextEditingController();
+    final TextEditingController opinionMercadonaController =
+        TextEditingController();
     final TextEditingController opinionLidlController = TextEditingController();
     final TextEditingController categoriaController = TextEditingController();
-    final TextEditingController cantidadMercadonaController = TextEditingController();
-    final TextEditingController cantidadLidlController = TextEditingController();
+    final TextEditingController cantidadMercadonaController =
+        TextEditingController();
+    final TextEditingController cantidadLidlController =
+        TextEditingController();
 
     final formKey = GlobalKey<FormState>();
 
@@ -337,8 +346,7 @@ class _MyScreenState extends State<Principal> {
                   categoriaController,
                   cantidadMercadonaController,
                   cantidadLidlController,
-                  formKey
-              ),
+                  formKey),
             ),
             contentPadding: const EdgeInsets.fromLTRB(20, 5, 20, 20),
             actions: [
@@ -364,10 +372,18 @@ class _MyScreenState extends State<Principal> {
                             int.tryParse(yukaLidlController.text) ?? -1;
                         final String categoria =
                             categoriaController.text.trim();
-                        final String cantidadMercadona = cantidadMercadonaController.text.isNotEmpty ? cantidadMercadonaController.text : 'No disponible';
-                        final String cantidadLidl = cantidadLidlController.text.isNotEmpty ? cantidadLidlController.text : 'No disponible';
-                        final int opinionMercadona = int.tryParse(opinionMercadonaController.text) ?? -1;
-                        final int opinionLidl = int.tryParse(opinionLidlController.text) ?? -1;
+                        final String cantidadMercadona =
+                            cantidadMercadonaController.text.isNotEmpty
+                                ? cantidadMercadonaController.text
+                                : '-1';
+                        final String cantidadLidl =
+                            cantidadLidlController.text.isNotEmpty
+                                ? cantidadLidlController.text
+                                : '-1';
+                        final int opinionMercadona =
+                            int.tryParse(opinionMercadonaController.text) ?? -1;
+                        final int opinionLidl =
+                            int.tryParse(opinionLidlController.text) ?? -1;
 
                         if (nombre.isNotEmpty) {
                           final Producto nuevoProducto = Producto(
@@ -375,7 +391,6 @@ class _MyScreenState extends State<Principal> {
                             precios: [mercadona, lidl],
                             categoria: categoria,
                             cantidad: [cantidadMercadona, cantidadLidl],
-                            id: 0,
                             yuka: [yukaMercadona, yukaLidl],
                             opinion: [opinionMercadona, opinionLidl],
                             fecha: DateTime.now(),
@@ -513,7 +528,7 @@ class _MyScreenState extends State<Principal> {
                             child: Text(
                               producto.precios[0] == -1
                                   ? 'No disponible'
-                                  : '${producto.precios[0]}€',
+                                  : '${producto.precios[0].toStringAsFixed(2)}€',
                               style: const TextStyle(fontFamily: 'ProductSans'),
                             ),
                           ),
@@ -524,7 +539,7 @@ class _MyScreenState extends State<Principal> {
                             child: Text(
                               producto.precios[1] == -1
                                   ? 'No disponible'
-                                  : '${producto.precios[1]}€',
+                                  : '${producto.precios[1].toStringAsFixed(2)}€',
                               style: const TextStyle(fontFamily: 'ProductSans'),
                             ),
                           ),
@@ -693,18 +708,20 @@ class _MyScreenState extends State<Principal> {
             : '${productosFiltrados[index].yuka[1]}');
     final TextEditingController categoriaController =
         TextEditingController(text: productosFiltrados[index].categoria);
-    final TextEditingController cantidadMercadonaController = TextEditingController(
-        text: productosFiltrados[index].cantidad[0] == '-1'
-            ? ''
-            : productosFiltrados[index].cantidad[1]);
+    final TextEditingController cantidadMercadonaController =
+        TextEditingController(
+            text: productosFiltrados[index].cantidad[0] == '-1'
+                ? ''
+                : productosFiltrados[index].cantidad[0]);
     final TextEditingController cantidadLidlController = TextEditingController(
         text: productosFiltrados[index].cantidad[1] == '-1'
             ? ''
             : productosFiltrados[index].cantidad[1]);
-    final TextEditingController opinionMercadonaController = TextEditingController(
-        text: productosFiltrados[index].opinion[0] == -1
-            ? ''
-            : '${productosFiltrados[index].opinion[0]}');
+    final TextEditingController opinionMercadonaController =
+        TextEditingController(
+            text: productosFiltrados[index].opinion[0] == -1
+                ? ''
+                : '${productosFiltrados[index].opinion[0]}');
     final TextEditingController opinionLidlController = TextEditingController(
         text: productosFiltrados[index].opinion[1] == -1
             ? ''
@@ -754,8 +771,14 @@ class _MyScreenState extends State<Principal> {
                         int.tryParse(yukaLidlController.text) ?? -1;
                     productosFiltrados[index].categoria =
                         categoriaController.text;
-                    productosFiltrados[index].cantidad[0] = cantidadMercadonaController.text.isNotEmpty ? cantidadMercadonaController.text : 'No disponible';
-                    productosFiltrados[index].cantidad[1] = cantidadLidlController.text.isNotEmpty ? cantidadLidlController.text : 'No disponible';
+                    productosFiltrados[index].cantidad[0] =
+                        cantidadMercadonaController.text.isNotEmpty
+                            ? cantidadMercadonaController.text
+                            : '-1';
+                    productosFiltrados[index].cantidad[1] =
+                        cantidadLidlController.text.isNotEmpty
+                            ? cantidadLidlController.text
+                            : '-1';
                     productosFiltrados[index].opinion[0] =
                         int.tryParse(opinionMercadonaController.text) ?? -1;
                     productosFiltrados[index].opinion[1] =
@@ -940,12 +963,11 @@ class _MyScreenState extends State<Principal> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        const Text(
-                            'Aplicación desarrollada por',
+                        const Text('Aplicación desarrollada por',
                             style: TextStyle(fontFamily: 'ProductSans')),
-                        const Text(
-                            'Luis Martín García',
-                            style: TextStyle(fontFamily: 'ProductSans',
+                        const Text('Luis Martín García',
+                            style: TextStyle(
+                                fontFamily: 'ProductSans',
                                 fontWeight: FontWeight.bold)),
                         const SizedBox(height: 10),
                         const Text('Price Market',
@@ -1178,7 +1200,7 @@ class _MyScreenState extends State<Principal> {
                               child: Text(
                                 productosFiltrados[index].precios[0] == -1
                                     ? 'No disponible'
-                                    : '${productosFiltrados[index].precios[0]}€',
+                                    : '${productosFiltrados[index].precios[0].toStringAsFixed(2)}€',
                                 style: const TextStyle(color: Colors.green),
                                 textAlign: TextAlign.center,
                               ),
@@ -1187,7 +1209,7 @@ class _MyScreenState extends State<Principal> {
                               child: Text(
                                 productosFiltrados[index].precios[1] == -1
                                     ? 'No disponible'
-                                    : '${productosFiltrados[index].precios[1]}€',
+                                    : '${productosFiltrados[index].precios[1].toStringAsFixed(2)}€',
                                 style: const TextStyle(
                                     color: Color.fromARGB(255, 255, 0, 0)),
                                 textAlign: TextAlign.center,
