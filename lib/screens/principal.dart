@@ -110,166 +110,202 @@ class _MyScreenState extends State<Principal> {
             },
           ),
           const SizedBox(height: 8),
-          TextFormField(
-            controller: mercadonaController,
-            keyboardType: TextInputType.number,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              labelText: 'Precio Mercadona',
-              labelStyle: TextStyle(fontFamily: 'ProductSans'),
-            ),
-            validator: (value) {
-              if (value != null && value.isNotEmpty) {
-                try {
-                  final intVal = double.parse(value);
-                  if (intVal <= 0) {
-                    return 'El producto no puede ser gratis.';
-                  }
-                } catch (e) {
-                  return 'Ingrese un número válido.';
-                }
-                return null;
-              }
-              return null;
-            },
+          ExpansionTile(
+              tilePadding: const EdgeInsets.all(8),
+              title: const Text('Mercadona',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'ProductSans',
+                  )),
+              children: [
+                const SizedBox(height: 8),
+                TextFormField(
+                  controller: mercadonaController,
+                  keyboardType: TextInputType.number,
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Precio Mercadona',
+                    labelStyle: TextStyle(fontFamily: 'ProductSans'),
+                  ),
+                  validator: (value) {
+                    if (value != null && value.isNotEmpty) {
+                      try {
+                        final intVal = double.parse(value);
+                        if (intVal <= 0) {
+                          return 'El producto no puede ser gratis.';
+                        }
+                      } catch (e) {
+                        return 'Ingrese un número válido.';
+                      }
+                      return null;
+                    }
+                    return null;
+                  },
+                ),
+                const SizedBox(height: 8),
+                TextFormField(
+                  controller: cantidadMercadonaController,
+                  keyboardType: TextInputType.number,
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Cantidad Mercadona',
+                    labelStyle: TextStyle(fontFamily: 'ProductSans'),
+                  ),
+                ),
+                const SizedBox(height: 8),
+                TextFormField(
+                    controller: yukaMercadonaController,
+                    keyboardType: TextInputType.number,
+                    decoration: const InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: 'Yuka Mercadona',
+                      labelStyle: TextStyle(fontFamily: 'ProductSans'),
+                    ),
+                    validator: (value) {
+                      if (value != null && value.isNotEmpty) {
+                        try {
+                          final intVal = double.parse(value);
+                          if (intVal < -2 || intVal > 100) {
+                            return 'Ingrese un número entre 0 y 100.';
+                          }
+                        } catch (e) {
+                          return 'Ingrese un número válido.';
+                        }
+                        return null;
+                      }
+                      return null;
+                    }),
+                const SizedBox(height: 8),
+                DropdownButtonFormField(
+                  items:
+                      opiniones.map<DropdownMenuItem<String>>((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value,
+                          style: const TextStyle(fontFamily: 'ProductSans')),
+                    );
+                  }).toList(),
+                  value: opinionMercadonaController.text.isNotEmpty
+                      ? opinionMercadonaController.text
+                      : null,
+                  hint: const Text(
+                    'Seleccione una opinión',
+                    style: TextStyle(fontFamily: 'ProductSans'),
+                  ),
+                  onChanged: (String? newValue) {
+                    setState(() {
+                      opinionMercadonaController.text = newValue!;
+                    });
+                  },
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Opinión',
+                    labelStyle: TextStyle(fontFamily: 'ProductSans'),
+                  ),
+                  icon: const Icon(Icons.expand_more),
+                ),
+                const SizedBox(height: 8),
+              ]),
+          const SizedBox(height: 8),
+          ExpansionTile(
+            tilePadding: const EdgeInsets.all(8),
+            title: const Text('Lidl',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'ProductSans',
+                )),
+            children: [
+              const SizedBox(height: 8),
+              TextFormField(
+                  controller: lidlController,
+                  keyboardType: TextInputType.number,
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Precio Lidl',
+                    labelStyle: TextStyle(fontFamily: 'ProductSans'),
+                  ),
+                  validator: (value) {
+                    if (value != null && value.isNotEmpty) {
+                      try {
+                        final intVal = double.parse(value);
+                        if (intVal <= 0) {
+                          return 'El producto no puede ser gratis.';
+                        }
+                      } catch (e) {
+                        return 'Ingrese un número válido.';
+                      }
+                      return null;
+                    }
+                    return null;
+                  }),
+              const SizedBox(height: 8),
+              TextFormField(
+                  controller: cantidadLidlController,
+                  keyboardType: TextInputType.number,
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Cantidad Lidl',
+                    labelStyle: TextStyle(fontFamily: 'ProductSans'),
+                  ),
+                  validator: (value) {
+                    return null;
+                  }),
+              const SizedBox(height: 8),
+              TextFormField(
+                  controller: yukaLidlController,
+                  keyboardType: TextInputType.number,
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Yuka Lidl',
+                    labelStyle: TextStyle(fontFamily: 'ProductSans'),
+                  ),
+                  validator: (value) {
+                    if (value != null && value.isNotEmpty) {
+                      try {
+                        final intVal = int.parse(value);
+                        if (intVal < -2 || intVal > 100) {
+                          return 'Ingrese un número entre 0 y 100.';
+                        }
+                      } catch (e) {
+                        return 'Ingrese un número válido.';
+                      }
+                      return null;
+                    }
+                    return null;
+                  }),
+              const SizedBox(height: 8),
+              DropdownButtonFormField(
+                items: opiniones.map<DropdownMenuItem<String>>((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value,
+                        style: const TextStyle(fontFamily: 'ProductSans')),
+                  );
+                }).toList(),
+                value: opinionLidlController.text.isNotEmpty
+                    ? opinionLidlController.text
+                    : null,
+                hint: const Text(
+                  'Seleccione una opinión',
+                  style: TextStyle(fontFamily: 'ProductSans'),
+                ),
+                onChanged: (String? newValue) {
+                  setState(() {
+                    opinionLidlController.text = newValue!;
+                  });
+                },
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'Opinión',
+                  labelStyle: TextStyle(fontFamily: 'ProductSans'),
+                ),
+                icon: const Icon(Icons.expand_more),
+              ),
+              const SizedBox(height: 8),
+            ],
           ),
-          const SizedBox(width: 8),
-          TextFormField(
-            controller: cantidadMercadonaController,
-            keyboardType: TextInputType.number,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              labelText: 'Cantidad Mercadona',
-              labelStyle: TextStyle(fontFamily: 'ProductSans'),
-            ),
-          ),
-          const SizedBox(height: 8),
-          TextFormField(
-              controller: yukaMercadonaController,
-              keyboardType: TextInputType.number,
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'Yuka Mercadona',
-                labelStyle: TextStyle(fontFamily: 'ProductSans'),
-              ),
-              validator: (value) {
-                if (value != null && value.isNotEmpty) {
-                  try {
-                    final intVal = double.parse(value);
-                    if (intVal < -2 || intVal > 100) {
-                      return 'Ingrese un número entre 0 y 100.';
-                    }
-                  } catch (e) {
-                    return 'Ingrese un número válido.';
-                  }
-                  return null;
-                }
-                return null;
-              }),
-          const SizedBox(width: 8),
-          TextFormField(
-              controller: opinionMercadonaController,
-              keyboardType: TextInputType.number,
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'Opinión Mercadona',
-                labelStyle: TextStyle(fontFamily: 'ProductSans'),
-              ),
-              validator: (value) {
-                if (value != null && value.isNotEmpty) {
-                  try {
-                    final intVal = double.parse(value);
-                    if (intVal < -1 || intVal > 100) {
-                      return 'Ingrese un número entre 0 y 100.';
-                    }
-                  } catch (e) {
-                    return 'Ingrese un número válido.';
-                  }
-                  return null;
-                }
-                return null;
-              }),
-          const SizedBox(height: 8),
-          TextFormField(
-              controller: lidlController,
-              keyboardType: TextInputType.number,
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'Precio Lidl',
-                labelStyle: TextStyle(fontFamily: 'ProductSans'),
-              ),
-              validator: (value) {
-                if (value != null && value.isNotEmpty) {
-                  try {
-                    final intVal = double.parse(value);
-                    if (intVal <= 0) {
-                      return 'El producto no puede ser gratis.';
-                    }
-                  } catch (e) {
-                    return 'Ingrese un número válido.';
-                  }
-                  return null;
-                }
-                return null;
-              }),
-          const SizedBox(width: 8),
-          TextFormField(
-              controller: cantidadLidlController,
-              keyboardType: TextInputType.number,
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'Cantidad Lidl',
-                labelStyle: TextStyle(fontFamily: 'ProductSans'),
-              ),
-              validator: (value) {
-                return null;
-              }),
-          const SizedBox(height: 8),
-          TextFormField(
-              controller: yukaLidlController,
-              keyboardType: TextInputType.number,
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'Yuka Lidl',
-                labelStyle: TextStyle(fontFamily: 'ProductSans'),
-              ),
-              validator: (value) {
-                if (value != null && value.isNotEmpty) {
-                  try {
-                    final intVal = int.parse(value);
-                    if (intVal < -2 || intVal > 100) {
-                      return 'Ingrese un número entre 0 y 100.';
-                    }
-                  } catch (e) {
-                    return 'Ingrese un número válido.';
-                  }
-                  return null;
-                }
-                return null;
-              }),
-          const SizedBox(width: 8),
-          TextFormField(
-              controller: opinionLidlController,
-              keyboardType: TextInputType.number,
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'Opinión Lidl',
-                labelStyle: TextStyle(fontFamily: 'ProductSans'),
-              ),
-              validator: (value) {
-                if (value != null && value.isNotEmpty) {
-                  try {
-                    final intVal = int.parse(value);
-                    if (intVal < -1 || intVal > 100) {
-                      return 'Ingrese un número entre 0 y 100.';
-                    }
-                  } catch (e) {
-                    return 'Ingrese un número válido.';
-                  }
-                  return null;
-                }
-                return null;
-              }),
           const SizedBox(height: 8),
           DropdownButtonFormField(
             items: Categorias.listaCategorias
@@ -361,7 +397,7 @@ class _MyScreenState extends State<Principal> {
                   setState(
                     () {
                       if (formKey.currentState!.validate()) {
-                        final String nombre = nombreController.text.trim();
+                        final String nombre = nombreController.text;
                         final double mercadona =
                             double.tryParse(mercadonaController.text) ?? -1;
                         final double lidl =
@@ -380,10 +416,14 @@ class _MyScreenState extends State<Principal> {
                             cantidadLidlController.text.isNotEmpty
                                 ? cantidadLidlController.text
                                 : '-1';
-                        final int opinionMercadona =
-                            int.tryParse(opinionMercadonaController.text) ?? -1;
-                        final int opinionLidl =
-                            int.tryParse(opinionLidlController.text) ?? -1;
+                        final String opinionMercadona =
+                            opinionMercadonaController.text.isNotEmpty
+                                ? opinionMercadonaController.text
+                                : '-1';
+                        final String opinionLidl =
+                            opinionLidlController.text.isNotEmpty
+                                ? opinionLidlController.text
+                                : '-1';
 
                         if (nombre.isNotEmpty) {
                           final Producto nuevoProducto = Producto(
@@ -635,9 +675,9 @@ class _MyScreenState extends State<Principal> {
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Text(
-                              producto.opinion[0] == -1
+                              producto.opinion[0] == '-1'
                                   ? 'No disponible'
-                                  : '${producto.opinion[0]}',
+                                  : producto.opinion[0],
                               style: const TextStyle(fontFamily: 'ProductSans'),
                             ),
                           ),
@@ -646,9 +686,9 @@ class _MyScreenState extends State<Principal> {
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Text(
-                              producto.opinion[1] == -1
+                              producto.opinion[1] == '-1'
                                   ? 'No disponible'
-                                  : '${producto.opinion[1]}',
+                                  : producto.opinion[1],
                               style: const TextStyle(fontFamily: 'ProductSans'),
                             ),
                           ),
@@ -719,13 +759,13 @@ class _MyScreenState extends State<Principal> {
             : productosFiltrados[index].cantidad[1]);
     final TextEditingController opinionMercadonaController =
         TextEditingController(
-            text: productosFiltrados[index].opinion[0] == -1
+            text: productosFiltrados[index].opinion[0] == '-1'
                 ? ''
-                : '${productosFiltrados[index].opinion[0]}');
+                : productosFiltrados[index].opinion[0]);
     final TextEditingController opinionLidlController = TextEditingController(
-        text: productosFiltrados[index].opinion[1] == -1
+        text: productosFiltrados[index].opinion[1] == '-1'
             ? ''
-            : '${productosFiltrados[index].opinion[1]}');
+            : productosFiltrados[index].opinion[1]);
     final formKey = GlobalKey<FormState>();
 
     await showDialog(
@@ -780,9 +820,13 @@ class _MyScreenState extends State<Principal> {
                             ? cantidadLidlController.text
                             : '-1';
                     productosFiltrados[index].opinion[0] =
-                        int.tryParse(opinionMercadonaController.text) ?? -1;
+                        opinionMercadonaController.text.isNotEmpty
+                            ? opinionMercadonaController.text
+                            : '-1';
                     productosFiltrados[index].opinion[1] =
-                        int.tryParse(opinionLidlController.text) ?? -1;
+                        opinionLidlController.text.isNotEmpty
+                            ? opinionLidlController.text
+                            : '-1';
                     productosFiltrados[index].fecha = DateTime.now();
                     _datosManager('Exportar');
                     _actualizarPagina();
@@ -997,22 +1041,23 @@ class _MyScreenState extends State<Principal> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        scrolledUnderElevation: 5,
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(
-            bottom: Radius.circular(30),
-          ),
-        ),
-        elevation: 2,
-        iconTheme: const IconThemeData(color: AppStyle.miColorPrimario),
-        backgroundColor: Colors.white,
-        centerTitle: true,
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Spacer(),
-            GestureDetector(
+      drawer: DrawerWidget(),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          _agregarProductoNuevo();
+        },
+        backgroundColor: AppStyle.miColorPrimario,
+        foregroundColor: Colors.white,
+        child: const Icon(Icons.add),
+      ),
+      body: CustomScrollView(
+        controller: _scrollController,
+        slivers: [
+          SliverAppBar(
+            expandedHeight: 10.0,
+            floating: false,
+            pinned: true,
+            title: GestureDetector(
               onTap: () {
                 _actualizarPagina();
                 _scrollController.animateTo(0,
@@ -1028,203 +1073,137 @@ class _MyScreenState extends State<Principal> {
                 ),
               ),
             ),
-            const Spacer(),
-            PopupMenuButton(
-              itemBuilder: (context) {
-                return [
-                  PopupMenuItem(
-                    child: const Text('Importar datos'),
-                    onTap: () {
-                      showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return AlertDialog(
-                            title: const Text('Importar datos'),
-                            content: const Text(
-                                '¿Está seguro de que desea importar los datos?'),
-                            actions: [
-                              TextButton(
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                },
-                                child: const Text('Cancelar'),
+            centerTitle: true,
+          ),
+
+          // Resto de los slivers según sea necesario
+
+          SliverList(
+            delegate: SliverChildBuilderDelegate(
+              (BuildContext context, int index) {
+                return Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: TextField(
+                              onChanged: _filtrarProductos,
+                              decoration: const InputDecoration(
+                                border: OutlineInputBorder(),
+                                labelText: 'Buscar producto',
+                                prefixIcon: Icon(Icons.search),
                               ),
-                              TextButton(
-                                onPressed: () {
-                                  setState(() {
-                                    _datosManager('Importar');
-                                    Navigator.pop(context);
-                                  });
-                                },
-                                child: const Text('Importar datos'),
-                              ),
-                            ],
-                          );
-                        },
-                      );
-                    },
-                  ),
-                  PopupMenuItem(
-                    child: const Text('Exportar datos'),
-                    onTap: () {
-                      showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return AlertDialog(
-                            title: const Text('Exportar datos'),
-                            content: const Text(
-                                '¿Está seguro de que desea exportar los datos?'),
-                            actions: [
-                              TextButton(
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                },
-                                child: const Text('Cancelar'),
-                              ),
-                              TextButton(
-                                onPressed: () {
-                                  setState(() {
-                                    _datosManager('Exportar');
-                                    Navigator.pop(context);
-                                  });
-                                },
-                                child: const Text('Exportar datos'),
-                              ),
-                            ],
-                          );
-                        },
-                      );
-                    },
-                  ),
-                ];
-              },
-            ),
-          ],
-        ),
-      ),
-      drawer: DrawerWidget(),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          _agregarProductoNuevo();
-        },
-        backgroundColor: AppStyle.miColorPrimario,
-        foregroundColor: Colors.white,
-        child: const Icon(Icons.add),
-      ),
-      body: SingleChildScrollView(
-        controller: _scrollController,
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: TextField(
-                      onChanged: _filtrarProductos,
-                      decoration: const InputDecoration(
-                        border: OutlineInputBorder(),
-                        labelText: 'Buscar producto',
-                        prefixIcon: Icon(Icons.search),
+                            ),
+                          ),
+                          IconButton(
+                            onPressed: _mostrarFiltrosDialog,
+                            icon: const Icon(Icons.filter_list),
+                          ),
+                        ],
                       ),
                     ),
-                  ),
-                  IconButton(
-                    onPressed: _mostrarFiltrosDialog,
-                    icon: const Icon(Icons.filter_list),
-                  ),
-                ],
-              ),
-            ),
-            const Padding(
-              padding: EdgeInsets.fromLTRB(28, 8, 35, 8),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Expanded(
-                    child: Text(
-                      'Nombre',
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                  Expanded(
-                    child: Text(
-                      'Mercadona',
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                  Expanded(
-                    child: Text(
-                      'Lidl',
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            ListView.builder(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              itemCount: productosFiltrados.length,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
-                  child: Card(
-                    surfaceTintColor: const Color.fromARGB(255, 217, 212, 212),
-                    child: InkWell(
-                      onTap: () {
-                        _mostrarInformacionProducto(productosFiltrados[index]);
-                      },
-                      onLongPress: () {
-                        _editarProducto(index);
-                      },
-                      onDoubleTap: () {
-                        _eliminarProducto(productosFiltrados[index]);
-                      },
-                      child: ListTile(
-                        title: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Expanded(
-                              child: Text(
-                                productosFiltrados[index].nombre,
-                                style: const TextStyle(
-                                    fontWeight: FontWeight.bold),
-                                textAlign: TextAlign.center,
-                              ),
+                    const Padding(
+                      padding: EdgeInsets.fromLTRB(28, 8, 35, 8),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Expanded(
+                            child: Text(
+                              'Nombre',
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                              textAlign: TextAlign.center,
                             ),
-                            Expanded(
-                              child: Text(
-                                productosFiltrados[index].precios[0] == -1
-                                    ? 'No disponible'
-                                    : '${productosFiltrados[index].precios[0].toStringAsFixed(2)}€',
-                                style: const TextStyle(color: Colors.green),
-                                textAlign: TextAlign.center,
-                              ),
+                          ),
+                          Expanded(
+                            child: Text(
+                              'Mercadona',
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                              textAlign: TextAlign.center,
                             ),
-                            Expanded(
-                              child: Text(
-                                productosFiltrados[index].precios[1] == -1
-                                    ? 'No disponible'
-                                    : '${productosFiltrados[index].precios[1].toStringAsFixed(2)}€',
-                                style: const TextStyle(
-                                    color: Color.fromARGB(255, 255, 0, 0)),
-                                textAlign: TextAlign.center,
-                              ),
+                          ),
+                          Expanded(
+                            child: Text(
+                              'Lidl',
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                              textAlign: TextAlign.center,
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     ),
-                  ),
+                    ListView.builder(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: productosFiltrados.length,
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
+                          child: Card(
+                            surfaceTintColor:
+                                const Color.fromARGB(255, 217, 212, 212),
+                            child: InkWell(
+                              onTap: () {
+                                _mostrarInformacionProducto(
+                                    productosFiltrados[index]);
+                              },
+                              onLongPress: () {
+                                _editarProducto(index);
+                              },
+                              onDoubleTap: () {
+                                _eliminarProducto(productosFiltrados[index]);
+                              },
+                              child: ListTile(
+                                title: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Expanded(
+                                      child: Text(
+                                        productosFiltrados[index].nombre,
+                                        style: const TextStyle(
+                                            fontWeight: FontWeight.bold),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: Text(
+                                        productosFiltrados[index].precios[0] ==
+                                                -1
+                                            ? 'No disponible'
+                                            : '${productosFiltrados[index].precios[0].toStringAsFixed(2)}€',
+                                        style: const TextStyle(
+                                            color: Colors.green),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: Text(
+                                        productosFiltrados[index].precios[1] ==
+                                                -1
+                                            ? 'No disponible'
+                                            : '${productosFiltrados[index].precios[1].toStringAsFixed(2)}€',
+                                        style: const TextStyle(
+                                            color:
+                                                Color.fromARGB(255, 255, 0, 0)),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ],
                 );
               },
+              childCount: 1, // Solo un elemento en este caso
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

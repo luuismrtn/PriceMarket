@@ -58,7 +58,7 @@ class ImportadorExportadorDatos {
         String categoria = partes[3];
         List<String> cantidad = [partes[4], partes[5]];
         List<int> yuka = [int.parse(partes[6]), int.parse(partes[7])];
-        List<int> opinion = [int.parse(partes[8]), int.parse(partes[9])];
+        List<String> opinion = [partes[8], partes[9]];
         String imagen = partes[10];
         DateTime fecha = DateTime.parse(partes[11]);
         listaDeProductos.add(Producto(

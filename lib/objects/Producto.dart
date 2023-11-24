@@ -4,7 +4,7 @@ class Producto {
   String categoria;
   List<String> cantidad;
   List<int> yuka;
-  List<int> opinion;
+  List<String> opinion;
   String imagen = '';
   DateTime fecha;
 
