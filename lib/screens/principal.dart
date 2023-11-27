@@ -30,7 +30,7 @@ class _MyScreenState extends State<Principal> {
 
   String filtroOrden = 'Ninguno';
 
-  final String version = '1.0.5';
+  final String version = '1.0.6';
 
   ListaProducto listaProductos = ListaProducto(productos: []);
   List<Producto> productosFiltrados = [];
@@ -111,6 +111,9 @@ class _MyScreenState extends State<Principal> {
           ),
           const SizedBox(height: 8),
           ExpansionTile(
+            shape: BeveledRectangleBorder(
+              borderRadius: BorderRadius.circular(5),
+            ),
               tilePadding: const EdgeInsets.all(8),
               title: const Text('Mercadona',
                   style: TextStyle(
@@ -209,6 +212,9 @@ class _MyScreenState extends State<Principal> {
               ]),
           const SizedBox(height: 8),
           ExpansionTile(
+            shape: BeveledRectangleBorder(
+              borderRadius: BorderRadius.circular(5),
+            ),
             tilePadding: const EdgeInsets.all(8),
             title: const Text('Lidl',
                 style: TextStyle(
@@ -369,7 +375,7 @@ class _MyScreenState extends State<Principal> {
         builder: (BuildContext context) {
           return AlertDialog(
             title: const Text('Añadir Producto'),
-            titlePadding: const EdgeInsets.fromLTRB(20, 20, 20, 5),
+            titlePadding: const EdgeInsets.all(20),
             content: SingleChildScrollView(
               child: formularioProducto(
                   nombreController,
@@ -773,7 +779,7 @@ class _MyScreenState extends State<Principal> {
       builder: (BuildContext context) {
         return AlertDialog(
           title: const Text('Editar Producto'),
-          titlePadding: const EdgeInsets.fromLTRB(20, 20, 20, 5),
+          titlePadding:  const EdgeInsets.all(20),
           content: SingleChildScrollView(
             child: formularioProducto(
                 nombreController,
@@ -1054,27 +1060,104 @@ class _MyScreenState extends State<Principal> {
         controller: _scrollController,
         slivers: [
           SliverAppBar(
-            expandedHeight: 10.0,
-            floating: false,
-            pinned: true,
-            title: GestureDetector(
-              onTap: () {
-                _actualizarPagina();
-                _scrollController.animateTo(0,
-                    duration: const Duration(milliseconds: 500),
-                    curve: Curves.easeInOut);
-              },
-              child: const Text(
-                'Price Market',
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                  color: AppStyle.miColorPrimario,
+              expandedHeight: 10.0,
+              floating: false,
+              pinned: true,
+              title: GestureDetector(
+                onTap: () {
+                  _actualizarPagina();
+                  _scrollController.animateTo(0,
+                      duration: const Duration(milliseconds: 500),
+                      curve: Curves.easeInOut);
+                },
+                child: const Text(
+                  'Price Market',
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: AppStyle.miColorPrimario,
+                  ),
                 ),
               ),
-            ),
-            centerTitle: true,
-          ),
+              centerTitle: true,
+              flexibleSpace: Padding(
+                padding: EdgeInsets.all(8),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    PopupMenuButton(
+                      itemBuilder: (context) {
+                        return [
+                          PopupMenuItem(
+                            child: const Text('Importar datos'),
+                            onTap: () {
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return AlertDialog(
+                                    title: const Text('Importar datos'),
+                                    content: const Text(
+                                        '¿Está seguro de que desea importar los datos?'),
+                                    actions: [
+                                      TextButton(
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                        },
+                                        child: const Text('Cancelar'),
+                                      ),
+                                      TextButton(
+                                        onPressed: () {
+                                          setState(() {
+                                            _datosManager('Importar');
+                                            Navigator.pop(context);
+                                          });
+                                        },
+                                        child: const Text('Importar datos'),
+                                      ),
+                                    ],
+                                  );
+                                },
+                              );
+                            },
+                          ),
+                          PopupMenuItem(
+                            child: const Text('Exportar datos'),
+                            onTap: () {
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return AlertDialog(
+                                    title: const Text('Exportar datos'),
+                                    content: const Text(
+                                        '¿Está seguro de que desea exportar los datos?'),
+                                    actions: [
+                                      TextButton(
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                        },
+                                        child: const Text('Cancelar'),
+                                      ),
+                                      TextButton(
+                                        onPressed: () {
+                                          setState(() {
+                                            _datosManager('Exportar');
+                                            Navigator.pop(context);
+                                          });
+                                        },
+                                        child: const Text('Exportar datos'),
+                                      ),
+                                    ],
+                                  );
+                                },
+                              );
+                            },
+                          ),
+                        ];
+                      },
+                    ),
+                  ],
+                ),
+              )),
 
           // Resto de los slivers según sea necesario
 
