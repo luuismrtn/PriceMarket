@@ -18,13 +18,14 @@ class _MyScreenState extends State<Principal> {
 
   List<Producto> listaProductos = [];
   List<Producto> productosFiltrados = [];
+  List<String> listaCategorias = [];
+  List<String> listaProductoMercadona = [];
   String filtroCategoria = '';
   final ScrollController _scrollController = ScrollController();
 
   @override
   void initState() {
     super.initState();
-    _actualizarPagina();
   }
 
   void _filtrarProductos(String filtro) {
@@ -144,15 +145,14 @@ class _MyScreenState extends State<Principal> {
 
                         if (nombre.isNotEmpty) {
                           final Producto nuevoProducto = Producto(
-                            nombre: nombre,
-                            precios: [mercadona, lidl],
-                            categoria: categoria,
-                            cantidad: [cantidadMercadona, cantidadLidl],
-                            yuka: [yukaMercadona, yukaLidl],
-                            opinion: [opinionMercadona, opinionLidl],
-                            fecha: DateTime.now(),
-                            url: ['', ''],
-                          );
+                              id: 0,
+                              nombre: nombre,
+                              precios: [mercadona, lidl],
+                              categoria: categoria,
+                              cantidad: [cantidadMercadona, cantidadLidl],
+                              yuka: [yukaMercadona, yukaLidl],
+                              opinion: [opinionMercadona, opinionLidl],
+                              fecha: DateTime.now());
                           listaProductos.add(nuevoProducto);
                           _datosManager('Exportar');
                           _actualizarPagina();
@@ -582,7 +582,7 @@ class _MyScreenState extends State<Principal> {
                     ),
                     const SizedBox(height: 10),
                     Wrap(
-                      children: Categorias.listaCategorias.map((categoria) {
+                      children: listaCategorias.map((categoria) {
                         return Padding(
                           padding: const EdgeInsets.all(3.0),
                           child: FilterChip(
@@ -648,11 +648,23 @@ class _MyScreenState extends State<Principal> {
     );
   }
 
-  void _datosManager(String accion) {
+  void _datosManager(String accion) async {
     if (accion == 'Exportar') {
       ImportadorExportadorDatos.exportDataToFile(listaProductos);
+      ImportadorExportadorDatos.exportCategoriesToFile();
+      ImportadorExportadorDatos.exportDataMercadonaToFile();
     } else if (accion == 'Importar') {
-      ImportadorExportadorDatos.importDataFromFile(listaProductos);
+      listaProductos.clear();
+      listaProductos = await ImportadorExportadorDatos.importDataFromFile();
+      listaCategorias.clear();
+      listaCategorias =
+          await ImportadorExportadorDatos.importCategoriesFromFile(
+              listaCategorias);
+      listaProductoMercadona.clear();
+      listaProductoMercadona =
+          await ImportadorExportadorDatos.importDataMercadonaFromFile();
+    } else if (accion == 'ImportarM') {
+      await ImportadorExportadorDatos.convertDataToFile(listaProductoMercadona);
     }
   }
 
@@ -668,6 +680,8 @@ class _MyScreenState extends State<Principal> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           _agregarProductoNuevo();
+          print(listaProductos.length);
+          print(listaProductoMercadona.length);
         },
         backgroundColor: AppStyle.miColorPrimario,
         foregroundColor: Colors.white,
@@ -769,6 +783,39 @@ class _MyScreenState extends State<Principal> {
                               );
                             },
                           ),
+                          PopupMenuItem(
+                            child: const Text('Importar datos mercadona'),
+                            onTap: () {
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return AlertDialog(
+                                    title:
+                                        const Text('Importar datos mercadona'),
+                                    content: const Text(
+                                        '¿Está seguro de que desea importar datos del mercadona'),
+                                    actions: [
+                                      TextButton(
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                        },
+                                        child: const Text('Cancelar'),
+                                      ),
+                                      TextButton(
+                                        onPressed: () {
+                                          setState(() {
+                                            _datosManager('ImportarM');
+                                            Navigator.pop(context);
+                                          });
+                                        },
+                                        child: const Text('Exportar datos'),
+                                      ),
+                                    ],
+                                  );
+                                },
+                              );
+                            },
+                          ),
                         ];
                       },
                     ),
@@ -833,7 +880,7 @@ class _MyScreenState extends State<Principal> {
                     ListView.builder(
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
-                      itemCount: productosFiltrados.length,
+                      itemCount: productosFiltrados.length%100,
                       itemBuilder: (context, index) {
                         return Padding(
                           padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),

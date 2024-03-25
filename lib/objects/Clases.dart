@@ -1,16 +1,3 @@
-class Categorias {
-  static const List<String> listaCategorias = [
-    'Comidas',
-    'Desayunos',
-    'Picar',
-    'Postres',
-    'Frutas',
-    'Higiene',
-    'Bebidas',
-    'Otros'
-  ];
-}
-
 class Supermercados {
   static const List<String> listaSupermercados = ['Mercadona', 'Lidl'];
 }
@@ -25,8 +12,8 @@ class Opiniones {
   ];
 }
 
-class OrdenOpciones{
-  static const  List<String> ordenOpciones = [
+class OrdenOpciones {
+  static const List<String> ordenOpciones = [
     'Menor Precio',
     'Mayor Precio',
     'Menor Yuka',
