@@ -221,4 +221,26 @@ class ImportadorExportadorDatos {
       print('Error al exportar datos: $e');
     }
   }
+
+  static Future<void> combinarDatos(
+    List<Producto> listaProductos, List<String> listaProductoMercadona) async {
+  for (Producto producto in listaProductos) {
+    String productoMercadona = listaProductoMercadona.firstWhere((item) {
+      List<String> partes = item.split(';');
+      return double.parse(partes[0]) == producto.id; // Comparar IDs
+    }, orElse: () => '');
+
+    // Si se encontró un producto correspondiente
+    if (productoMercadona.isNotEmpty) {
+      List<String> partesMercadona = productoMercadona.split(';');
+      // 19733;Sal gruesa Hacendado;0.19;1.0kg;Aceite, vinagre y sal
+
+      // Actualizar los campos correspondientes del producto
+      producto.precios[0] = double.parse(partesMercadona[2]);
+      producto.cantidad[0] = partesMercadona[3];
+      producto.categoria = partesMercadona[4];
+    }
+  }
+}
+
 }
