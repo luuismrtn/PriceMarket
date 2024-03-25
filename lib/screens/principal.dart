@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:price_market/objects/Clases.dart';
 import 'package:price_market/objects/DatosManager.dart';
-import 'package:price_market/objects/ListaProdutos.dart';
 import '../objects/AppStyle.dart';
 import '../objects/Producto.dart';
 import '../components/formularioProducto.dart';
@@ -17,9 +16,7 @@ class Principal extends StatefulWidget {
 class _MyScreenState extends State<Principal> {
   String filtroOrden = 'Ninguno';
 
-  final String version = '1.0.6';
-
-  ListaProducto listaProductos = ListaProducto(productos: []);
+  List<Producto> listaProductos = [];
   List<Producto> productosFiltrados = [];
   String filtroCategoria = '';
   final ScrollController _scrollController = ScrollController();
@@ -28,12 +25,11 @@ class _MyScreenState extends State<Principal> {
   void initState() {
     super.initState();
     _actualizarPagina();
-    productosFiltrados = listaProductos.productos;
   }
 
   void _filtrarProductos(String filtro) {
     setState(() {
-      productosFiltrados = listaProductos.productos
+      productosFiltrados = listaProductos
           .where((producto) =>
               producto.nombre.toLowerCase().contains(filtro.toLowerCase()) &&
               (filtroCategoria.isEmpty ||
@@ -155,8 +151,9 @@ class _MyScreenState extends State<Principal> {
                             yuka: [yukaMercadona, yukaLidl],
                             opinion: [opinionMercadona, opinionLidl],
                             fecha: DateTime.now(),
+                            url: ['', ''],
                           );
-                          listaProductos.productos.add(nuevoProducto);
+                          listaProductos.add(nuevoProducto);
                           _datosManager('Exportar');
                           _actualizarPagina();
                           Navigator.pop(context);
@@ -190,7 +187,7 @@ class _MyScreenState extends State<Principal> {
             TextButton(
               onPressed: () {
                 setState(() {
-                  listaProductos.productos.remove(producto);
+                  listaProductos.remove(producto);
                   _datosManager('Exportar');
                   _actualizarPagina();
                   Navigator.pop(context);
@@ -653,9 +650,9 @@ class _MyScreenState extends State<Principal> {
 
   void _datosManager(String accion) {
     if (accion == 'Exportar') {
-      ImportadorExportadorDatos.exportDataToFile(listaProductos.productos);
+      ImportadorExportadorDatos.exportDataToFile(listaProductos);
     } else if (accion == 'Importar') {
-      ImportadorExportadorDatos.importDataFromFile(listaProductos.productos);
+      ImportadorExportadorDatos.importDataFromFile(listaProductos);
     }
   }
 
@@ -701,7 +698,7 @@ class _MyScreenState extends State<Principal> {
               ),
               centerTitle: true,
               flexibleSpace: Padding(
-                padding: EdgeInsets.all(8),
+                padding: const EdgeInsets.all(8),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
@@ -778,9 +775,6 @@ class _MyScreenState extends State<Principal> {
                   ],
                 ),
               )),
-
-          // Resto de los slivers según sea necesario
-
           SliverList(
             delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {

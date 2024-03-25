@@ -61,6 +61,7 @@ class ImportadorExportadorDatos {
         List<String> opinion = [partes[8], partes[9]];
         String imagen = partes[10];
         DateTime fecha = DateTime.parse(partes[11]);
+        List<String> url = [partes[12], partes[13]];
         listaDeProductos.add(Producto(
             nombre: nombre,
             precios: precios,
@@ -69,7 +70,8 @@ class ImportadorExportadorDatos {
             yuka: yuka,
             opinion: opinion,
             imagen: imagen,
-            fecha: fecha));
+            fecha: fecha,
+            url: url));
       }
 
       return listaDeProductos;
