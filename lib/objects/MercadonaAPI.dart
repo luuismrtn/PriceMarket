@@ -38,6 +38,7 @@ class MercadonaAPI {
 
     if (response.statusCode == 200) {
       final jsonResponse = json.decode(utf8.decode(response.bodyBytes));
+      final nombreCategoria = jsonResponse['name'];
       final categorias = jsonResponse['categories'];
       for (var categoria in categorias) {
         final productos = categoria['products'];
@@ -49,10 +50,9 @@ class MercadonaAPI {
           final cantidad = producto['price_instructions']['min_bunch_amount'];
           final unidad = producto['price_instructions']['reference_format'];
 
-          final nombrecategoria = categoria['name'];
 
           listaProductos
-              .add('$id;$nombre;$precio;$cantidad$unidad;$nombrecategoria');
+              .add('$id;$nombre;$precio;$cantidad$unidad;$nombreCategoria');
         }
       }
     } else {

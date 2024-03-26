@@ -452,8 +452,6 @@ class _MyScreenState extends State<Principal> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           _agregarProductoNuevo();
-          print(listaProductos.length);
-          print(listaProductoMercadona.length);
         },
         backgroundColor: AppStyle.miColorPrimario,
         foregroundColor: Colors.white,

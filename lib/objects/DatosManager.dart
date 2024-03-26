@@ -75,8 +75,6 @@ class ImportadorExportadorDatos {
           fecha: fecha,
         ));
       }
-
-      print(listaDeProductos.length);
       return listaDeProductos;
     } catch (e) {
       print('Error al importar datos: $e');
@@ -233,7 +231,6 @@ class ImportadorExportadorDatos {
     // Si se encontró un producto correspondiente
     if (productoMercadona.isNotEmpty) {
       List<String> partesMercadona = productoMercadona.split(';');
-      // 19733;Sal gruesa Hacendado;0.19;1.0kg;Aceite, vinagre y sal
 
       // Actualizar los campos correspondientes del producto
       producto.precios[0] = double.parse(partesMercadona[2]);
