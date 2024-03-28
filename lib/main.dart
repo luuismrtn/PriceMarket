@@ -16,9 +16,10 @@ class PriceMarket extends StatelessWidget {
       title: 'PriceMarket',
       theme: ThemeData(
         primaryColor: AppStyle.miColorPrimario,
+        scaffoldBackgroundColor: AppStyle.backgroundColor,
         useMaterial3: true,
       ),
-      home: const Principal(),
+      home: Principal(),
     );
   }
 }

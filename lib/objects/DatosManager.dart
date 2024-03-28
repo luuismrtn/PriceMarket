@@ -220,24 +220,99 @@ class ImportadorExportadorDatos {
     }
   }
 
-  static Future<void> combinarDatos(
-    List<Producto> listaProductos, List<String> listaProductoMercadona) async {
-  for (Producto producto in listaProductos) {
-    String productoMercadona = listaProductoMercadona.firstWhere((item) {
-      List<String> partes = item.split(';');
-      return double.parse(partes[0]) == producto.id; // Comparar IDs
-    }, orElse: () => '');
+  static Future<void> combinarDatos(List<Producto> listaProductos,
+      List<String> listaProductoMercadona) async {
+    for (Producto producto in listaProductos) {
+      String productoMercadona = listaProductoMercadona.firstWhere((item) {
+        List<String> partes = item.split(';');
+        return double.parse(partes[0]) == producto.id; // Comparar IDs
+      }, orElse: () => '');
 
-    // Si se encontró un producto correspondiente
-    if (productoMercadona.isNotEmpty) {
-      List<String> partesMercadona = productoMercadona.split(';');
+      // Si se encontró un producto correspondiente
+      if (productoMercadona.isNotEmpty) {
+        List<String> partesMercadona = productoMercadona.split(';');
 
-      // Actualizar los campos correspondientes del producto
-      producto.precios[0] = double.parse(partesMercadona[2]);
-      producto.cantidad[0] = partesMercadona[3];
-      producto.categoria = partesMercadona[4];
+        // Actualizar los campos correspondientes del producto
+        producto.precios[0] = double.parse(partesMercadona[2]);
+        producto.cantidad[0] = partesMercadona[3];
+        producto.categoria = partesMercadona[4];
+      }
     }
   }
-}
 
+  static Future<void> exportDataMIOFromFile(
+      List<Producto> listaDeProductos) async {
+    try {
+      // Obtén el directorio de documentos de la aplicación
+      Directory? documentsDirectory = await getDownloadsDirectory();
+
+      // Construye la ruta del archivo
+      String filePath = join(documentsDirectory!.path, 'datosMIOS.txt');
+
+      // Abre el archivo en modo de escritura
+      File file = File(filePath);
+      IOSink sink = file.openWrite();
+
+      // Escribe los datos en el archivo
+      for (var producto in listaDeProductos) {
+        sink.write('${producto.toString()}\n');
+      }
+
+      // Cierra el archivo
+      await sink.close();
+    } catch (e) {
+      print('Error al exportar datos: $e');
+    }
+  }
+
+  static Future<List<Producto>> importDataMIOFromFile() async {
+    List<Producto> listaDeProductos = [];
+
+    try {
+      // Obtén el directorio de documentos de la aplicación
+      Directory? documentsDirectory = await getDownloadsDirectory();
+
+      // Construye la ruta del archivo
+      String filePath = join(documentsDirectory!.path, 'datosMIOS.txt');
+
+      // Lee el contenido del archivo
+      File file = File(filePath);
+      String data = await file.readAsString();
+
+      // Procesa la cadena de datos y crea la lista de productos
+      List<String> lineas = LineSplitter.split(data).toList();
+      for (var i = 0; i < lineas.length; i++) {
+        String linea = lineas[i];
+        List<String> partes = linea.split(';');
+
+        double id = double.parse(partes[0]);
+        String nombre = partes[1];
+        List<double> precios = [
+          double.parse(partes[2]),
+          double.parse(partes[3])
+        ];
+        String categoria = partes[4];
+        List<String> cantidad = [partes[5], partes[6]];
+        List<int> yuka = [int.parse(partes[7]), int.parse(partes[8])];
+        List<String> opinion = [partes[9], partes[10]];
+        String imagen = partes[11];
+        DateTime fecha = DateTime.parse(partes[12]);
+        listaDeProductos.add(Producto(
+          id: id,
+          nombre: nombre,
+          precios: precios,
+          categoria: categoria,
+          cantidad: cantidad,
+          yuka: yuka,
+          opinion: opinion,
+          imagen: imagen,
+          fecha: fecha,
+        ));
+      }
+      return listaDeProductos;
+    } catch (e) {
+      print('Error al importar datos: $e');
+      return [];
+    }
+  }
 }

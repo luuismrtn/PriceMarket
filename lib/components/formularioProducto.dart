@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:price_market/objects/Clases.dart';
-import 'package:price_market/objects/MercadonaAPI.dart';
+import 'package:price_market/screens/principal.dart';
 
 class FormularioProducto extends StatefulWidget {
   final TextEditingController nombreController;
@@ -34,6 +34,9 @@ class FormularioProducto extends StatefulWidget {
 }
 
 class _FormularioProductoState extends State<FormularioProducto> {
+
+  List<String> categorias = Principal.getListaCategorias();
+
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -260,50 +263,40 @@ class _FormularioProductoState extends State<FormularioProducto> {
             ],
           ),
           const SizedBox(height: 8),
-          FutureBuilder<List<String>>(
-            future: MercadonaAPI().obtenerCategorias("nombre"),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return CircularProgressIndicator();
-              } else if (snapshot.hasError) {
-                return Text('Error: ${snapshot.error}');
-              } else {
-                final listaCategorias = snapshot.data!;
-                return DropdownButtonFormField(
-                  items: listaCategorias
-                      .map<DropdownMenuItem<String>>((String value) {
-                    return DropdownMenuItem<String>(
-                      value: value,
-                      child: Text(value,
-                          style: const TextStyle(fontFamily: 'ProductSans')),
-                    );
-                  }).toList(),
-                  value: widget.categoriaController.text.isNotEmpty
-                      ? widget.categoriaController.text
-                      : null,
-                  hint: const Text(
-                    'Seleccione una categoría',
-                    style: TextStyle(fontFamily: 'ProductSans'),
-                  ),
-                  onChanged: (String? newValue) {
-                    setState(() {
-                      widget.categoriaController.text = newValue!;
-                    });
-                  },
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'Categoría',
-                    labelStyle: TextStyle(fontFamily: 'ProductSans'),
-                  ),
-                  icon: const Icon(Icons.expand_more),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Por favor, elija una categoría.';
-                    }
-                    return null;
-                  },
-                );
+          DropdownButtonFormField(
+            items:
+                categorias.map<DropdownMenuItem<String>>((String value) {
+              return DropdownMenuItem<String>(
+                value: value,
+                child: Text(
+                  value,
+                  style: const TextStyle(fontFamily: 'ProductSans'),
+                ),
+              );
+            }).toList(),
+            value: widget.categoriaController.text.isNotEmpty
+                ? widget.categoriaController.text
+                : null,
+            hint: const Text(
+              'Seleccione una categoría',
+              style: TextStyle(fontFamily: 'ProductSans'),
+            ),
+            onChanged: (String? newValue) {
+              setState(() {
+                widget.categoriaController.text = newValue!;
+              });
+            },
+            decoration: const InputDecoration(
+              border: OutlineInputBorder(),
+              labelText: 'Categoría',
+              labelStyle: TextStyle(fontFamily: 'ProductSans'),
+            ),
+            icon: const Icon(Icons.expand_more),
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Por favor, elija una categoría.';
               }
+              return null;
             },
           ),
         ],

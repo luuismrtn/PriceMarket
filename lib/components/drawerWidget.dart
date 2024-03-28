@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:price_market/objects/AppStyle.dart';
+import 'package:price_market/screens/settings.dart';
 
 class DrawerWidget extends StatelessWidget {
   @override
@@ -42,14 +43,16 @@ class DrawerWidget extends StatelessWidget {
             title: const Text('Inicio'),
             onTap: () {
               Navigator.pop(context);
-              // Código para la acción al hacer clic en "Inicio"
             },
           ),
           ListTile(
             leading: const Icon(Icons.settings),
             title: const Text('Configuración'),
             onTap: () {
-              Navigator.pop(context);
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const SettingsPage()),
+              );
               // Código para la acción al hacer clic en "Configuración"
             },
           ),
