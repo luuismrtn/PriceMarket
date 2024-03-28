@@ -90,4 +90,7 @@ flutter:
         - asset: fonts/ProductSansItalic.ttf
           style: italic
         - asset: fonts/ProductSansBold.ttf
+          weight: 500
         - asset: fonts/ProductSansBoldItalic.ttf
+          weight: 500
+          style: italic

@@ -16,13 +16,12 @@ class Principal extends StatefulWidget {
   @override
   _MyScreenState createState() => _MyScreenState();
 
-  String filtroOrden = 'Ninguno';
-
   static List<Producto> listaProductos = [];
   static List<Producto> productosFiltrados = [];
   static List<String> listaCategorias = [];
   static List<String> listaProductoMercadona = [];
-  String filtroCategoria = '';
+  static String filtroOrden = 'Ninguno';
+  static String filtroCategoria = '';
   final ScrollController _scrollController = ScrollController();
 
   static void datosManager(String accion) async {
@@ -91,28 +90,28 @@ class _MyScreenState extends State<Principal> {
       Principal.productosFiltrados = Principal.listaProductos
           .where((producto) =>
               producto.nombre.toLowerCase().contains(filtro.toLowerCase()) &&
-              (widget.filtroCategoria.isEmpty ||
-                  producto.categoria == widget.filtroCategoria))
+              (Principal.filtroCategoria.isEmpty ||
+                  producto.categoria == Principal.filtroCategoria))
           .toList();
 
-      if (widget.filtroOrden == 'Menor Precio') {
+      if (Principal.filtroOrden == 'Menor Precio') {
         Principal.productosFiltrados.sort((a, b) => (a.precios
                     .reduce((value, element) => value + element) /
                 a.precios.length)
             .compareTo((b.precios.reduce((value, element) => value + element) /
                 b.precios.length)));
-      } else if (widget.filtroOrden == 'Mayor Precio') {
+      } else if (Principal.filtroOrden == 'Mayor Precio') {
         Principal.productosFiltrados.sort((a, b) => (b.precios
                     .reduce((value, element) => value + element) /
                 b.precios.length)
             .compareTo((a.precios.reduce((value, element) => value + element) /
                 a.precios.length)));
-      } else if (widget.filtroOrden == 'Menor Yuka') {
+      } else if (Principal.filtroOrden == 'Menor Yuka') {
         Principal.productosFiltrados.sort((a, b) =>
             (a.yuka.reduce((value, element) => value + element) / a.yuka.length)
                 .compareTo(b.yuka.reduce((value, element) => value + element) /
                     b.yuka.length));
-      } else if (widget.filtroOrden == 'Mayor Yuka') {
+      } else if (Principal.filtroOrden == 'Mayor Yuka') {
         Principal.productosFiltrados.sort((a, b) =>
             (b.yuka.reduce((value, element) => value + element) / b.yuka.length)
                 .compareTo(a.yuka.reduce((value, element) => value + element) /
@@ -416,10 +415,10 @@ class _MyScreenState extends State<Principal> {
                             ),
                             labelPadding: const EdgeInsets.fromLTRB(5, 5, 5, 5),
                             label: Text(categoria),
-                            selected: widget.filtroCategoria == categoria,
+                            selected: Principal.filtroCategoria == categoria,
                             onSelected: (selected) {
                               setState(() {
-                                widget.filtroCategoria =
+                                Principal.filtroCategoria =
                                     selected ? categoria : '';
                                 _filtrarProductos('');
                               });
@@ -453,10 +452,10 @@ class _MyScreenState extends State<Principal> {
                             ),
                             labelPadding: const EdgeInsets.fromLTRB(5, 5, 5, 5),
                             label: Text(orden),
-                            selected: widget.filtroOrden == orden,
+                            selected: Principal.filtroOrden == orden,
                             onSelected: (selected) {
                               setState(() {
-                                widget.filtroOrden = selected ? orden : '';
+                                Principal.filtroOrden = selected ? orden : '';
                                 _filtrarProductos('');
                               });
                             },
