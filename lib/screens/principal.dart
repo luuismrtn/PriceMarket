@@ -2,9 +2,9 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:price_market/components/ProductoDialog.dart';
-import 'package:price_market/components/dialogDatos.dart';
 import 'package:price_market/objects/Clases.dart';
 import 'package:price_market/objects/DatosManager.dart';
+import 'package:price_market/screens/settings.dart';
 import '../objects/AppStyle.dart';
 import '../objects/Producto.dart';
 import '../components/formularioProducto.dart';
@@ -287,8 +287,8 @@ class _MyScreenState extends State<Principal> {
         text: Principal.productosFiltrados[index].yuka[1] == -1
             ? ''
             : '${Principal.productosFiltrados[index].yuka[1]}');
-    final TextEditingController categoriaController =
-        TextEditingController(text: Principal.productosFiltrados[index].categoria);
+    final TextEditingController categoriaController = TextEditingController(
+        text: Principal.productosFiltrados[index].categoria);
     final TextEditingController cantidadMercadonaController =
         TextEditingController(
             text: Principal.productosFiltrados[index].cantidad[0] == '-1'
@@ -481,7 +481,6 @@ class _MyScreenState extends State<Principal> {
     );
   }
 
-
   Future<void> _actualizarPagina() async {
     _filtrarProductos('');
     _filtrarProductos;
@@ -528,107 +527,20 @@ class _MyScreenState extends State<Principal> {
                   alignment: Alignment.bottomRight,
                   padding: const EdgeInsets.fromLTRB(0, 0, 0, 5),
                   child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      PopupMenuButton(
-                        itemBuilder: (context) {
-                          return [
-                            PopupMenuItem(
-                              child: const Text('Importar categorias'),
-                              onTap: () {
-                                showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) {
-                                    return const DialogDatos(
-                                      title: 'Importar categorias',
-                                      content:
-                                          '¿Está seguro de que desea importar las categorías?'
-                                    );
-                                  },
-                                );
-                              },
-                            ),
-                            PopupMenuItem(
-                              child: const Text('Exportar categorias'),
-                              onTap: () {
-                                showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) {
-                                    return const DialogDatos(
-                                      title: 'Exportar categorías',
-                                      content:
-                                          '¿Está seguro de que desea exportar las categorias?'
-                                    );
-                                  },
-                                );
-                              },
-                            ),
-                            PopupMenuItem(
-                              child: const Text('Importar Datos.txt'),
-                              onTap: () {
-                                showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) {
-                                    return const DialogDatos(
-                                      title: 'Importar Datos.txt',
-                                      content:
-                                          '¿Está seguro de que desea importar datos del mercadona?'
-                                    );
-                                  },
-                                );
-                              },
-                            ),
-                            PopupMenuItem(
-                              child: const Text('Combinar datos'),
-                              onTap: () {
-                                showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) {
-                                    return const DialogDatos(
-                                      title: 'Combinar datos',
-                                      content:
-                                          '¿Está seguro de que deseas combinar los datos del mercadona y los tuyos?'
-                                    );
-                                  },
-                                );
-                              },
-                            ),
-                            PopupMenuItem(
-                              child: const Text('Importar datosMIOS.txt'),
-                              onTap: () {
-                                showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) {
-                                    return const DialogDatos(
-                                      title: 'Importar datosMIOS.txt',
-                                      content:
-                                          '¿Está seguro de que desea importar sus datos?'
-                                    );
-                                  },
-                                );
-                              },
-                            ),
-                            PopupMenuItem(
-                              child: const Text('Exportar datosMIOS.txt'),
-                              onTap: () {
-                                showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) {
-                                    return const DialogDatos(
-                                      title: 'Exportar datosMIOS.txt',
-                                      content:
-                                          '¿Está seguro de que desea exportar sus datos?'
-                                    );
-                                  },
-                                );
-                              },
-                            ),
-                          ];
-                        },
-                      ),
-                    ],
-                  ),
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        IconButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const SettingsPage()),
+                            );
+                          },
+                          icon: const Icon(Icons.settings),
+                        ),
+                      ]),
                 ),
               )),
           SliverList(
@@ -714,7 +626,8 @@ class _MyScreenState extends State<Principal> {
                                   children: [
                                     Expanded(
                                       child: Text(
-                                        Principal.productosFiltrados[index].nombre,
+                                        Principal
+                                            .productosFiltrados[index].nombre,
                                         style: const TextStyle(
                                             fontWeight: FontWeight.bold),
                                         textAlign: TextAlign.center,
@@ -756,7 +669,7 @@ class _MyScreenState extends State<Principal> {
                   ],
                 );
               },
-              childCount: 1, // Solo un elemento en este caso
+              childCount: 1,
             ),
           ),
         ],

@@ -53,7 +53,6 @@ class DrawerWidget extends StatelessWidget {
                 context,
                 MaterialPageRoute(builder: (context) => const SettingsPage()),
               );
-              // Código para la acción al hacer clic en "Configuración"
             },
           ),
           ListTile(
