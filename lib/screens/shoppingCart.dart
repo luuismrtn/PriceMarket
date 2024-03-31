@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 import 'package:price_market/components/ProductoDialog.dart';
@@ -9,6 +8,7 @@ import '../objects/AppStyle.dart';
 import '../objects/Producto.dart';
 import '../components/drawerWidget.dart';
 import '../objects/Clases.dart';
+import 'package:price_market/objects/DatosManager.dart';
 
 class ShoppingCart extends StatefulWidget {
   ShoppingCart({Key? key}) : super(key: key);
@@ -20,7 +20,6 @@ class ShoppingCart extends StatefulWidget {
 
   static String filtroOrden = 'Ninguno';
   static String filtroCategoria = '';
-  final ScrollController _scrollController = ScrollController();
 }
 
 class _ShoppingCartState extends State<ShoppingCart> {
@@ -29,10 +28,20 @@ class _ShoppingCartState extends State<ShoppingCart> {
   List<Producto> productosFiltrados = [];
   String filtroSuper = '';
   final TextEditingController _searchController = TextEditingController();
+  final ScrollController _scrollController = ScrollController();
 
   @override
   void initState() {
     super.initState();
+      _datosManager('Importar');
+  }
+
+  void _datosManager(String accion) async {
+    if (accion == 'Importar') {
+      listaCompra = await ImportadorExportadorDatos.importListaCompraFromFile();
+    } else if (accion == 'Exportar') {
+      await ImportadorExportadorDatos.exportListaCompraFromFile(listaCompra);
+    }
   }
 
   void _filtrarProductos(String value) {
@@ -57,15 +66,18 @@ class _ShoppingCartState extends State<ShoppingCart> {
   void _agregarProductoAListaCompra(Producto producto) {
     setState(() {
       listaCompra.add(producto);
+      _filtrarProductos('');
       resultadosBusqueda.clear();
       _searchController.clear();
     });
+    _datosManager('Exportar');
   }
 
   void _eliminarProducto(Producto producto) {
     setState(() {
       listaCompra.remove(producto);
     });
+    _datosManager('Exportar');
   }
 
   void _mostrarInformacionProducto(Producto producto) {
@@ -170,7 +182,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     return Scaffold(
       drawer: DrawerWidget(),
       body: CustomScrollView(
-        controller: widget._scrollController,
+        controller: _scrollController,
         slivers: [
           SliverAppBar(
               expandedHeight: 10.0,
@@ -179,7 +191,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
               title: GestureDetector(
                 onTap: () {
                   _actualizarPagina();
-                  widget._scrollController.animateTo(0,
+                  _scrollController.animateTo(0,
                       duration: const Duration(milliseconds: 500),
                       curve: Curves.easeInOut);
                 },
@@ -279,7 +291,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                 },
                                 decoration: const InputDecoration(
                                   border: InputBorder
-                                      .none, // Elimina el borde del TextField
+                                      .none,
                                   labelText: 'Añadir producto',
                                   prefixIcon: Icon(Icons.add),
                                 ),
@@ -292,8 +304,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                             onTap: () {
                                               _agregarProductoAListaCompra(
                                                   producto);
-                                              _searchController
-                                                  .clear(); // Limpia el campo de búsqueda
+                                              _searchController.clear();
                                             },
                                           ))
                                       .toList(),
@@ -342,65 +353,76 @@ class _ShoppingCartState extends State<ShoppingCart> {
                         return Padding(
                           padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
                           child: Card(
-                            color: Colors.white,
-                            elevation: 2,
-                            child: InkWell(
-                              onTap: () {
-                                _mostrarInformacionProducto(producto);
-                              },
-                              onDoubleTap: () {
-                                _eliminarProducto(producto);
-                              },
-                              child: ListTile(
-                                title: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Expanded(
-                                        child: Container(
-                                      padding: EdgeInsets.fromLTRB(5, 2, 5, 2),
-                                      child: Text(
-                                        producto.nombre,
-                                        style: const TextStyle(
-                                            fontWeight: FontWeight.bold),
-                                        textAlign: TextAlign.center,
-                                      ),
-                                    )),
-                                    Expanded(
-                                      child: Container(
-                                        padding: const EdgeInsets.fromLTRB(
-                                            5, 2, 5, 2),
-                                        margin: const EdgeInsets.fromLTRB(
-                                            10, 2, 10, 2),
-                                        decoration: BoxDecoration(
-                                          color: const Color.fromARGB(
-                                              255, 255, 125, 125),
-                                          borderRadius:
-                                              BorderRadius.circular(5),
-                                        ),
-                                        child: Text(
-                                          _calcularMejorSuper(
-                                              producto),
-                                          style: const TextStyle(
-                                            color: Colors.white,
-                                          ),
-                                          textAlign: TextAlign.center,
-                                        ),
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: Text(
-                                        _calcularMejorOpcion(
-                                            producto),
-                                        style: const TextStyle(
-                                            color: Colors.green),
-                                        textAlign: TextAlign.center,
-                                      ),
-                                    ),
-                                  ],
+                              color: Colors.white,
+                              elevation: 2,
+                              child: Dismissible(
+                                key: Key(producto.nombre),
+                                direction: DismissDirection.startToEnd,
+                                background: Container(
+                                  alignment: Alignment.centerRight,
+                                  color: Colors.red,
+                                  child: const Icon(Icons.delete),
                                 ),
-                              ),
-                            ),
-                          ),
+                                onDismissed: (direction) {
+                                  setState(() {
+                                    _eliminarProducto(producto);
+                                    productosFiltrados.remove(producto);
+                                  });
+                                },
+                                child: InkWell(
+                                  onTap: () {
+                                    _mostrarInformacionProducto(producto);
+                                  },
+                                  child: ListTile(
+                                    title: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Expanded(
+                                            child: Container(
+                                          padding: const EdgeInsets.fromLTRB(
+                                              5, 2, 5, 2),
+                                          child: Text(
+                                            producto.nombre,
+                                            style: const TextStyle(
+                                                fontWeight: FontWeight.bold),
+                                            textAlign: TextAlign.center,
+                                          ),
+                                        )),
+                                        Expanded(
+                                          child: Container(
+                                            padding: const EdgeInsets.fromLTRB(
+                                                5, 2, 5, 2),
+                                            margin: const EdgeInsets.fromLTRB(
+                                                10, 2, 10, 2),
+                                            decoration: BoxDecoration(
+                                              color: const Color.fromARGB(
+                                                  255, 255, 125, 125),
+                                              borderRadius:
+                                                  BorderRadius.circular(5),
+                                            ),
+                                            child: Text(
+                                              _calcularMejorSuper(producto),
+                                              style: const TextStyle(
+                                                color: Colors.white,
+                                              ),
+                                              textAlign: TextAlign.center,
+                                            ),
+                                          ),
+                                        ),
+                                        Expanded(
+                                          child: Text(
+                                            _calcularMejorOpcion(producto),
+                                            style: const TextStyle(
+                                                color: Colors.green),
+                                            textAlign: TextAlign.center,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              )),
                         );
                       },
                     ),
