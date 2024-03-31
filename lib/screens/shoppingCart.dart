@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 import 'package:price_market/components/ProductoDialog.dart';
@@ -16,7 +17,7 @@ class ShoppingCart extends StatefulWidget {
   _ShoppingCartState createState() => _ShoppingCartState();
 
   static List<Producto> listaProductos = Principal.getListaProductos();
-  static List<Producto> productosFiltrados = [];
+
   static String filtroOrden = 'Ninguno';
   static String filtroCategoria = '';
   final ScrollController _scrollController = ScrollController();
@@ -25,15 +26,32 @@ class ShoppingCart extends StatefulWidget {
 class _ShoppingCartState extends State<ShoppingCart> {
   List<Producto> resultadosBusqueda = [];
   List<Producto> listaCompra = [];
-  final TextEditingController _searchController = TextEditingController();
+  List<Producto> productosFiltrados = [];
   String filtroSuper = '';
+  final TextEditingController _searchController = TextEditingController();
+
   @override
   void initState() {
     super.initState();
   }
 
-  void _filtrarProductos(String filtro) {
-    
+  void _filtrarProductos(String value) {
+    List<Producto> resultados = listaCompra.where((producto) {
+      if (value.isNotEmpty &&
+          !producto.nombre.toLowerCase().contains(value.toLowerCase())) {
+        return false;
+      }
+      // Aplicar filtro por supermercado
+      if (filtroSuper.isNotEmpty &&
+          _calcularMejorSuper(producto) != filtroSuper) {
+        return false;
+      }
+      return true;
+    }).toList();
+
+    setState(() {
+      productosFiltrados = resultados;
+    });
   }
 
   void _agregarProductoAListaCompra(Producto producto) {
@@ -59,11 +77,92 @@ class _ShoppingCartState extends State<ShoppingCart> {
     );
   }
 
-  void _mostrarFiltrosDialog() {}
-
   Future<void> _actualizarPagina() async {
     _filtrarProductos('');
     _filtrarProductos;
+  }
+
+  String _calcularMejorOpcion(Producto producto) {
+    // Obtener precios del producto
+    double precioMercadona = producto.precios[0];
+    double precioLidl = producto.precios[1];
+
+    if (precioMercadona == -1) {
+      return '${producto.precios[1].toStringAsFixed(2)}€';
+    } else if (precioLidl == -1) {
+      return '${producto.precios[0].toStringAsFixed(2)}€';
+    }
+
+    // Obtener cantidad del producto
+    String cantidadMercadona = producto.cantidad[0];
+    String cantidadLidl = producto.cantidad[1];
+
+    double unidadMercadona = double.parse(cantidadMercadona.split(' ')[0]);
+    double unidadLidl = double.parse(cantidadLidl.split(' ')[0]);
+
+    // Obtener puntuación de Yuka del producto
+    int yukaMercadona = producto.yuka[0];
+    int yukaLidl = producto.yuka[1];
+
+    // Calcular puntaje para cada opción
+    double puntajeMercadona = precioMercadona / unidadMercadona / yukaMercadona;
+    double puntajeLidl = precioLidl / unidadLidl / yukaLidl;
+
+    String opinionMercadona = producto.opinion[0];
+    String opinionLidl = producto.opinion[1];
+
+    switch (opinionMercadona) {
+      case 'Increíble':
+        puntajeMercadona *= 0.5;
+        break;
+      case 'Me gusta':
+        puntajeMercadona *= 0.7;
+        break;
+      case 'Sin más':
+        puntajeMercadona *= 1.0;
+        break;
+      case 'No me gusta':
+        puntajeMercadona *= 1.3;
+        break;
+      case 'Horrible':
+        puntajeMercadona *= 1.5;
+        break;
+    }
+
+    switch (opinionLidl) {
+      case 'Increíble':
+        puntajeLidl *= 0.5;
+        break;
+      case 'Me gusta':
+        puntajeLidl *= 0.7;
+        break;
+      case 'Sin más':
+        puntajeLidl *= 1.0;
+        break;
+      case 'No me gusta':
+        puntajeLidl *= 1.3;
+        break;
+      case 'Horrible':
+        puntajeLidl *= 1.5;
+        break;
+    }
+
+    // Elegir el mejor precio
+    if (puntajeLidl >= puntajeMercadona) {
+      return '${producto.precios[0].toStringAsFixed(2)}€';
+    } else {
+      return '${producto.precios[1].toStringAsFixed(2)}€';
+    }
+  }
+
+  String _calcularMejorSuper(Producto producto) {
+    String precio = _calcularMejorOpcion(producto);
+
+    if (precio == '${producto.precios[0].toStringAsFixed(2)}€') {
+      return 'Mercadona';
+    } else {
+      return 'Lidl';
+    }
   }
 
   @override
@@ -237,8 +336,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       padding: const EdgeInsets.all(0),
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
-                      itemCount: listaCompra.length,
+                      itemCount: productosFiltrados.length,
                       itemBuilder: (context, index) {
+                        final producto = productosFiltrados[index];
                         return Padding(
                           padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
                           child: Card(
@@ -246,41 +346,53 @@ class _ShoppingCartState extends State<ShoppingCart> {
                             elevation: 2,
                             child: InkWell(
                               onTap: () {
-                                _mostrarInformacionProducto(listaCompra[index]);
+                                _mostrarInformacionProducto(producto);
                               },
                               onDoubleTap: () {
-                                _eliminarProducto(listaCompra[index]);
+                                _eliminarProducto(producto);
                               },
                               child: ListTile(
                                 title: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Expanded(
+                                        child: Container(
+                                      padding: EdgeInsets.fromLTRB(5, 2, 5, 2),
                                       child: Text(
-                                        listaCompra[index].nombre,
+                                        producto.nombre,
                                         style: const TextStyle(
                                             fontWeight: FontWeight.bold),
                                         textAlign: TextAlign.center,
                                       ),
-                                    ),
+                                    )),
                                     Expanded(
-                                      child: Text(
-                                        listaCompra[index].precios[0] == -1
-                                            ? 'No disponible'
-                                            : '${listaCompra[index].precios[0].toStringAsFixed(2)}€',
-                                        style: const TextStyle(
-                                            color: Colors.green),
-                                        textAlign: TextAlign.center,
+                                      child: Container(
+                                        padding: const EdgeInsets.fromLTRB(
+                                            5, 2, 5, 2),
+                                        margin: const EdgeInsets.fromLTRB(
+                                            10, 2, 10, 2),
+                                        decoration: BoxDecoration(
+                                          color: const Color.fromARGB(
+                                              255, 255, 125, 125),
+                                          borderRadius:
+                                              BorderRadius.circular(5),
+                                        ),
+                                        child: Text(
+                                          _calcularMejorSuper(
+                                              producto),
+                                          style: const TextStyle(
+                                            color: Colors.white,
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
                                       ),
                                     ),
                                     Expanded(
                                       child: Text(
-                                        listaCompra[index].precios[1] == -1
-                                            ? 'No disponible'
-                                            : '${listaCompra[index].precios[1].toStringAsFixed(2)}€',
+                                        _calcularMejorOpcion(
+                                            producto),
                                         style: const TextStyle(
-                                            color:
-                                                Color.fromARGB(255, 255, 0, 0)),
+                                            color: Colors.green),
                                         textAlign: TextAlign.center,
                                       ),
                                     ),

@@ -98,7 +98,7 @@ class _FormularioProductoState extends State<FormularioProducto> {
                 const SizedBox(height: 8),
                 TextFormField(
                   controller: widget.cantidadMercadonaController,
-                  keyboardType: TextInputType.number,
+                  keyboardType: TextInputType.text,
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'Cantidad Mercadona',
@@ -198,7 +198,7 @@ class _FormularioProductoState extends State<FormularioProducto> {
               const SizedBox(height: 8),
               TextFormField(
                   controller: widget.cantidadLidlController,
-                  keyboardType: TextInputType.number,
+                  keyboardType: TextInputType.text,
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'Cantidad Lidl',
