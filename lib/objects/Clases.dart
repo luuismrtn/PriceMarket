@@ -1,5 +1,9 @@
 class Supermercados {
   static const List<String> listaSupermercados = ['Mercadona', 'Lidl'];
+
+  static List<String> getListaSupermercados() {
+    return listaSupermercados;
+  }
 }
 
 class Opiniones {

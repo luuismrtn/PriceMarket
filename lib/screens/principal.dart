@@ -64,7 +64,7 @@ class Principal extends StatefulWidget {
     }
   }
 
-  List<Producto> getListaProductos() {
+ static List<Producto> getListaProductos() {
     return listaProductos;
   }
 

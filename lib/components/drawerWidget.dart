@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:price_market/objects/AppStyle.dart';
+import 'package:price_market/screens/principal.dart';
 import 'package:price_market/screens/settings.dart';
+import 'package:price_market/screens/shoppingCart.dart';
 
 class DrawerWidget extends StatelessWidget {
   @override
@@ -42,7 +44,20 @@ class DrawerWidget extends StatelessWidget {
             leading: const Icon(Icons.home),
             title: const Text('Inicio'),
             onTap: () {
-              Navigator.pop(context);
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Principal()),
+              );
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.shopping_cart),
+            title: const Text('Cesta de la compra'),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ShoppingCart()),
+              );
             },
           ),
           ListTile(
