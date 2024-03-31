@@ -33,7 +33,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
   @override
   void initState() {
     super.initState();
-      _datosManager('Importar');
+    _datosManager('Importar');
   }
 
   void _datosManager(String accion) async {
@@ -185,47 +185,46 @@ class _ShoppingCartState extends State<ShoppingCart> {
         controller: _scrollController,
         slivers: [
           SliverAppBar(
-              expandedHeight: 10.0,
-              floating: true,
-              pinned: true,
-              title: GestureDetector(
-                onTap: () {
-                  _actualizarPagina();
-                  _scrollController.animateTo(0,
-                      duration: const Duration(milliseconds: 500),
-                      curve: Curves.easeInOut);
-                },
-                child: const Text(
-                  'Price Market',
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                    color: AppStyle.miColorPrimario,
-                  ),
+            expandedHeight: 10.0,
+            floating: true,
+            pinned: true,
+            title: GestureDetector(
+              onTap: () {
+                _actualizarPagina();
+                _scrollController.animateTo(0,
+                    duration: const Duration(milliseconds: 500),
+                    curve: Curves.easeInOut);
+              },
+              child: const Text(
+                'Price Market',
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  color: AppStyle.miColorPrimario,
                 ),
               ),
-              centerTitle: true,
-              flexibleSpace: Expanded(
-                child: Container(
-                  alignment: Alignment.bottomRight,
-                  padding: const EdgeInsets.fromLTRB(0, 0, 0, 5),
-                  child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        IconButton(
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const SettingsPage()),
-                            );
-                          },
-                          icon: const Icon(Icons.settings),
-                        ),
-                      ]),
-                ),
-              )),
+            ),
+            centerTitle: true,
+            flexibleSpace: Container(
+              alignment: Alignment.bottomRight,
+              padding: const EdgeInsets.fromLTRB(0, 0, 0, 5),
+              child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    IconButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const SettingsPage()),
+                        );
+                      },
+                      icon: const Icon(Icons.settings),
+                    ),
+                  ]),
+            ),
+          ),
           SliverList(
             delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {
@@ -290,8 +289,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                   });
                                 },
                                 decoration: const InputDecoration(
-                                  border: InputBorder
-                                      .none,
+                                  border: InputBorder.none,
                                   labelText: 'Añadir producto',
                                   prefixIcon: Icon(Icons.add),
                                 ),
@@ -359,9 +357,18 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                 key: Key(producto.nombre),
                                 direction: DismissDirection.startToEnd,
                                 background: Container(
-                                  alignment: Alignment.centerRight,
-                                  color: Colors.red,
-                                  child: const Icon(Icons.delete),
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(12),
+                                      color: Colors.red),
+                                  alignment: Alignment.centerLeft,
+                                  child: Container(
+                                    padding:
+                                        const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                                    child: const Icon(
+                                      Icons.delete,
+                                      color: Colors.white,
+                                    ),
+                                  ),
                                 ),
                                 onDismissed: (direction) {
                                   setState(() {

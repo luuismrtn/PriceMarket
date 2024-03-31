@@ -64,7 +64,7 @@ class Principal extends StatefulWidget {
     }
   }
 
- static List<Producto> getListaProductos() {
+  static List<Producto> getListaProductos() {
     return listaProductos;
   }
 
@@ -522,8 +522,7 @@ class _MyScreenState extends State<Principal> {
                 ),
               ),
               centerTitle: true,
-              flexibleSpace: Expanded(
-                child: Container(
+              flexibleSpace: Container(
                   alignment: Alignment.bottomRight,
                   padding: const EdgeInsets.fromLTRB(0, 0, 0, 5),
                   child: Row(
@@ -542,7 +541,7 @@ class _MyScreenState extends State<Principal> {
                         ),
                       ]),
                 ),
-              )),
+              ),
           SliverList(
             delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {
