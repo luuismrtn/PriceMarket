@@ -11,7 +11,7 @@ import '../objects/Clases.dart';
 import 'package:price_market/objects/DatosManager.dart';
 
 class ShoppingCart extends StatefulWidget {
-  ShoppingCart({Key? key}) : super(key: key);
+  const ShoppingCart({Key? key}) : super(key: key);
 
   @override
   _ShoppingCartState createState() => _ShoppingCartState();
@@ -34,6 +34,12 @@ class _ShoppingCartState extends State<ShoppingCart> {
   void initState() {
     super.initState();
     _datosManager('Importar');
+    _actualizarPagina();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 
   void _datosManager(String accion) async {
@@ -45,7 +51,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
   }
 
   void _filtrarProductos(String value) {
-    List<Producto> resultados = listaCompra.where((producto) {
+    List<Producto> resultadosFiltrados = listaCompra.where((producto) {
       if (value.isNotEmpty &&
           !producto.nombre.toLowerCase().contains(value.toLowerCase())) {
         return false;
@@ -59,7 +65,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     }).toList();
 
     setState(() {
-      productosFiltrados = resultados;
+      productosFiltrados = resultadosFiltrados;
     });
   }
 
@@ -194,6 +200,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                 _scrollController.animateTo(0,
                     duration: const Duration(milliseconds: 500),
                     curve: Curves.easeInOut);
+                _searchController.clear();
               },
               child: const Text(
                 'Price Market',
@@ -278,7 +285,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                 onChanged: (value) {
                                   List<Producto> resultados = [];
                                   if (value.isNotEmpty) {
-                                    resultados = ShoppingCart.listaProductos
+                                    resultados = Principal.getListaProductos()
                                         .where((producto) => producto.nombre
                                             .toLowerCase()
                                             .contains(value.toLowerCase()))

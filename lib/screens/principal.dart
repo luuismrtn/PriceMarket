@@ -502,46 +502,46 @@ class _MyScreenState extends State<Principal> {
         controller: widget._scrollController,
         slivers: [
           SliverAppBar(
-              expandedHeight: 10.0,
-              floating: true,
-              pinned: true,
-              title: GestureDetector(
-                onTap: () {
-                  _actualizarPagina();
-                  widget._scrollController.animateTo(0,
-                      duration: const Duration(milliseconds: 500),
-                      curve: Curves.easeInOut);
-                },
-                child: const Text(
-                  'Price Market',
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                    color: AppStyle.miColorPrimario,
-                  ),
+            expandedHeight: 10.0,
+            floating: true,
+            pinned: true,
+            title: GestureDetector(
+              onTap: () {
+                _actualizarPagina();
+                widget._scrollController.animateTo(0,
+                    duration: const Duration(milliseconds: 500),
+                    curve: Curves.easeInOut);
+              },
+              child: const Text(
+                'Price Market',
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  color: AppStyle.miColorPrimario,
                 ),
               ),
-              centerTitle: true,
-              flexibleSpace: Container(
-                  alignment: Alignment.bottomRight,
-                  padding: const EdgeInsets.fromLTRB(0, 0, 0, 5),
-                  child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        IconButton(
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const SettingsPage()),
-                            );
-                          },
-                          icon: const Icon(Icons.settings),
-                        ),
-                      ]),
-                ),
-              ),
+            ),
+            centerTitle: true,
+            flexibleSpace: Container(
+              alignment: Alignment.bottomRight,
+              padding: const EdgeInsets.fromLTRB(0, 0, 0, 5),
+              child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    IconButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const SettingsPage()),
+                        );
+                      },
+                      icon: const Icon(Icons.settings),
+                    ),
+                  ]),
+            ),
+          ),
           SliverList(
             delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {
@@ -549,23 +549,33 @@ class _MyScreenState extends State<Principal> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: TextField(
-                              onChanged: _filtrarProductos,
-                              decoration: const InputDecoration(
-                                border: OutlineInputBorder(),
-                                labelText: 'Buscar producto',
-                                prefixIcon: Icon(Icons.search),
+                      child: Card(
+                        color: Colors.white,
+                        elevation: 2,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8),
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: TextField(
+                                  onChanged: _filtrarProductos,
+                                  decoration: const InputDecoration(
+                                    border: InputBorder.none,
+                                    labelText: 'Buscar producto',
+                                    prefixIcon: Icon(Icons.search),
+                                  ),
+                                ),
                               ),
-                            ),
+                              IconButton(
+                                onPressed: _mostrarFiltrosDialog,
+                                icon: const Icon(Icons.filter_list),
+                              ),
+                            ],
                           ),
-                          IconButton(
-                            onPressed: _mostrarFiltrosDialog,
-                            icon: const Icon(Icons.filter_list),
-                          ),
-                        ],
+                        ),
                       ),
                     ),
                     const Padding(
