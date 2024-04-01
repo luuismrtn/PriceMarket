@@ -20,13 +20,24 @@ class ShoppingCart extends StatefulWidget {
 
   static String filtroOrden = 'Ninguno';
   static String filtroCategoria = '';
+  static List<Producto> listaCompra = [];
+
+  static void datosManager(String accion) async {
+    if (accion == 'Importar') {
+      listaCompra = await ImportadorExportadorDatos.importListaCompraFromFile();
+    } else if (accion == 'Exportar') {
+      await ImportadorExportadorDatos.exportListaCompraFromFile(listaCompra);
+    }
+  }
 }
 
 class _ShoppingCartState extends State<ShoppingCart> {
   List<Producto> resultadosBusqueda = [];
-  List<Producto> listaCompra = [];
   List<Producto> productosFiltrados = [];
   String filtroSuper = '';
+
+  bool _isDeleting = false;
+
   final TextEditingController _searchController = TextEditingController();
   final ScrollController _scrollController = ScrollController();
 
@@ -37,22 +48,16 @@ class _ShoppingCartState extends State<ShoppingCart> {
   }
 
   Future<void> _inicializarDatos() async {
-    listaCompra = await ImportadorExportadorDatos.importListaCompraFromFile();
+    ShoppingCart.listaCompra =
+        await ImportadorExportadorDatos.importListaCompraFromFile();
     setState(() {
       _filtrarProductos('');
     });
   }
 
-  void _datosManager(String accion) async {
-    if (accion == 'Importar') {
-      listaCompra = await ImportadorExportadorDatos.importListaCompraFromFile();
-    } else if (accion == 'Exportar') {
-      await ImportadorExportadorDatos.exportListaCompraFromFile(listaCompra);
-    }
-  }
-
   void _filtrarProductos(String value) {
-    List<Producto> resultadosFiltrados = listaCompra.where((producto) {
+    List<Producto> resultadosFiltrados =
+        ShoppingCart.listaCompra.where((producto) {
       if (value.isNotEmpty &&
           !producto.nombre.toLowerCase().contains(value.toLowerCase())) {
         return false;
@@ -72,19 +77,19 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
   void _agregarProductoAListaCompra(Producto producto) {
     setState(() {
-      listaCompra.add(producto);
+      ShoppingCart.listaCompra.add(producto);
       _filtrarProductos('');
       resultadosBusqueda.clear();
       _searchController.clear();
     });
-    _datosManager('Exportar');
+    ShoppingCart.datosManager('Exportar');
   }
 
   void _eliminarProducto(Producto producto) {
     setState(() {
-      listaCompra.remove(producto);
+      ShoppingCart.listaCompra.remove(producto);
     });
-    _datosManager('Exportar');
+    ShoppingCart.datosManager('Exportar');
   }
 
   void _mostrarInformacionProducto(Producto producto) {
@@ -184,271 +189,332 @@ class _ShoppingCartState extends State<ShoppingCart> {
     }
   }
 
+  double _calcularTotal() {
+    double total = 0.0;
+    for (var producto in productosFiltrados) {
+      double precio =
+          double.parse(_calcularMejorOpcion(producto).split('€')[0]);
+      total += precio;
+    }
+    return total;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: DrawerWidget(),
-      body: CustomScrollView(
-        controller: _scrollController,
-        slivers: [
-          SliverAppBar(
-            expandedHeight: 10.0,
-            floating: true,
-            pinned: true,
-            title: GestureDetector(
-              onTap: () {
-                _actualizarPagina();
-                _scrollController.animateTo(0,
-                    duration: const Duration(milliseconds: 500),
-                    curve: Curves.easeInOut);
-                _searchController.clear();
-              },
-              child: const Text(
-                'Price Market',
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                  color: AppStyle.miColorPrimario,
-                ),
-              ),
-            ),
-            centerTitle: true,
-            flexibleSpace: Container(
-              alignment: Alignment.bottomRight,
-              padding: const EdgeInsets.fromLTRB(0, 0, 0, 5),
-              child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    IconButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const SettingsPage()),
-                        );
-                      },
-                      icon: const Icon(Icons.settings),
-                    ),
-                  ]),
-            ),
-          ),
-          SliverList(
-            delegate: SliverChildBuilderDelegate(
-              (BuildContext context, int index) {
-                return Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Wrap(
-                        children: Supermercados.getListaSupermercados()
-                            .map((supermercado) {
-                          return Padding(
-                            padding: const EdgeInsets.all(2.0),
-                            child: FilterChip(
-                              padding: const EdgeInsets.fromLTRB(10, 2, 10, 2),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20),
-                              ),
-                              labelStyle: const TextStyle(
-                                fontSize: 15,
-                                fontFamily: 'ProductSans',
-                              ),
-                              labelPadding:
-                                  const EdgeInsets.fromLTRB(5, 2, 5, 2),
-                              label: Text(supermercado),
-                              selected: filtroSuper == supermercado,
-                              onSelected: (selected) {
-                                setState(() {
-                                  filtroSuper = selected ? supermercado : '';
-                                  _filtrarProductos('');
-                                });
-                              },
-                            ),
-                          );
-                        }).toList(),
+        drawer: DrawerWidget(),
+        body: Stack(
+          children: [
+            CustomScrollView(
+              controller: _scrollController,
+              slivers: [
+                SliverAppBar(
+                  expandedHeight: 10.0,
+                  floating: true,
+                  pinned: true,
+                  title: GestureDetector(
+                    onTap: () {
+                      _actualizarPagina();
+                      _scrollController.animateTo(0,
+                          duration: const Duration(milliseconds: 500),
+                          curve: Curves.easeInOut);
+                      _searchController.clear();
+                    },
+                    child: const Text(
+                      'Price Market',
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                        color: AppStyle.miColorPrimario,
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(8),
-                      child: Card(
-                        color: Colors.white,
-                        elevation: 4,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 8),
-                          child: Column(
-                            children: [
-                              TextField(
-                                controller: _searchController,
-                                onChanged: (value) {
-                                  List<Producto> resultados = [];
-                                  if (value.isNotEmpty) {
-                                    resultados = Principal.getListaProductos()
-                                        .where((producto) => producto.nombre
-                                            .toLowerCase()
-                                            .contains(value.toLowerCase()))
-                                        .toList();
-                                  }
-                                  setState(() {
-                                    resultadosBusqueda = resultados;
-                                  });
-                                },
-                                decoration: const InputDecoration(
-                                  border: InputBorder.none,
-                                  labelText: 'Añadir producto',
-                                  prefixIcon: Icon(Icons.add),
-                                ),
-                              ),
-                              if (resultadosBusqueda.isNotEmpty)
-                                Column(
-                                  children: resultadosBusqueda
-                                      .map((producto) => ListTile(
-                                            title: Text(producto.nombre),
-                                            onTap: () {
-                                              _agregarProductoAListaCompra(
-                                                  producto);
-                                              _searchController.clear();
-                                            },
-                                          ))
-                                      .toList(),
-                                ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                    const Padding(
-                      padding: EdgeInsets.fromLTRB(28, 8, 35, 8),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                  ),
+                  centerTitle: true,
+                  flexibleSpace: Container(
+                    alignment: Alignment.bottomRight,
+                    padding: const EdgeInsets.fromLTRB(0, 0, 0, 5),
+                    child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          Expanded(
-                            child: Text(
-                              'Nombre',
-                              style: TextStyle(fontWeight: FontWeight.bold),
-                              textAlign: TextAlign.center,
+                          IconButton(
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const SettingsPage()),
+                              );
+                            },
+                            icon: const Icon(Icons.settings),
+                          ),
+                        ]),
+                  ),
+                ),
+                SliverList(
+                  delegate: SliverChildBuilderDelegate(
+                    (BuildContext context, int index) {
+                      return Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Wrap(
+                              children: Supermercados.getListaSupermercados()
+                                  .map((supermercado) {
+                                return Padding(
+                                  padding: const EdgeInsets.all(2.0),
+                                  child: FilterChip(
+                                    padding:
+                                        const EdgeInsets.fromLTRB(10, 2, 10, 2),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20),
+                                    ),
+                                    labelStyle: const TextStyle(
+                                      fontSize: 15,
+                                      fontFamily: 'ProductSans',
+                                    ),
+                                    labelPadding:
+                                        const EdgeInsets.fromLTRB(5, 2, 5, 2),
+                                    label: Text(supermercado),
+                                    selected: filtroSuper == supermercado,
+                                    onSelected: (selected) {
+                                      setState(() {
+                                        filtroSuper =
+                                            selected ? supermercado : '';
+                                        _filtrarProductos('');
+                                      });
+                                    },
+                                  ),
+                                );
+                              }).toList(),
                             ),
                           ),
-                          Expanded(
-                            child: Text(
-                              'Super',
-                              style: TextStyle(fontWeight: FontWeight.bold),
-                              textAlign: TextAlign.center,
+                          Padding(
+                            padding: const EdgeInsets.all(8),
+                            child: Card(
+                              color: Colors.white,
+                              elevation: 4,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 8),
+                                child: Column(
+                                  children: [
+                                    TextField(
+                                      controller: _searchController,
+                                      onChanged: (value) {
+                                        List<Producto> resultados = [];
+                                        if (value.isNotEmpty) {
+                                          resultados =
+                                              Principal.getListaProductos()
+                                                  .where((producto) => producto
+                                                      .nombre
+                                                      .toLowerCase()
+                                                      .contains(
+                                                          value.toLowerCase()))
+                                                  .toList();
+                                        }
+                                        setState(() {
+                                          resultadosBusqueda = resultados;
+                                        });
+                                      },
+                                      decoration: const InputDecoration(
+                                        border: InputBorder.none,
+                                        labelText: 'Añadir producto',
+                                        prefixIcon: Icon(Icons.add),
+                                      ),
+                                    ),
+                                    if (resultadosBusqueda.isNotEmpty)
+                                      Column(
+                                        children: resultadosBusqueda
+                                            .map((producto) => ListTile(
+                                                  title: Text(producto.nombre),
+                                                  onTap: () {
+                                                    _agregarProductoAListaCompra(
+                                                        producto);
+                                                    _searchController.clear();
+                                                  },
+                                                ))
+                                            .toList(),
+                                      ),
+                                  ],
+                                ),
+                              ),
                             ),
                           ),
-                          Expanded(
-                            child: Text(
-                              'Precio',
-                              style: TextStyle(fontWeight: FontWeight.bold),
-                              textAlign: TextAlign.center,
+                          const Padding(
+                            padding: EdgeInsets.fromLTRB(28, 8, 35, 8),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    'Nombre',
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Text(
+                                    'Super',
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Text(
+                                    'Precio',
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
+                              ],
                             ),
+                          ),
+                          ListView.builder(
+                            padding: const EdgeInsets.all(0),
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemCount: productosFiltrados.length,
+                            itemBuilder: (context, index) {
+                              final producto = productosFiltrados[index];
+                              return Padding(
+                                padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
+                                child: Card(
+                                    color: Colors.white,
+                                    elevation: 2,
+                                    child: Dismissible(
+                                      key: Key(producto.nombre),
+                                      direction: DismissDirection.startToEnd,
+                                      background: Container(
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(12),
+                                            color: Colors.red),
+                                        alignment: Alignment.centerLeft,
+                                        child: Container(
+                                          padding: const EdgeInsets.fromLTRB(
+                                              10, 0, 0, 0),
+                                          child: const Icon(
+                                            Icons.delete,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ),
+                                      onDismissed: (direction) {
+                                        setState(() {
+                                          _isDeleting = true;
+                                          _eliminarProducto(producto);
+                                          productosFiltrados.remove(producto);
+                                          _isDeleting = false;
+                                        });
+                                      },
+                                      confirmDismiss: (direction) async {
+                                        return !_isDeleting; // Bloquear eliminaciones si se está eliminando actualmente
+                                      },
+                                      child: InkWell(
+                                        onTap: () {
+                                          _mostrarInformacionProducto(producto);
+                                        },
+                                        child: ListTile(
+                                          title: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Expanded(
+                                                  child: Container(
+                                                padding:
+                                                    const EdgeInsets.fromLTRB(
+                                                        5, 2, 5, 2),
+                                                child: Text(
+                                                  producto.nombre,
+                                                  style: const TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                  textAlign: TextAlign.center,
+                                                ),
+                                              )),
+                                              Expanded(
+                                                child: Container(
+                                                  padding:
+                                                      const EdgeInsets.fromLTRB(
+                                                          5, 2, 5, 2),
+                                                  margin:
+                                                      const EdgeInsets.fromLTRB(
+                                                          10, 2, 10, 2),
+                                                  decoration: BoxDecoration(
+                                                    color: const Color.fromARGB(
+                                                        255, 255, 125, 125),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5),
+                                                  ),
+                                                  child: Text(
+                                                    _calcularMejorSuper(
+                                                        producto),
+                                                    style: const TextStyle(
+                                                      color: Colors.white,
+                                                    ),
+                                                    textAlign: TextAlign.center,
+                                                  ),
+                                                ),
+                                              ),
+                                              Expanded(
+                                                child: Text(
+                                                  _calcularMejorOpcion(
+                                                      producto),
+                                                  style: const TextStyle(
+                                                      color: Colors.green),
+                                                  textAlign: TextAlign.center,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    )),
+                              );
+                            },
                           ),
                         ],
+                      );
+                    },
+                    childCount: 1,
+                  ),
+                ),
+              ],
+            ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Container(
+                padding: const EdgeInsets.all(8),
+                decoration: const BoxDecoration(
+                  color: Color.fromARGB(255, 255, 215, 215),
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(10),
+                    topRight: Radius.circular(10),
+                  ),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Total: ${_calcularTotal().toStringAsFixed(2)}€',
+                      style: const TextStyle(
+                        fontFamily: 'ProductSans',
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
-                    ListView.builder(
-                      padding: const EdgeInsets.all(0),
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemCount: productosFiltrados.length,
-                      itemBuilder: (context, index) {
-                        final producto = productosFiltrados[index];
-                        return Padding(
-                          padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
-                          child: Card(
-                              color: Colors.white,
-                              elevation: 2,
-                              child: Dismissible(
-                                key: Key(producto.nombre),
-                                direction: DismissDirection.startToEnd,
-                                background: Container(
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(12),
-                                      color: Colors.red),
-                                  alignment: Alignment.centerLeft,
-                                  child: Container(
-                                    padding:
-                                        const EdgeInsets.fromLTRB(10, 0, 0, 0),
-                                    child: const Icon(
-                                      Icons.delete,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ),
-                                onDismissed: (direction) {
-                                  setState(() {
-                                    _eliminarProducto(producto);
-                                    productosFiltrados.remove(producto);
-                                  });
-                                },
-                                child: InkWell(
-                                  onTap: () {
-                                    _mostrarInformacionProducto(producto);
-                                  },
-                                  child: ListTile(
-                                    title: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Expanded(
-                                            child: Container(
-                                          padding: const EdgeInsets.fromLTRB(
-                                              5, 2, 5, 2),
-                                          child: Text(
-                                            producto.nombre,
-                                            style: const TextStyle(
-                                                fontWeight: FontWeight.bold),
-                                            textAlign: TextAlign.center,
-                                          ),
-                                        )),
-                                        Expanded(
-                                          child: Container(
-                                            padding: const EdgeInsets.fromLTRB(
-                                                5, 2, 5, 2),
-                                            margin: const EdgeInsets.fromLTRB(
-                                                10, 2, 10, 2),
-                                            decoration: BoxDecoration(
-                                              color: const Color.fromARGB(
-                                                  255, 255, 125, 125),
-                                              borderRadius:
-                                                  BorderRadius.circular(5),
-                                            ),
-                                            child: Text(
-                                              _calcularMejorSuper(producto),
-                                              style: const TextStyle(
-                                                color: Colors.white,
-                                              ),
-                                              textAlign: TextAlign.center,
-                                            ),
-                                          ),
-                                        ),
-                                        Expanded(
-                                          child: Text(
-                                            _calcularMejorOpcion(producto),
-                                            style: const TextStyle(
-                                                color: Colors.green),
-                                            textAlign: TextAlign.center,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              )),
-                        );
-                      },
-                    ),
                   ],
-                );
-              },
-              childCount: 1,
-            ),
-          ),
-        ],
-      ),
-    );
+                ),
+              ),
+            )
+          ],
+        ));
   }
 }

@@ -31,7 +31,6 @@ migrate_working_dir/
 .pub-cache/
 .pub/
 /build/
-logs/
 
 # Symbolication related
 app.*.symbols
@@ -43,3 +42,9 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Personal
+logs/analyzer.txt
+logs/dap.txt
+logs/extension.txt
+logs/flutter_daemon.txt

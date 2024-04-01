@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:price_market/components/dialogDatos.dart';
 import 'package:price_market/objects/AppStyle.dart';
+import 'package:price_market/screens/shoppingCart.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({Key? key}) : super(key: key);
@@ -61,7 +62,8 @@ class SettingsPage extends StatelessWidget {
                 children: [
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color.fromARGB(255, 255, 215, 215),
+                        backgroundColor:
+                            const Color.fromARGB(255, 255, 215, 215),
                         minimumSize: const Size(double.infinity, 50),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(5),
@@ -87,7 +89,8 @@ class SettingsPage extends StatelessWidget {
                   ),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color.fromARGB(255, 255, 215, 215),
+                        backgroundColor:
+                            const Color.fromARGB(255, 255, 215, 215),
                         minimumSize: const Size(double.infinity, 50),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(5),
@@ -113,7 +116,8 @@ class SettingsPage extends StatelessWidget {
                   ),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color.fromARGB(255, 255, 215, 215),
+                        backgroundColor:
+                            const Color.fromARGB(255, 255, 215, 215),
                         minimumSize: const Size(double.infinity, 50),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(5),
@@ -132,6 +136,49 @@ class SettingsPage extends StatelessWidget {
                       );
                     },
                     child: const Text('Importar categorías',
+                        style: TextStyle(color: AppStyle.miColorPrimario)),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor:
+                            const Color.fromARGB(255, 255, 215, 215),
+                        minimumSize: const Size(double.infinity, 50),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                        padding: const EdgeInsets.all(10),
+                        elevation: 5),
+                    onPressed: () {
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: Text('Importar lista de la compra'),
+                            content: Text(
+                                '¿Está seguro de que desea importar la lista de la compra?'),
+                            actions: [
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                child: const Text('Cancelar'),
+                              ),
+                              TextButton(
+                                onPressed: () {
+                                  ShoppingCart.datosManager('Importar');
+                                  Navigator.pop(context);
+                                },
+                                child: Text('Importar lista de la compra'),
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    },
+                    child: const Text('Importar lista de la compra',
                         style: TextStyle(color: AppStyle.miColorPrimario)),
                   ),
                 ],
@@ -162,7 +209,8 @@ class SettingsPage extends StatelessWidget {
                 children: [
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color.fromARGB(255, 255, 215, 215),
+                        backgroundColor:
+                            const Color.fromARGB(255, 255, 215, 215),
                         minimumSize: const Size(double.infinity, 50),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(5),
@@ -188,7 +236,8 @@ class SettingsPage extends StatelessWidget {
                   ),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color.fromARGB(255, 255, 215, 215),
+                        backgroundColor:
+                            const Color.fromARGB(255, 255, 215, 215),
                         minimumSize: const Size(double.infinity, 50),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(5),
@@ -214,7 +263,8 @@ class SettingsPage extends StatelessWidget {
                   ),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color.fromARGB(255, 255, 215, 215),
+                        backgroundColor:
+                            const Color.fromARGB(255, 255, 215, 215),
                         minimumSize: const Size(double.infinity, 50),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(5),
@@ -233,6 +283,49 @@ class SettingsPage extends StatelessWidget {
                       );
                     },
                     child: const Text('Exportar categorías',
+                        style: TextStyle(color: AppStyle.miColorPrimario)),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor:
+                            const Color.fromARGB(255, 255, 215, 215),
+                        minimumSize: const Size(double.infinity, 50),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                        padding: const EdgeInsets.all(10),
+                        elevation: 5),
+                    onPressed: () {
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: Text('Exportar lista de la compra'),
+                            content: Text(
+                                '¿Está seguro de que desea exportar la lista de la compra?'),
+                            actions: [
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                child: const Text('Cancelar'),
+                              ),
+                              TextButton(
+                                onPressed: () {
+                                  ShoppingCart.datosManager('Exportar');
+                                  Navigator.pop(context);
+                                },
+                                child: Text('Exportar lista de la compra'),
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    },
+                    child: const Text('Exportar lista de la compra',
                         style: TextStyle(color: AppStyle.miColorPrimario)),
                   ),
                 ],
