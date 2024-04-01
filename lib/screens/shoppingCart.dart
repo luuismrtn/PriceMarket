@@ -33,13 +33,14 @@ class _ShoppingCartState extends State<ShoppingCart> {
   @override
   void initState() {
     super.initState();
-    _datosManager('Importar');
-    _actualizarPagina();
+    _inicializarDatos();
   }
 
-  @override
-  void dispose() {
-    super.dispose();
+  Future<void> _inicializarDatos() async {
+    listaCompra = await ImportadorExportadorDatos.importListaCompraFromFile();
+    setState(() {
+      _filtrarProductos('');
+    });
   }
 
   void _datosManager(String accion) async {

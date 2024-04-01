@@ -81,8 +81,19 @@ class _MyScreenState extends State<Principal> {
   @override
   void initState() {
     super.initState();
-    Principal.datosManager('Importar categorias');
-    Principal.datosManager('Importar datosMIOS.txt');
+    _inicializarDatos();
+  }
+
+  Future<void> _inicializarDatos() async {
+    Principal.listaProductos =
+        await ImportadorExportadorDatos.importDataMIOFromFile();
+    Principal.listaCategorias =
+        await ImportadorExportadorDatos.importCategoriesFromFile(
+            Principal.listaCategorias);
+
+    setState(() {
+      _filtrarProductos('');
+    });
   }
 
   void _filtrarProductos(String filtro) {
@@ -470,6 +481,8 @@ class _MyScreenState extends State<Principal> {
                 TextButton(
                   onPressed: () {
                     Navigator.pop(context);
+                    print(Principal.listaProductos.length);
+                    print(Principal.productosFiltrados.length);
                   },
                   child: const Text('Cerrar'),
                 ),
