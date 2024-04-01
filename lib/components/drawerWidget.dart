@@ -61,7 +61,7 @@ class DrawerWidget extends StatelessWidget {
           ),
           ListTile(
             leading: const Icon(Icons.shopping_cart),
-            title: const Text('Cesta de la compra'),
+            title: const Text('Lista de la compra'),
             onTap: () {
               Navigator.pushReplacement(
                 context,
