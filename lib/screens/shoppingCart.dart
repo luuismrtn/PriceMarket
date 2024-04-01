@@ -503,7 +503,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      'Total: ${_calcularTotal().toStringAsFixed(2)}€',
+                      'Precio total: ${_calcularTotal().toStringAsFixed(2)}€',
                       style: const TextStyle(
                         fontFamily: 'ProductSans',
                         fontSize: 20,

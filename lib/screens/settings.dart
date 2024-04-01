@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:price_market/components/dialogDatos.dart';
+import 'package:price_market/components/drawerWidget.dart';
 import 'package:price_market/objects/AppStyle.dart';
 import 'package:price_market/screens/shoppingCart.dart';
 
@@ -9,6 +10,7 @@ class SettingsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: DrawerWidget(),
       appBar: AppBar(
         title: const Text(
           'Configuración',
@@ -156,8 +158,8 @@ class SettingsPage extends StatelessWidget {
                         context: context,
                         builder: (BuildContext context) {
                           return AlertDialog(
-                            title: Text('Importar lista de la compra'),
-                            content: Text(
+                            title: const Text('Importar lista de la compra'),
+                            content: const Text(
                                 '¿Está seguro de que desea importar la lista de la compra?'),
                             actions: [
                               TextButton(
@@ -171,7 +173,7 @@ class SettingsPage extends StatelessWidget {
                                   ShoppingCart.datosManager('Importar');
                                   Navigator.pop(context);
                                 },
-                                child: Text('Importar lista de la compra'),
+                                child: const Text('Importar lista de la compra'),
                               ),
                             ],
                           );
@@ -303,8 +305,8 @@ class SettingsPage extends StatelessWidget {
                         context: context,
                         builder: (BuildContext context) {
                           return AlertDialog(
-                            title: Text('Exportar lista de la compra'),
-                            content: Text(
+                            title: const Text('Exportar lista de la compra'),
+                            content: const Text(
                                 '¿Está seguro de que desea exportar la lista de la compra?'),
                             actions: [
                               TextButton(
@@ -318,7 +320,7 @@ class SettingsPage extends StatelessWidget {
                                   ShoppingCart.datosManager('Exportar');
                                   Navigator.pop(context);
                                 },
-                                child: Text('Exportar lista de la compra'),
+                                child: const Text('Exportar lista de la compra'),
                               ),
                             ],
                           );

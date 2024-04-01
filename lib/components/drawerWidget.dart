@@ -44,9 +44,18 @@ class DrawerWidget extends StatelessWidget {
             leading: const Icon(Icons.home),
             title: const Text('Inicio'),
             onTap: () {
-              Navigator.push(
+              Navigator.pushReplacement(
                 context,
-                MaterialPageRoute(builder: (context) => Principal()),
+                PageRouteBuilder(
+                  pageBuilder: (context, animation1, animation2) => Principal(),
+                  transitionDuration: const Duration(milliseconds: 200),
+                  transitionsBuilder: (context, animation1, animation2, child) {
+                    return FadeTransition(
+                      opacity: animation1,
+                      child: child,
+                    );
+                  },
+                ),
               );
             },
           ),
@@ -54,9 +63,19 @@ class DrawerWidget extends StatelessWidget {
             leading: const Icon(Icons.shopping_cart),
             title: const Text('Cesta de la compra'),
             onTap: () {
-              Navigator.push(
+              Navigator.pushReplacement(
                 context,
-                MaterialPageRoute(builder: (context) => const ShoppingCart()),
+                PageRouteBuilder(
+                  pageBuilder: (context, animation1, animation2) =>
+                      const ShoppingCart(),
+                  transitionDuration: const Duration(milliseconds: 200),
+                  transitionsBuilder: (context, animation1, animation2, child) {
+                    return FadeTransition(
+                      opacity: animation1,
+                      child: child,
+                    );
+                  },
+                ),
               );
             },
           ),
@@ -64,9 +83,19 @@ class DrawerWidget extends StatelessWidget {
             leading: const Icon(Icons.settings),
             title: const Text('Configuración'),
             onTap: () {
-              Navigator.push(
+              Navigator.pushReplacement(
                 context,
-                MaterialPageRoute(builder: (context) => const SettingsPage()),
+                PageRouteBuilder(
+                  pageBuilder: (context, animation1, animation2) =>
+                      const SettingsPage(),
+                  transitionDuration: const Duration(milliseconds: 200),
+                  transitionsBuilder: (context, animation1, animation2, child) {
+                    return FadeTransition(
+                      opacity: animation1,
+                      child: child,
+                    );
+                  },
+                ),
               );
             },
           ),
