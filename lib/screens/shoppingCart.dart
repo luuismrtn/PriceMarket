@@ -128,6 +128,13 @@ class _ShoppingCartState extends State<ShoppingCart> {
     int yukaMercadona = producto.yuka[0];
     int yukaLidl = producto.yuka[1];
 
+    if (yukaMercadona == 0) {
+      yukaMercadona++;
+    }
+    if (yukaLidl == 0) {
+      yukaLidl++;
+    }
+
     // Calcular puntaje para cada opción
     double puntajeMercadona = precioMercadona / unidadMercadona / yukaMercadona;
     double puntajeLidl = precioLidl / unidadLidl / yukaLidl;
