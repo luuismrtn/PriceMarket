@@ -58,15 +58,22 @@ class _ShoppingCartState extends State<ShoppingCart> {
   void _filtrarProductos(String value) {
     List<Producto> resultadosFiltrados =
         ShoppingCart.listaCompra.where((producto) {
+      // Filtrar por nombre del producto
       if (value.isNotEmpty &&
           !producto.nombre.toLowerCase().contains(value.toLowerCase())) {
         return false;
       }
+
+      if (_calcularMejorOpcion(producto) == 'Igual') {
+        return true;
+      }
+
       // Aplicar filtro por supermercado
       if (filtroSuper.isNotEmpty &&
-          _calcularMejorSuper(producto) != filtroSuper) {
+              _calcularMejorOpcion(producto) != filtroSuper) {
         return false;
       }
+
       return true;
     }).toList();
 
@@ -107,6 +114,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
   }
 
   String _calcularMejorOpcion(Producto producto) {
+    double puntajeMercadona = 0;
+    double puntajeLidl = 0;
+
     // Obtener precios del producto
     double precioMercadona = producto.precios[0];
     double precioLidl = producto.precios[1];
@@ -136,60 +146,62 @@ class _ShoppingCartState extends State<ShoppingCart> {
     }
 
     // Calcular puntaje para cada opción
-    double puntajeMercadona = precioMercadona / unidadMercadona / yukaMercadona;
-    double puntajeLidl = precioLidl / unidadLidl / yukaLidl;
+    if (yukaMercadona == -1 || yukaLidl == -1) {
+      puntajeMercadona = precioMercadona / unidadMercadona;
+      puntajeLidl = precioLidl / unidadLidl;
+    } else {
+      puntajeMercadona = precioMercadona / unidadMercadona / yukaMercadona;
+      puntajeLidl = precioLidl / unidadLidl / yukaLidl;
+    }
 
     String opinionMercadona = producto.opinion[0];
     String opinionLidl = producto.opinion[1];
 
-    switch (opinionMercadona) {
-      case 'Increíble':
-        puntajeMercadona *= 0.5;
-        break;
-      case 'Me gusta':
-        puntajeMercadona *= 0.7;
-        break;
-      case 'Sin más':
-        puntajeMercadona *= 1.0;
-        break;
-      case 'No me gusta':
-        puntajeMercadona *= 1.3;
-        break;
-      case 'Horrible':
-        puntajeMercadona *= 1.5;
-        break;
+    if (opinionMercadona != '-1') {
+      switch (opinionMercadona) {
+        case 'Increíble':
+          puntajeMercadona *= 0.5;
+          break;
+        case 'Me gusta':
+          puntajeMercadona *= 0.7;
+          break;
+        case 'Sin más':
+          puntajeMercadona *= 1.0;
+          break;
+        case 'No me gusta':
+          puntajeMercadona *= 1.3;
+          break;
+        case 'Horrible':
+          puntajeMercadona *= 1.5;
+          break;
+      }
     }
 
-    switch (opinionLidl) {
-      case 'Increíble':
-        puntajeLidl *= 0.5;
-        break;
-      case 'Me gusta':
-        puntajeLidl *= 0.7;
-        break;
-      case 'Sin más':
-        puntajeLidl *= 1.0;
-        break;
-      case 'No me gusta':
-        puntajeLidl *= 1.3;
-        break;
-      case 'Horrible':
-        puntajeLidl *= 1.5;
-        break;
+    if (opinionLidl != '-1') {
+      switch (opinionLidl) {
+        case 'Increíble':
+          puntajeLidl *= 0.5;
+          break;
+        case 'Me gusta':
+          puntajeLidl *= 0.7;
+          break;
+        case 'Sin más':
+          puntajeLidl *= 1.0;
+          break;
+        case 'No me gusta':
+          puntajeLidl *= 1.3;
+          break;
+        case 'Horrible':
+          puntajeLidl *= 1.5;
+          break;
+      }
     }
 
     // Elegir el mejor precio
-    if (puntajeLidl >= puntajeMercadona) {
-      return '${producto.precios[0].toStringAsFixed(2)}€';
-    } else {
-      return '${producto.precios[1].toStringAsFixed(2)}€';
-    }
-  }
 
-  String _calcularMejorSuper(Producto producto) {
-    String precio = _calcularMejorOpcion(producto);
-
-    if (precio == '${producto.precios[0].toStringAsFixed(2)}€') {
+    if (puntajeMercadona == puntajeLidl) {
+      return 'Igual';
+    } else if (puntajeLidl >= puntajeMercadona) {
       return 'Mercadona';
     } else {
       return 'Lidl';
@@ -199,9 +211,12 @@ class _ShoppingCartState extends State<ShoppingCart> {
   double _calcularTotal() {
     double total = 0.0;
     for (var producto in productosFiltrados) {
-      double precio =
-          double.parse(_calcularMejorOpcion(producto).split('€')[0]);
-      total += precio;
+      String supermercado = _calcularMejorOpcion(producto);
+      if (supermercado == 'Mercadona') {
+        total += producto.precios[0];
+      } else {
+        total += producto.precios[1];
+      }
     }
     return total;
   }
@@ -461,7 +476,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                                             5),
                                                   ),
                                                   child: Text(
-                                                    _calcularMejorSuper(
+                                                    _calcularMejorOpcion(
                                                         producto),
                                                     style: const TextStyle(
                                                       color: Colors.white,
@@ -473,7 +488,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                               Expanded(
                                                 child: Text(
                                                   _calcularMejorOpcion(
-                                                      producto),
+                                                              producto) ==
+                                                          'Mercadona'
+                                                      ? '${producto.precios[0].toStringAsFixed(2)}€'
+                                                      : '${producto.precios[1].toStringAsFixed(2)}€',
                                                   style: const TextStyle(
                                                       color: Colors.green),
                                                   textAlign: TextAlign.center,
