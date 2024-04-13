@@ -15,7 +15,7 @@ class Producto {
     required this.precios,
     required this.categoria,
     required this.cantidad,
-    this.imagen = '',
+    this.imagen = '-1',
     required this.yuka,
     required this.opinion,
     required this.fecha,

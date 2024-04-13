@@ -17,7 +17,6 @@ class ProductoDialog extends StatelessWidget {
             Text(
               producto.nombre,
               style: const TextStyle(
-                
                   fontWeight: FontWeight.bold,
                   fontSize: 20,
                   fontFamily: 'ProductSans'),
