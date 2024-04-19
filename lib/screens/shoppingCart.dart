@@ -70,7 +70,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
       // Aplicar filtro por supermercado
       if (filtroSuper.isNotEmpty &&
-              _calcularMejorOpcion(producto) != filtroSuper) {
+          _calcularMejorOpcion(producto) != filtroSuper) {
         return false;
       }
 
@@ -121,18 +121,15 @@ class _ShoppingCartState extends State<ShoppingCart> {
     double precioMercadona = producto.precios[0];
     double precioLidl = producto.precios[1];
 
-    if (precioMercadona == -1) {
-      return '${producto.precios[1].toStringAsFixed(2)}€';
-    } else if (precioLidl == -1) {
-      return '${producto.precios[0].toStringAsFixed(2)}€';
-    }
-
     // Obtener cantidad del producto
-    String cantidadMercadona = producto.cantidad[0];
-    String cantidadLidl = producto.cantidad[1];
+    double cantidadMercadona = double.parse(producto.cantidad[0].split(' ')[0]);
+    double cantidadLidl = double.parse(producto.cantidad[1].split(' ')[0]);
 
-    double unidadMercadona = double.parse(cantidadMercadona.split(' ')[0]);
-    double unidadLidl = double.parse(cantidadLidl.split(' ')[0]);
+    if (precioMercadona == -1 || cantidadMercadona == -1) {
+      return 'Lidl';
+    } else if (precioLidl == -1 || cantidadLidl == -1) {
+      return 'Mercadona';
+    }
 
     // Obtener puntuación de Yuka del producto
     int yukaMercadona = producto.yuka[0];
@@ -147,11 +144,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
     // Calcular puntaje para cada opción
     if (yukaMercadona == -1 || yukaLidl == -1) {
-      puntajeMercadona = precioMercadona / unidadMercadona;
-      puntajeLidl = precioLidl / unidadLidl;
+      puntajeMercadona = precioMercadona / cantidadMercadona;
+      puntajeLidl = precioLidl / cantidadLidl;
     } else {
-      puntajeMercadona = precioMercadona / unidadMercadona / yukaMercadona;
-      puntajeLidl = precioLidl / unidadLidl / yukaLidl;
+      puntajeMercadona = precioMercadona / cantidadMercadona / yukaMercadona;
+      puntajeLidl = precioLidl / cantidadLidl / yukaLidl;
     }
 
     String opinionMercadona = producto.opinion[0];
